@@ -6,6 +6,7 @@
         :locales="Object.values(availableLocales)"
         @update:model-value="updateLocale"
       />
+      <UColorModeSwitch />
     </template>
   </UHeader>
 </template>
