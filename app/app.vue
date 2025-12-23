@@ -1,6 +1,6 @@
 <template>
   <UApp>
-    <UHeader />
+    <AppHeader />
 
     <UMain>
       <NuxtLayout>
@@ -8,6 +8,6 @@
       </NuxtLayout>
     </UMain>
 
-    <UFooter />
+    <AppFooter />
   </UApp>
 </template>
