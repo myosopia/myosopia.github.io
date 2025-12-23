@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui',
+    '@nuxtjs/i18n',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
@@ -14,4 +15,13 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+  i18n: {
+    defaultLocale: 'zh-CN',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
+      { code: 'zh-CN', name: '简体中文', file: 'zh.json' },
+      { code: 'ja', name: '日本語', file: 'ja.json' },
+    ]
+  }
 })
