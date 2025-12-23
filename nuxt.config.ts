@@ -22,6 +22,6 @@ export default defineNuxtConfig({
       { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
       { code: 'zh-CN', name: '简体中文', file: 'zh.json' },
       { code: 'ja', name: '日本語', file: 'ja.json' },
-    ]
-  }
+    ],
+  },
 })
