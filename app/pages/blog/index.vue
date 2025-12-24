@@ -27,6 +27,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'Blog',
+})
+
 const { data: posts } = await useAsyncData('blog', () => queryCollection('blog').all())
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()

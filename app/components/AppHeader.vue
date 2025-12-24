@@ -2,34 +2,25 @@
   <div class="uppercase hidden lg:flex justify-center items-center text-2xl pt-8">
     <div>꒰୨⁺ <span class="text-xl font-bold text-primary">{{ $t('appTitle') }}</span> ⁺୧꒱</div>
   </div>
-  <div class="fixed z-100 top-0 right-0 mt-6 mr-6 hidden lg:flex items-center gap-4">
-    <ULocaleSelect
-      :model-value="locale"
-      :locales="Object.values(availableLocales)"
-      @update:model-value="updateLocale"
-    />
-    <UColorModeSwitch />
-  </div>
   <UHeader
-    :title="$t('appTitle')"
+    :title="pageTitle"
     mode="drawer"
     :ui="{
       root: 'border-0 h-auto',
-      title: 'hidden',
-      container: 'block py-4',
-      left: 'lg:hidden',
-      right: 'lg:hidden',
+      container: 'flex py-4',
       center: 'justify-center',
     }"
   >
     <UNavigationMenu :items="items" />
     <template #right>
-      <ULocaleSelect
-        :model-value="locale"
-        :locales="Object.values(availableLocales)"
-        @update:model-value="updateLocale"
-      />
-      <UColorModeSwitch />
+      <div class="flex gap-4 items-center justify-end">
+        <ULocaleSelect
+          :model-value="locale"
+          :locales="Object.values(availableLocales)"
+          @update:model-value="updateLocale"
+        />
+        <UColorModeSwitch />
+      </div>
     </template>
     <template #body>
       <UNavigationMenu
@@ -47,6 +38,10 @@
 <script setup lang="ts">
 import * as uiLocales from '@nuxt/ui/locale'
 import type { NavigationMenuItem } from '@nuxt/ui'
+
+// Page title
+const route = useRoute()
+const pageTitle = computed(() => (route.meta.title as string) || '')
 
 // I18n
 const { locale, locales, t } = useI18n()
