@@ -1,4 +1,7 @@
 <script setup lang="ts">
+definePageMeta({
+  title: 'Blog',
+})
 const route = useRoute()
 const slug = typeof route.params.slug === 'string' ? route.params.slug : (route.params.slug ?? []).join('/')
 const supabase = useSupabaseClient()
@@ -49,40 +52,44 @@ const updatePost = async () => {
 </script>
 
 <template>
-  <div>
-    <article
-      class="blog-post"
-      v-html="post!.content"
-    />
-    <UModal
-      v-model:open="editModalOpen"
-      @update:open="onModalOpen"
-    >
-      <UButton
-        label="Edit"
-        color="neutral"
-        variant="subtle"
+  <UPage class="px-4 sm:px-6 lg:px-8">
+    <UPageBody>
+      <article
+        class="blog-post"
+        v-html="post!.content"
       />
-      <template #content>
-        <UForm
-          class="p-4 space-y-4"
-          :state="state"
-          @submit="updatePost"
+      <div class="flex justify-end">
+        <UModal
+          v-model:open="editModalOpen"
+          @update:open="onModalOpen"
         >
-          <UFormField
-            label="Post Content"
-            name="content"
-          >
-            <UTextarea
-              v-model="state.content"
-              class="w-full"
-            />
-          </UFormField>
-          <UButton type="submit">
-            Update Post
-          </UButton>
-        </UForm>
-      </template>
-    </UModal>
-  </div>
+          <UButton
+            label="Edit"
+            color="neutral"
+            variant="subtle"
+          />
+          <template #content>
+            <UForm
+              class="p-4 space-y-4"
+              :state="state"
+              @submit="updatePost"
+            >
+              <UFormField
+                label="Post Content"
+                name="content"
+              >
+                <UTextarea
+                  v-model="state.content"
+                  class="w-full"
+                />
+              </UFormField>
+              <UButton type="submit">
+                Update Post
+              </UButton>
+            </UForm>
+          </template>
+        </UModal>
+      </div>
+    </UPageBody>
+  </UPage>
 </template>

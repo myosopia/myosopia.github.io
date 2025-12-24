@@ -6,7 +6,10 @@ export default defineContentConfig({
       // Specify the type of content in this collection
       type: 'page',
       // Load every file inside the `content` directory
-      source: 'blog/**',
+      source: {
+        include: 'blog/**',
+        exclude: ['blog/private/**'],
+      },
     }),
   },
 })
