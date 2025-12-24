@@ -11,6 +11,11 @@
       center: 'justify-center',
     }"
   >
+    <template #left>
+      <div class="font-bold text-lg">
+        {{ pageTitle }}
+      </div>
+    </template>
     <UNavigationMenu :items="items" />
     <template #right>
       <div class="flex gap-4 items-center justify-end">
