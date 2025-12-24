@@ -12,3 +12,10 @@
 .dark {
   --ui-primary: var(--ui-color-primary-50);
 }
+
+.blog-post {
+  @apply max-w-3xl mx-auto px-4;
+  h1 {
+    @apply text-2xl font-bold mb-2;
+  }
+}
