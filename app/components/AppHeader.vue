@@ -39,7 +39,7 @@
       />
     </template>
   </UHeader>
-  <div class="uppercase lg:hidden text-center text-2xl">
+  <div class="uppercase lg:hidden text-center text-2xl mb-4">
     ꒰୨⁺ <span class="text-xl font-bold text-primary">{{ $t('appTitle') }}</span> ⁺୧꒱
   </div>
 </template>
