@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxtjs/i18n',
+    '@nuxtjs/supabase',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
