@@ -1,29 +1,32 @@
 <template>
-  <div>
-    <h1>Blog</h1>
-    <ul>
-      <li
-        v-for="post in posts"
-        :key="post.id"
-      >
-        <NuxtLink :to="post.path">{{ post.title }}</NuxtLink>
-      </li>
-    </ul>
-    <div v-if="user">
-      <p>Logged in as: {{ user.email }}</p>
-      <h2>Private Posts</h2>
-      <ul>
-        <li
-          v-for="post in privatePosts"
-          :key="post.id"
-        >
-          <NuxtLink :to="`/blog/private/${post.slug}`">
-            {{ post.title }}
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <UPage class="px-4">
+    <UPageHeader :title="$t('blog')" />
+    <UPageBody>
+      <UBlogPosts>
+        <UBlogPost
+          v-for="(post, index) in posts"
+          :key="index"
+          v-bind="post"
+          :to="post.path"
+        />
+      </UBlogPosts>
+      <div v-if="user">
+        <UPageSection
+          :title="$t('privatePosts')"
+          description="Limited to logged in users"
+        />
+        <UBlogPosts>
+          <UBlogPost
+            v-for="(post, index) in privatePosts"
+            :key="index"
+            :title="post.title??'No Title'"
+            :date="new Date(post.created_at)"
+            :to="`/blog/private/${post.slug}`"
+          />
+        </UBlogPosts>
+      </div>
+    </UPageBody>
+  </UPage>
 </template>
 
 <script setup lang="ts">
@@ -38,7 +41,7 @@ const { data: privatePosts } = useAsyncData('private-posts', async () => {
   if (user.value) {
     const { data, error } = await supabase
       .from('posts')
-      .select('id,title,slug')
+      .select('title,slug,created_at')
     if (error) {
       console.error('Error fetching private posts:', error)
       return []
