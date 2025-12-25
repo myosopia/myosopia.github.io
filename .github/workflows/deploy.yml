@@ -15,7 +15,10 @@ jobs:
         with:
           node-version: "24.12.0"
       # Pick your own package manager and build script
-      - run: npm install
+      - run: echo "Test $SUPABASE_URL" && npm install
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       - run: echo "$SUPABASE_URL" && npx nuxt build --preset github_pages
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
