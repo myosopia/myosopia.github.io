@@ -73,16 +73,24 @@ const updateLocale = (code: string) => {
 // Navigation Menu
 const items = computed<NavigationMenuItem[]>(() => [
   {
+    label: t('home'),
+    to: '/',
+    icon: 'i-lucide-house',
+  },
+  {
     label: t('blog'),
     to: '/blog',
+    icon: 'i-lucide-book-open',
   },
   {
     label: t('about'),
     to: '/about',
+    icon: 'i-lucide-user-circle',
   },
   {
     label: t('contact'),
     to: '/contact',
+    icon: 'i-lucide-mail',
   },
 ])
 </script>
