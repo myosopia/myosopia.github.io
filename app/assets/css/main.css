@@ -3,7 +3,8 @@
 
 @theme {
   /* Your custom design tokens go here */
-  --font-fancy: 'Charmonman', cursive;
+  --font-fancy: "Charmonman", cursive, serif;
+  --font-vintage: "Cormorant SC", serif;
 }
 
 :root {
@@ -13,4 +14,3 @@
 .dark {
   --ui-primary: var(--ui-color-primary-50);
 }
-

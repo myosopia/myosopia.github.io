@@ -1,6 +1,21 @@
 <template>
   <UPage class="px-4">
-    <UPageHeader :title="$t('blog')" />
+    <UPageHeader
+      title="BLOG"
+      :ui="{
+        root: 'border-0',
+        title: 'font-vintage flex items-center justify-center gap-2',
+      }"
+    >
+      <template #title>
+        <span class="font-sans text-xl font-light">. ⊹ ₊ ݁</span>
+        BLOG
+        <span class="font-sans text-xl font-light"> ₊ ⊹ . ݁</span>
+      </template>
+      <div class="text-center text-sm font-light">
+        ꧁──────ஓ๑♡๑ஓ──────꧂
+      </div>
+    </UPageHeader>
     <UPageBody>
       <USelect
         v-model="tags"
