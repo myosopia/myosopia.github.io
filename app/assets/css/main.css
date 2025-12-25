@@ -14,16 +14,3 @@
   --ui-primary: var(--ui-color-primary-50);
 }
 
-.blog-post {
-  @apply max-w-3xl mx-auto px-4;
-  h1 {
-    @apply text-2xl lg:text-3xl font-bold border-b border-b-accented drop-shadow-md drop-shadow-neutral-100 dark:drop-shadow-neutral-900 py-2 mb-4;
-  }
-  h2 {
-    @apply text-xl lg:text-2xl font-semibold mb-2;
-  }
-  p {
-    @apply mb-2;
-  }
-}
-

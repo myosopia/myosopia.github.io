@@ -52,13 +52,13 @@ const updatePost = async () => {
 </script>
 
 <template>
-  <UPage class="px-4 sm:px-6 lg:px-8">
+  <UPage>
     <UPageBody>
-      <article
-        class="blog-post"
-        v-html="post!.content"
+      <MDC
+        :value="post!.content!"
+        class="px-4 max-w-3xl mx-auto"
       />
-      <div class="flex justify-end">
+      <div class="px-4 max-w-3xl mx-auto flex justify-end">
         <UModal
           v-model:open="editModalOpen"
           @update:open="onModalOpen"
