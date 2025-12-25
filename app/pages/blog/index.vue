@@ -2,6 +2,14 @@
   <UPage class="px-4">
     <UPageHeader :title="$t('blog')" />
     <UPageBody>
+      <USelect
+        v-model="tags"
+        :items="availableTags"
+        multiple
+        placeholder="Filter by tags"
+        class="w-48"
+        @change="() => { refreshBlog() }"
+      />
       <UBlogPosts>
         <UBlogPost
           v-for="(post, index) in posts"
@@ -46,7 +54,22 @@ definePageMeta({
   title: 'Blog',
 })
 
-const { data: posts } = await useAsyncData('blog', () => queryCollection('blog').all())
+const availableTags = ref<string[]>([])
+const allPosts = await queryCollection('blog').select('tags').all()
+availableTags.value = [...new Set(allPosts.flatMap(post => post.tags || []))]
+const tags = ref<string[]>([])
+
+const { data: posts, refresh: refreshBlog } = await useAsyncData(
+  'blog',
+  async () => {
+    // fetch all blog posts then filter client-side to require ALL tags in `tags`
+    const all = await queryCollection('blog').all()
+    if (!tags.value.length) return all
+    return (all || []).filter((p) => {
+      return tags.value.every(t => p.tags?.includes(t))
+    })
+  },
+)
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const { data: privatePosts, refresh } = useAsyncData(
