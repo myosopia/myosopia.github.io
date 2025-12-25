@@ -3,6 +3,7 @@
 
 @theme {
   /* Your custom design tokens go here */
+  --font-fancy: 'Charmonman', cursive;
 }
 
 :root {
@@ -25,3 +26,4 @@
     @apply mb-2;
   }
 }
+

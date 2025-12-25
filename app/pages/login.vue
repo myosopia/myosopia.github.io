@@ -55,7 +55,9 @@ const signInWithPassword = async () => {
           type="password"
         />
       </UFormField>
-      <UButton type="submit">{{ t('submitButton') }}</UButton>
+      <UButton type="submit">
+        {{ t('submitButton') }}
+      </UButton>
     </UForm>
   </div>
 </template>

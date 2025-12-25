@@ -1,6 +1,11 @@
 <template>
-  <div class="uppercase hidden lg:flex justify-center items-center text-2xl pt-8">
-    <div>꒰୨⁺ <span class="text-xl font-bold text-primary">{{ $t('appTitle') }}</span> ⁺୧꒱</div>
+  <div class="uppercase hidden lg:flex flex-col items-center justify-center h-48">
+    <div class="flex justify-center items-start gap-2 text-2xl">
+      ꒰୨⁺<span class="text-5xl font-fancy font-bold text-primary">{{ $t('appTitle') }}</span>⁺୧꒱
+    </div>
+    <div class="text-2xl">
+      · · ─ ·𖥸· ─ · ·
+    </div>
   </div>
   <UHeader
     :title="pageTitle"
@@ -35,8 +40,13 @@
       />
     </template>
   </UHeader>
-  <div class="uppercase lg:hidden text-center text-2xl mb-4">
-    ꒰୨⁺ <span class="text-xl font-bold text-primary">{{ $t('appTitle') }}</span> ⁺୧꒱
+  <div class="lg:hidden flex flex-col items-center justify-center h-32">
+    <div class="text-lg flex justify-center items-start gap-2">
+      ꒰୨⁺<span class="text-3xl font-bold text-primary font-fancy">{{ $t('appTitle') }}</span>⁺୧꒱
+    </div>
+    <div class="text-lg">
+      · · ─ ·𖥸· ─ · ·
+    </div>
   </div>
 </template>
 
