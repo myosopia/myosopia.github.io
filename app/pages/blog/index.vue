@@ -15,17 +15,15 @@
           :title="$t('privatePosts')"
           description="Limited to logged in users"
         />
-        <ClientOnly>
-          <UBlogPosts>
-            <UBlogPost
-              v-for="(post, index) in privatePosts"
-              :key="index"
-              :title="post.title??'No Title'"
-              :date="new Date(post.created_at)"
-              :to="`/blog/private/${post.slug}`"
-            />
-          </UBlogPosts>
-        </ClientOnly>
+        <UBlogPosts>
+          <UBlogPost
+            v-for="(post, index) in privatePosts"
+            :key="index"
+            :title="post.title??'No Title'"
+            :date="new Date(post.created_at)"
+            :to="`/blog/private/${post.slug}`"
+          />
+        </UBlogPosts>
       </div>
     </UPageBody>
   </UPage>
@@ -53,5 +51,8 @@ const { data: privatePosts } = useAsyncData('private-posts', async () => {
   else {
     return []
   }
+})
+onMounted(() => {
+  refreshNuxtData('private-posts')
 })
 </script>
