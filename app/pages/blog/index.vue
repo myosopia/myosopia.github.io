@@ -15,15 +15,17 @@
           :title="$t('privatePosts')"
           description="Limited to logged in users"
         />
-        <UBlogPosts>
-          <UBlogPost
-            v-for="(post, index) in privatePosts"
-            :key="index"
-            :title="post.title??'No Title'"
-            :date="new Date(post.created_at)"
-            :to="`/blog/private/${post.slug}`"
-          />
-        </UBlogPosts>
+        <ClientOnly>
+          <UBlogPosts>
+            <UBlogPost
+              v-for="(post, index) in privatePosts"
+              :key="index"
+              :title="post.title??'No Title'"
+              :date="new Date(post.created_at)"
+              :to="`/blog/private/${post.slug}`"
+            />
+          </UBlogPosts>
+        </ClientOnly>
       </div>
     </UPageBody>
   </UPage>
