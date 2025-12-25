@@ -62,7 +62,7 @@ const signInWithPassword = async () => {
   </div>
 </template>
 
-<i18n format="json">
+<i18n lang="json">
 {
     "en": {
         "loginTitle": "Login",
