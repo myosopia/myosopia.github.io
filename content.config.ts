@@ -1,4 +1,5 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content'
+import { z } from 'zod/v4'
 
 export default defineContentConfig({
   collections: {
@@ -10,6 +11,13 @@ export default defineContentConfig({
         include: 'blog/**',
         exclude: ['blog/private/**'],
       },
+      schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        date: z.date(),
+        tags: z.array(z.string()).optional(),
+        draft: z.boolean().default(false),
+      }),
     }),
   },
 })

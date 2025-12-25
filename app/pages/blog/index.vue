@@ -8,7 +8,19 @@
           :key="index"
           v-bind="post"
           :to="post.path"
-        />
+        >
+          <template #description>
+            <div v-if="post.description">
+              {{ post.description }}
+            </div>
+            <div
+              v-if="post.tags"
+              class="text-sm mt-2"
+            >
+              {{ post.tags?.map(tag => `#${tag}`).join(' ') }}
+            </div>
+          </template>
+        </UBlogPost>
       </UBlogPosts>
       <div v-if="user">
         <UPageSection
