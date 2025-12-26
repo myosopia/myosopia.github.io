@@ -26,6 +26,7 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.82",
     "supabase": "^2.70.4"
   }
 }
