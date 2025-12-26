@@ -30,6 +30,14 @@ export default defineNuxtConfig({
       { code: 'ja', name: '日本語', file: 'ja.json' },
     ],
   },
+  icon: {
+    clientBundle: {
+      icons: [
+        'lucide:x',
+      ],
+      scan: true,
+    },
+  },
   supabase: {
     redirect: false,
     url: process.env.SUPABASE_URL,
