@@ -29,5 +29,18 @@ export default defineContentConfig({
         body: z.record(z.string(), z.string().or(z.array(z.string()))),
       }),
     }),
+    messages: defineCollection({
+      type: 'data',
+      source: {
+        include: 'messages/**',
+      },
+      schema: z.object({
+        messages: z.object({
+          name: z.string(),
+          content: z.string(),
+          date: z.date(),
+        }),
+      }),
+    }),
   },
 })

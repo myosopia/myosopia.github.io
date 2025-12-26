@@ -1,8 +1,5 @@
 <template>
   <UContainer class="flex flex-col items-center px-4 max-w-lg">
-    <h2 class="font-lg font-bold">
-      {{ t('Message Board') }}
-    </h2>
     <UForm
       :schema="schema"
       :state="state"
