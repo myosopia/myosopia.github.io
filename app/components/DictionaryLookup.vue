@@ -127,13 +127,16 @@ const { t } = useI18n({
   useScope: 'local',
 })
 
+const searchQuery = defineModel<string>({
+  default: '',
+})
+
 interface DictionaryResult {
   word: string
   definition: string | string[]
   dictionary: string
 }
 
-const searchQuery = ref('')
 const loading = ref(false)
 const hasSearched = ref(false)
 

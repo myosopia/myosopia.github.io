@@ -13,8 +13,8 @@
           class="w-64 sm:w-96"
         >
           <template #content>
-            <div class="p-4">
-              <DictionaryLookup />
+            <div class="p-4 grow">
+              <DictionaryLookup v-model="dictionaryQuery" />
             </div>
           </template>
         </UDrawer>
@@ -36,8 +36,10 @@ const contextMenuItems = ref<ContextMenuItem[]>([
     label: 'Dictionary Lookup',
     icon: 'i-lucide-book-open',
     onSelect: () => {
+      dictionaryQuery.value = window.getSelection()?.toString() || ''
       dictionaryOpen.value = true
     },
   },
 ])
+const dictionaryQuery = ref('')
 </script>
