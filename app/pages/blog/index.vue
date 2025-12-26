@@ -4,7 +4,7 @@
       title="BLOG"
       :ui="{
         root: 'border-0',
-        title: 'font-vintage flex items-center justify-center gap-2',
+        title: 'font-vintage flex items-center justify-center gap-2 mx-auto',
       }"
     >
       <template #title>
