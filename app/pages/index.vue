@@ -1,5 +1,7 @@
 <template>
   <UPage>
-    <UPageBody />
+    <UPageBody>
+      <MessageBoard />
+    </UPageBody>
   </UPage>
 </template>
