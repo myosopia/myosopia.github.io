@@ -1,7 +1,7 @@
 <template>
   <div class="uppercase hidden lg:flex flex-col items-center justify-center h-48">
     <div class="flex justify-center items-start gap-2 text-2xl">
-      ꒰୨⁺<span class="text-5xl font-fancy font-bold text-primary">{{ $t('appTitle') }}</span>⁺୧꒱
+      ꒰୨⁺<span class="text-5xl font-fancy font-bold text-primary">Huyễn Cảnh Lưu Ly</span>⁺୧꒱
     </div>
     <div class="text-2xl">
       · · ─ ·𖥸· ─ · ·
@@ -42,7 +42,7 @@
   </UHeader>
   <div class="lg:hidden flex flex-col items-center justify-center h-32">
     <div class="text-lg flex justify-center items-start gap-2">
-      ꒰୨⁺<span class="text-3xl font-bold text-primary font-fancy">{{ $t('appTitle') }}</span>⁺୧꒱
+      ꒰୨⁺<span class="text-3xl font-bold text-primary font-fancy">Huyễn Cảnh Lưu Ly</span>⁺୧꒱
     </div>
     <div class="text-lg">
       · · ─ ·𖥸· ─ · ·
