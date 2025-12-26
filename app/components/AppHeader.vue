@@ -29,7 +29,7 @@
           :locales="Object.values(availableLocales)"
           @update:model-value="updateLocale"
         />
-        <UColorModeSwitch />
+        <UColorModeButton />
       </div>
     </template>
     <template #body>
