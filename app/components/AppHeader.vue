@@ -11,7 +11,7 @@
     :title="pageTitle"
     mode="drawer"
     :ui="{
-      root: 'border-0 h-auto',
+      root: 'border-0',
       container: 'flex py-4',
       center: 'justify-center',
     }"
