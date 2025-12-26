@@ -83,6 +83,11 @@ const items = computed<NavigationMenuItem[]>(() => [
     icon: 'i-lucide-book-open',
   },
   {
+    label: t('dictionary'),
+    to: '/dictionary',
+    icon: 'i-lucide-book',
+  },
+  {
     label: t('about'),
     to: '/about',
     icon: 'i-lucide-user-circle',

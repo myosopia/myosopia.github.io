@@ -19,5 +19,15 @@ export default defineContentConfig({
         draft: z.boolean().default(false),
       }),
     }),
+    dictionary: defineCollection({
+      type: 'data',
+      source: {
+        include: 'dictionary/**',
+      },
+      schema: z.object({
+        title: z.string(),
+        body: z.record(z.string(), z.string().or(z.array(z.string()))),
+      }),
+    }),
   },
 })
