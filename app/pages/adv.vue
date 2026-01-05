@@ -58,7 +58,7 @@
         </div>
       </div>
       <UScrollArea
-        class="p-4 bg-muted"
+        class="p-4 bg-muted rounded-md"
         :class="{
           grow: fullscreen,
         }"
@@ -78,7 +78,7 @@
         </p>
       </UScrollArea>
       <div
-        class="text-sm text-muted flex justify-center items-center"
+        class="text-sm text-muted flex justify-center items-center mt-4"
       >
         <UButton
           variant="ghost"
