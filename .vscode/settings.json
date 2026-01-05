@@ -10,11 +10,15 @@
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[vue]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.tabSize": 2
     },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.defaultFormatter": "vscode.markdown-language-features"
+    },
+    "[json]": {
+        "editor.tabSize": 2
     },
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true

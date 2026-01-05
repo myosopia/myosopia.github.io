@@ -42,5 +42,15 @@ export default defineContentConfig({
         }),
       }),
     }),
+    adv: defineCollection({
+      type: 'data',
+      source: {
+        include: 'adv/**',
+      },
+      schema: z.object({
+        title: z.string(),
+        content: z.array(z.string()),
+      }),
+    }),
   },
 })
