@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      adv: {
+        Row: {
+          active: string | null
+          id: number
+          progress: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: string | null
+          id?: number
+          progress?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          active?: string | null
+          id?: number
+          progress?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string

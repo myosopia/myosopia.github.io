@@ -46,6 +46,22 @@
                     }]"
                   />
                 </UFormField>
+                <UButton
+                  :loading="synchronizationState.synchronizing"
+                  loading-icon="i-lucide-loader"
+                  :color="(() => {
+                    if (synchronizationState.synchronizing) {
+                      return 'neutral'
+                    }
+                    if (synchronizationState.executed) {
+                      return synchronizationState.success ? 'success' : 'error'
+                    }
+                    return 'neutral'
+                  })()"
+                  @click="synchronize"
+                >
+                  Synchronize
+                </UButton>
               </div>
             </template>
           </UPopover>
@@ -195,6 +211,66 @@ onMounted(() => {
 watch(advState, (newVal) => {
   localStorage.setItem('adv', JSON.stringify(newVal))
 }, { deep: true })
+
+const synchronizationState = reactive({
+  synchronizing: false,
+  success: false,
+  executed: false,
+})
+const synchronize = async () => {
+  synchronizationState.executed = true
+  synchronizationState.synchronizing = true
+  const supabase = useSupabaseClient()
+  const { data: userData } = await supabase.auth.getUser()
+  const user = userData.user
+  if (user) {
+    const { data, error } = await supabase.from('adv').select('*').eq('user_id', user.id).single()
+    if (error && error.code !== 'PGRST116') {
+      synchronizationState.success = false
+      synchronizationState.synchronizing = false
+      console.log(error)
+      return
+    }
+    if (!data) {
+      const { error } = await supabase.from('adv').insert({
+        active: advState.value.active,
+        updated_at: new Date(advState.value.updatedAt).toISOString(),
+        progress: advState.value.progress,
+        user_id: user.id,
+      })
+      if (error) {
+        console.log(error)
+        synchronizationState.success = false
+      }
+      else {
+        synchronizationState.success = true
+      }
+    }
+    else if (new Date(advState.value.updatedAt) > new Date(data.updated_at)) {
+      // Local is newer, upload
+      const { error } = await supabase.from('adv').update({
+        active: advState.value.active,
+        updated_at: new Date(advState.value.updatedAt).toISOString(),
+        progress: advState.value.progress,
+      }).eq('user_id', user.id)
+      if (error) {
+        synchronizationState.success = false
+      }
+      else {
+        synchronizationState.success = true
+      }
+    }
+    else {
+      // Remote is newer, download
+      advState.value.active = data.active ?? ''
+      advState.value.updatedAt = new Date(data.updated_at).getTime()
+      advState.value.progress = JSON.parse(JSON.stringify(data.progress)) ?? {}
+      synchronizationState.success = true
+      refreshAdvData()
+    }
+  }
+  synchronizationState.synchronizing = false
+}
 </script>
 
 <style>
