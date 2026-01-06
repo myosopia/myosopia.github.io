@@ -56,13 +56,13 @@
                         :content="false"
                         :items="[{
                           label: '小',
-                          value: 'text-sm',
-                        }, {
-                          label: '中',
                           value: 'text-base',
                         }, {
+                          label: '中',
+                          value: 'text-xl',
+                        }, {
                           label: '大',
-                          value: 'text-lg',
+                          value: 'text-3xl',
                         }]"
                       />
                     </UFormField>
@@ -221,7 +221,7 @@ const advState = useState('adv', () => {
   }
 })
 const textSpeed = ref(5)
-const textSize = ref('text-base')
+const textSize = ref('text-xl')
 const playing = ref(false)
 const cancelAnimation = ref(false)
 const fullscreen = ref(false)
