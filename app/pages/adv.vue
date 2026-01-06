@@ -153,6 +153,54 @@
         />
       </div>
     </div>
+    <UModal
+      v-model:open="synchronizeModalOpen"
+      title="是否同步数据"
+    >
+      <template #body>
+        <p v-if="!synchronizationState.executed">
+          您已登陆。点击确认同步云端数据。
+        </p>
+        <UProgress
+          v-if="synchronizationState.synchronizing"
+          animation="swing"
+        />
+        <Transition
+          enter-from-class="opacity-0"
+          enter-active-class="transition-opacity duration-1000"
+          leave-active-class="transition-opacity duration-1000"
+          leave-to-class="opacity-0"
+        >
+          <div
+            v-if="synchronizationState.executed && !synchronizationState.synchronizing"
+            class="flex gap-2 justify-center items-center font-bold text-xl"
+            :class="{
+              'text-success': synchronizationState.success,
+              'text-error': !synchronizationState.success,
+            }"
+          >
+            <UIcon
+              :name="synchronizationState.success ? 'i-lucide-circle-check' : 'i-lucide-triangle-alert'"
+              class="size-6"
+            />{{ synchronizationState.success ? '同步成功' : '同步失败' }}
+          </div>
+        </Transition>
+      </template>
+      <template #footer>
+        <UButton
+          variant="soft"
+          class="grow justify-center"
+        >
+          取消
+        </UButton>
+        <UButton
+          class="grow justify-center"
+          @click="confirmSynchronization"
+        >
+          确认
+        </UButton>
+      </template>
+    </UModal>
   </div>
 </template>
 
@@ -168,6 +216,12 @@ const textSpeed = ref(5)
 const textSize = ref('text-base')
 const fullscreen = ref(false)
 const headerOpen = ref(true)
+const synchronizationState = reactive({
+  synchronizing: false,
+  success: false,
+  executed: false,
+})
+const synchronizeModalOpen = ref(false)
 const { data: advTitleData } = await useAsyncData('advTitles', () => {
   return queryCollection('adv').select('title', 'stem').all()
 })
@@ -180,6 +234,7 @@ const activeTitle = computed({
     if (newVal) {
       advState.value.active = newVal.id
       advState.value.updatedAt = Date.now()
+      synchronizationState.executed = false
       refreshAdvData()
     }
   },
@@ -200,6 +255,7 @@ const progress = computed({
     if (advData.value) {
       advState.value.progress[advData.value.stem] = newValue % advData.value.content.length
       advState.value.updatedAt = Date.now()
+      synchronizationState.executed = false
     }
   },
 })
@@ -227,18 +283,16 @@ onMounted(() => {
   const advLocalState = localStorage.getItem('adv')
   if (advLocalState) {
     advState.value = JSON.parse(advLocalState)
-    activeTitle.value = advTitles.value?.find(item => item.id === advState.value.active)
+  }
+  const user = useSupabaseUser()
+  if (user.value) {
+    synchronizeModalOpen.value = true
   }
 })
 watch(advState, (newVal) => {
   localStorage.setItem('adv', JSON.stringify(newVal))
 }, { deep: true })
 
-const synchronizationState = reactive({
-  synchronizing: false,
-  success: false,
-  executed: false,
-})
 const synchronize = async () => {
   synchronizationState.executed = true
   synchronizationState.synchronizing = true
@@ -292,6 +346,12 @@ const synchronize = async () => {
     }
   }
   synchronizationState.synchronizing = false
+}
+const confirmSynchronization = async () => {
+  await synchronize()
+  setTimeout(() => {
+    synchronizeModalOpen.value = false
+  }, 1000)
 }
 </script>
 
