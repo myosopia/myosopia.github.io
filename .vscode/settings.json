@@ -1,9 +1,9 @@
 {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
-    "[markdown]": {
-        "editor.wordWrap": "on",
-    },
-    "eslint.useFlatConfig": true
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.tabSize": 2,
+	"[markdown]": {
+		"editor.wordWrap": "on"
+	},
+	"eslint.useFlatConfig": true
 }

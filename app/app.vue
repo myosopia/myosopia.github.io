@@ -1,15 +1,15 @@
 <template>
-  <UApp :locale="currentLocale">
-    <AppHeader />
+	<UApp :locale="currentLocale">
+		<AppHeader />
 
-    <UMain>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </UMain>
+		<UMain>
+			<NuxtLayout>
+				<NuxtPage />
+			</NuxtLayout>
+		</UMain>
 
-    <AppFooter />
-  </UApp>
+		<AppFooter />
+	</UApp>
 </template>
 
 <script setup lang="ts">
@@ -17,6 +17,6 @@ import * as locales from '@nuxt/ui/locale'
 
 const { locale } = useI18n()
 const currentLocale = computed(() => {
-  return locales[locale.value as keyof typeof locales]
+	return locales[locale.value as keyof typeof locales]
 })
 </script>

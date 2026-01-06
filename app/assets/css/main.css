@@ -1,16 +1,16 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 @theme {
-  /* Your custom design tokens go here */
-  --font-fancy: "Charmonman", cursive, serif;
-  --font-vintage: "Cormorant SC", serif;
+	/* Your custom design tokens go here */
+	--font-fancy: 'Charmonman', cursive, serif;
+	--font-vintage: 'Cormorant SC', serif;
 }
 
 :root {
-  --ui-primary: var(--ui-color-primary-950);
+	--ui-primary: var(--ui-color-primary-950);
 }
 
 .dark {
-  --ui-primary: var(--ui-color-primary-50);
+	--ui-primary: var(--ui-color-primary-50);
 }
