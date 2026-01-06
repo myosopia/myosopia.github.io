@@ -97,5 +97,15 @@ const items = computed<NavigationMenuItem[]>(() => [
     to: '/contact',
     icon: 'i-lucide-mail',
   },
+  {
+    label: t('adv'),
+    to: '/adv',
+    icon: 'i-lucide-book-open-text',
+  },
+  {
+    label: t('login'),
+    to: '/login',
+    icon: 'i-lucide-log-in',
+  },
 ])
 </script>
