@@ -302,6 +302,7 @@ onMounted(() => {
   const advLocalState = localStorage.getItem('adv')
   if (advLocalState) {
     advState.value = JSON.parse(advLocalState)
+    refreshAdvData()
   }
   if (supabaseUser.value) {
     synchronizeModalOpen.value = true
