@@ -338,3 +338,225 @@ Hạ cúi đầu cười, trái tim nhẹ bẫng.
 Chiều hôm đó, họ bước ra khỏi thư viện cùng nhau, tay khẽ chạm tay. Và giây phút Xuân chủ động nắm lấy tay Hạ, cả thế giới như sáng hơn hẳn.
 
 Họ bắt đầu yêu, nhẹ nhàng mà hạnh phúc.
+
+## Trạm Dừng Ở Phía Đông Thành Phố
+
+Thành phố vào mùa mưa luôn mang một vẻ ảm đạm đến khó tả. Những tòa nhà cao tầng chìm trong màn sương mờ đục, và tiếng còi xe inh ỏi như xé toạc không gian ẩm ướt. Lâm Diệp siết chặt chiếc túi xách, đứng nép dưới mái hiên của một cửa hàng đã đóng cửa, đôi giày búp bê của cô đã thấm đẫm nước mưa.
+
+"Thật là một ngày tồi tệ," cô lẩm bẩm, nhìn vào màn hình điện thoại vừa sập nguồn vì hết pin.
+
+Chẳng còn cách nào khác, Lâm Diệp quyết định chạy đại vào con hẻm nhỏ bên cạnh, hy vọng tìm được một quán cà phê nào đó để trú tạm. Nhưng thay vì hương cà phê, một mùi hương thanh khiết, mộc mạc của gỗ và nhựa thông lại dẫn lối cô đến trước một cánh cửa gỗ sồi dày dặn. Bên trên treo một tấm biển nhỏ khắc chữ bằng tay: "Xưởng mộc Phía Đông".
+
+Kính coong.
+
+Tiếng chuông gió vang lên khô khốc. Lâm Diệp bước vào, hơi lạnh của cơn mưa lập tức bị đẩy lùi bởi không khí ấm áp bên trong. Căn phòng rộng lớn đầy rẫy những khối gỗ chưa gọt giũa, những chiếc ghế bành theo phong cách vintage và bụi gỗ bay lơ lửng trong những tia sáng vàng vọt.
+
+"Xin lỗi... có ai ở đây không?" Lâm Diệp lên tiếng, giọng hơi run vì lạnh.
+
+Từ phía sau một tấm bình phong bằng gỗ lớn, một người đàn ông bước ra. Anh mặc một chiếc áo thun đen đơn giản, tay áo xắn cao để lộ cánh tay săn chắc với vài vệt bụi trắng bám trên da. Anh đang đeo một cặp kính bảo hộ, nhưng khi nhìn thấy cô, anh nhanh chóng tháo nó ra, để lộ đôi mắt sâu thẳm và điềm tĩnh.
+
+"Cửa hàng hôm nay không đón khách, nhưng nếu cô cần trú mưa thì cứ tự nhiên," giọng anh trầm thấp, có độ vang nhẹ như tiếng đàn cello.
+
+Lâm Diệp hơi bối rối: "Tôi xin lỗi, tôi thấy cửa không khóa... Tôi sẽ đi ngay khi mưa ngớt."
+
+"Không sao," anh bước lại gần một chiếc lò sưởi nhỏ bằng điện ở góc phòng, bật nó lên. "Cô ngồi đây đi, nếu không sẽ cảm lạnh mất."
+
+Anh kéo một chiếc ghế gỗ được chạm khắc tinh xảo ra cho cô. Lâm Diệp rón rén ngồi xuống, hơi ấm từ lò sưởi bắt đầu lan tỏa, xoa dịu đôi vai đang run rẩy của cô. Lúc này cô mới có dịp quan sát kỹ người đàn ông này. Anh ta có gương mặt góc cạnh, sống mũi cao thẳng và một phong thái rất tự tại, khác hẳn với sự hối hả của những người cô gặp ngoài kia.
+
+Anh quay vào trong và trở ra với một chiếc khăn bông sạch cùng một ly trà gừng nóng.
+
+"Dùng tạm đi. Tôi là Hứa Ngôn," anh nói ngắn gọn.
+
+"Cảm ơn anh, tôi là Lâm Diệp." Cô nhận lấy ly trà, hơi nóng bốc lên làm mờ đi đôi mắt cô. "Anh tự làm tất cả những thứ này sao?"
+
+Hứa Ngôn nhìn quanh những tác phẩm của mình, ánh mắt anh mềm mại hẳn đi: "Ừ, gỗ có linh hồn của nó. Nếu cô đủ kiên nhẫn, cô sẽ nghe thấy nó nói gì."
+
+Lâm Diệp bật cười, một nụ cười hiếm hoi sau một ngày dài mệt mỏi: "Vậy miếng gỗ kia đang nói gì với anh thế?" Cô chỉ vào khối gỗ lớn anh đang làm dở.
+
+Hứa Ngôn nhìn cô, khóe môi hơi nhếch lên thành một nụ cười ẩn ý: "Nó nói... hôm nay nó rất vui vì có một vị khách lạ ghé thăm."
+
+Trái tim Lâm Diệp bỗng hẫng đi một nhịp. Trong không gian tĩnh lặng chỉ có tiếng mưa đập vào mái tôn và mùi gỗ tuyết tùng thoang thoảng, cô cảm thấy một sự bình yên lạ kỳ. Những áp lực từ bản thiết kế bị khách hàng bác bỏ, những lời phàn nàn của sếp, tất cả dường như đều bị chặn lại ngoài cánh cửa gỗ dày kia.
+
+Khoảng một tiếng sau, mưa bắt đầu ngớt. Lâm Diệp đứng dậy, chỉnh lại trang phục, dù trong lòng cô có một sự nuối tiếc không tên.
+
+"Mưa tạnh rồi, tôi phải đi đây. Cảm ơn anh vì ly trà và... chỗ trú ẩn này."
+
+Hứa Ngôn tiễn cô ra cửa. Khi cô bước ra đến bậc thềm, anh chợt gọi vợi lại:
+
+"Lâm Diệp."
+
+Cô quay đầu lại, tò mò.
+
+"Lần sau nếu không mưa, cô vẫn có thể ghé qua. Tôi thường có thêm trà gừng."
+
+Dưới ánh đèn đường vàng nhạt vừa mới bật sáng, Lâm Diệp thấy gương mặt mình nóng bừng. Cô gật đầu thật nhanh rồi chạy biến vào bóng tối của con hẻm, nhưng trong lòng lại nở rộ một cảm xúc ngọt ngào mà từ lâu cô đã lãng quên.
+
+Trạm dừng chân ở phía Đông thành phố này, hóa ra lại là nơi bắt đầu của một điều gì đó rất khác.
+
+Cả tuần sau đó, tâm trí Lâm Diệp như bị treo ngược trên những kệ gỗ ở phía Đông thành phố. Cô vẫn đi làm, vẫn đối mặt với những bảng màu và deadline nghẹt thở, nhưng cứ mỗi khi ngửi thấy mùi hương trầm ấm từ một tách trà hay nhìn thấy một món đồ gỗ thủ công, gương mặt điềm tĩnh của Hứa Ngôn lại hiện lên.
+
+Chiều thứ Sáu, Lâm Diệp nhận được một yêu cầu kỳ lạ từ giám đốc sáng tạo.
+
+"Công ty chúng ta vừa nhận dự án thiết kế bộ nhận diện thương hiệu cho một triển lãm nội thất cao cấp. Tôi muốn cô trực tiếp đến xưởng của nghệ nhân để lấy cảm hứng. Địa chỉ tôi đã gửi vào mail."
+
+Khi mở mail ra, tim Lâm Diệp đập nhanh hơn một nhịp. Địa chỉ đó chính là con hẻm nhỏ ấy.
+
+Lần này, trời không mưa. Nắng chiều vàng vọt đổ dài trên những bức tường rêu phong. Lâm Diệp đứng trước cánh cửa gỗ sồi, hít một hơi thật sâu rồi gõ cửa.
+
+Kính coong.
+
+Vẫn là tiếng chuông gió ấy, nhưng lần này người mở cửa không đeo kính bảo hộ. Hứa Ngôn mặc một chiếc áo sơ mi màu xanh navy xắn tay, trên cổ tay vẫn còn vương một ít mạt cưa. Anh nhìn thấy cô, đôi lông mày hơi nhướng lên đầy thú vị.
+
+"Cô đến đòi trà gừng sao?" Anh tựa lưng vào khung cửa, giọng nói mang theo chút ý cười trêu chọc.
+
+Lâm Diệp đỏ mặt, vội vàng chìa tấm danh thiếp ra: "Không... tôi đến vì công việc. Tôi là người phụ trách thiết kế cho triển lãm 'Hồn Gỗ' sắp tới của anh."
+
+Hứa Ngôn cầm lấy tấm danh thiếp, ngón tay anh tình cờ chạm nhẹ vào tay cô. Cảm giác thô ráp nhưng ấm áp từ những vết chai tay của một người thợ mộc khiến Lâm Diệp khẽ run lên.
+
+"Ra là vậy. Mời vào, nhà thiết kế Lâm."
+
+Bên trong xưởng mộc vào ban ngày trông khác hẳn. Những tia nắng xuyên qua cửa sổ áp mái, chiếu rọi vào những khối gỗ đang được gọt giũa dở dang, tạo nên một khung cảnh nghệ thuật đến nghẹt thở. Hứa Ngôn dẫn cô đi tham quan, anh say sưa nói về đặc tính của từng loại gỗ: gỗ óc chó cứng cỏi, gỗ sồi tin cậy, hay gỗ thông mềm mại nhưng bền bỉ.
+
+"Mỗi thiết kế đều bắt đầu từ việc hiểu 'tính nết' của gỗ," Hứa Ngôn dừng lại trước một chiếc bàn tròn lớn. "Cũng giống như con người, nếu cô ép nó làm điều nó không muốn, nó sẽ nứt toác ra."
+
+Lâm Diệp chăm chú lắng nghe, bàn tay cô vô thức lướt trên mặt gỗ mịn màng. Cô chợt nhận ra, sự điềm tĩnh của anh không phải là lạnh lùng, mà là sự thấu hiểu sâu sắc đối với thế giới xung quanh.
+
+"Hứa Ngôn, tại sao anh lại chọn làm thợ mộc?" Cô ngẩng lên nhìn anh, đôi mắt long lanh đầy tò mò.
+
+Hứa Ngôn im lặng một lúc, anh nhìn xuống đôi bàn tay mình rồi khẽ nói: "Thế giới ngoài kia trôi nhanh quá. Người ta yêu nhanh, sống vội và cũng nhanh chóng vứt bỏ mọi thứ. Ở đây, tôi có thể bắt thời gian dừng lại. Một chiếc ghế tốt có thể tồn tại cả trăm năm. Tôi thích cảm giác tạo ra những thứ không bị thời gian đào thải."
+
+Câu nói của anh chạm đúng vào nỗi lòng của Lâm Diệp. Cô vốn mệt mỏi với những thiết kế "thì mì mì ăn liền" chỉ để làm hài lòng khách hàng trong chốc lát.
+
+"Tôi cũng muốn tạo ra những thứ như vậy," cô thì thầm.
+
+Ánh mắt hai người giao nhau giữa không gian nồng nàn mùi gỗ. Hứa Ngôn bước lại gần hơn, khoảng cách giữa họ chỉ còn chưa đầy nửa mét. Anh đưa tay lên, Lâm Diệp nín thở, nhưng anh chỉ nhẹ nhàng gỡ một mảnh dăm gỗ nhỏ vướng trên tóc cô.
+
+"Vậy thì bắt đầu từ hôm nay, chúng ta cùng tạo ra nó."
+
+Buổi làm việc kéo dài đến tận sẩm tối. Khi Lâm Diệp chuẩn bị ra về, Hứa Ngôn đưa cho cô một chiếc hộp nhỏ bằng gỗ tuyết tùng.
+
+"Cái này là gì vậy?"
+
+"Quà gặp mặt chính thức. Mở ra đi."
+
+Bên trong là một chiếc bút chì gỗ được chạm khắc tên cô "Lâm Diệp" bằng phông chữ viết tay cực kỳ mềm mại.
+
+"Dùng nó để vẽ những bản thiết kế tốt nhất nhé," anh nói, giọng nói dịu dàng như gió đêm.
+
+Lâm Diệp nắm chặt chiếc bút trong tay, cảm thấy trái tim mình như vừa được một lớp sáp gỗ đánh bóng, trở nên sáng lấp lánh và tràn đầy sức sống. Cô bước ra khỏi xưởng mộc, không còn cảm thấy cô đơn giữa phố thị đông đúc nữa. Bởi vì cô biết, ở phía Đông thành phố, có một người thợ mộc đang chờ cô cùng viết nên những câu chuyện trường tồn với thời gian.
+
+Kể từ ngày nhận chiếc bút chì gỗ, Lâm Diệp dường như có thêm một nguồn năng lượng vô hình. Cô không còn thức đêm trong sự chán nản nữa. Thay vào đó, mỗi nét vẽ của cô đều mang theo hơi thở của "Xưởng mộc Phía Đông". Tuy nhiên, dự án triển lãm "Hồn Gỗ" gặp một vấn đề lớn: Phía nhà đầu tư muốn thêm vào những yếu tố công nghiệp hiện đại, điều này hoàn toàn đi ngược lại tinh thần mộc mạc mà Hứa Ngôn hướng tới.
+
+Chiều thứ Bảy, Lâm Diệp tìm đến xưởng mộc với vẻ mặt đầy lo lắng. Cô thấy Hứa Ngôn đang tập trung đục đẽo một khối gỗ lớn. Những giọt mồ hôi lăn dài trên thái dương anh, thấm vào lớp áo thun mỏng.
+
+"Hứa Ngôn, bản thiết kế bị yêu cầu sửa lại. Họ muốn dùng khung kim loại thay vì ghép mộng gỗ thủ công để... tiết kiệm chi phí và thời gian," Lâm Diệp nói, giọng cô nghẹn lại vì bất lực.
+
+Hứa Ngôn dừng tay. Anh đặt chiếc đục xuống, tháo găng tay và nhìn cô. Thay vì tức giận, anh chỉ khẽ mỉm cười, một nụ cười có phần dung túng: "Em có muốn đi đâu đó cho khuây khỏa không? Bản thiết kế hãy cứ để đó đã."
+
+Anh dẫn cô ra chiếc xe bán tải cũ kỹ đậu ở góc sân. Họ rời khỏi thành phố ồn ào, hướng về phía ngoại ô, nơi có những cánh rừng cao su đang vào mùa thay lá.
+
+Xe dừng lại bên một con suối nhỏ. Không khí ở đây trong lành đến mức Lâm Diệp cảm thấy phổi mình như được thanh lọc. Hứa Ngôn lấy từ thùng xe ra hai chiếc ghế xếp bằng gỗ — tất nhiên, cũng do chính tay anh làm.
+
+"Tại sao anh lại đưa em đến đây?" Lâm Diệp hỏi khi ngồi xuống bên cạnh anh.
+
+"Để em thấy rằng, thiên nhiên không có bản thiết kế hoàn hảo, nhưng nó vẫn tuyệt đẹp," Hứa Ngôn chỉ tay về phía những tán cây. "Nhìn kìa, những cành cây kia uốn lượn không theo một quy tắc nào, nhưng nếu em thêm một thanh sắt thẳng tắp vào đó, sự cân bằng sẽ biến mất."
+
+Lâm Diệp im lặng, cô nhìn theo hướng tay anh. Sự tĩnh lặng của rừng già khiến cô nhận ra mình đã quá phụ thuộc vào những quy chuẩn cứng nhắc của văn phòng.
+
+Hứa Ngôn bỗng nhiên lấy từ trong túi áo ra một mẩu gỗ nhỏ và một con dao khắc. Đôi bàn tay to lớn của anh chuyển động thoăn thoắt. Lâm Diệp quan sát từng cử động ấy, cô bị mê hoặc bởi sự tập trung tuyệt đối của anh. Chỉ sau mười phút, một bông hoa trà nhỏ xíu nhưng sống động hiện ra trên tay anh.
+
+Anh đặt bông hoa gỗ vào lòng bàn tay cô.
+
+"Lâm Diệp, em là một nhà thiết kế tài năng. Đừng để những con số và kim loại làm mòn đi linh hồn của em. Nếu họ muốn kim loại, chúng ta sẽ cho họ thấy kim loại cũng có thể 'mềm' như gỗ nếu biết cách kết hợp, nhưng cốt lõi vẫn phải là sự chân thật."
+
+Lâm Diệp nhìn bông hoa gỗ, rồi nhìn vào đôi mắt sâu thẳm của người đàn ông trước mặt. Trong khoảnh khắc đó, tiếng suối chảy và tiếng lá xào xạc như lùi xa, chỉ còn lại nhịp đập rộn ràng nơi lồng ngực.
+
+"Hứa Ngôn... sao anh lại tốt với em như vậy?" cô khẽ hỏi, hơi thở có chút dồn dập.
+
+Hứa Ngôn không trả lời ngay. Anh nghiêng người về phía cô, khoảng cách thu hẹp đến mức cô có thể cảm nhận được hơi ấm và mùi hương gỗ tuyết tùng quen thuộc bao quanh lấy mình. Anh đưa tay vén một lọn tóc mai sau tai cô, ngón tay cái khẽ lướt qua gò má nóng hổi.
+
+"Vì ngay từ buổi chiều mưa hôm đó, khi em bước vào xưởng mộc với đôi mắt ướt nhòa, tôi đã biết... mình không thể để em phải tự chống chọi một mình nữa."
+
+Trái tim Lâm Diệp như nổ tung giữa cánh rừng vắng. Cô không tránh né, trái lại, cô khẽ tựa đầu vào vai anh. Vai anh rộng và vững chãi, giống như một trạm dừng chân an toàn nhất mà cô từng tìm thấy trong cuộc đời mình.
+
+"Em sẽ đấu tranh cho bản thiết kế này," cô quả quyết. "Dưới danh nghĩa của chúng ta."
+
+Hứa Ngôn siết nhẹ vai cô, giọng anh trầm thấp bên tai: "Không phải 'dưới danh nghĩa', mà là 'vì chúng ta'."
+
+Dưới ánh hoàng hôn đỏ rực của vùng ngoại ô, hai cái bóng đổ dài trên mặt đất, hòa quyện vào nhau. Không cần những lời thề non hẹn biển, chỉ có sự thấu hiểu lặng lẽ thấm sâu vào lòng, như cách nhựa cây ngấm vào từng thớ gỗ, bền bỉ và không thể tách rời.
+
+Sau chuyến đi ngoại ô, Lâm Diệp như biến thành một người khác. Cô không còn là cô nhân viên văn phòng rụt rè, chỉ biết gật đầu trước mọi yêu cầu vô lý. Cô dành trọn ba ngày ba đêm ở xưởng mộc cùng Hứa Ngôn để hoàn thiện bản thiết kế cuối cùng — một sự kết hợp táo bạo giữa gỗ thô và những đường nét tối giản của kiến trúc đương đại.
+
+Hôm nay là ngày thuyết trình phương án cuối cùng với ban quản trị công ty và nhà đầu tư. Lâm Diệp đứng trong phòng họp máy lạnh chạy vù vù, nhưng đôi bàn tay cô lại vô thức nắm chặt chiếc bút chì gỗ mà Hứa Ngôn tặng.
+
+"Nếu chúng ta dùng gỗ làm chủ đạo thay vì kim loại, tính bền vững sẽ được thể hiện rõ nét hơn qua thời gian..." Lâm Diệp dõng dạc trình bày.
+
+Khi cô kết thúc, căn phòng chìm vào sự im lặng đáng sợ. Gã giám đốc đầu tư cau mày: "Cô Lâm, cô có biết chi phí bảo quản gỗ tự nhiên trong triển lãm cao thế nào không? Tôi cần sự hiệu quả, không phải sự lãng mạn."
+
+Giữa lúc Lâm Diệp đang định lên tiếng bảo vệ ý tưởng của mình, cánh cửa phòng họp bật mở.
+
+Hứa Ngôn bước vào trong bộ vest xám than chỉn chu, khác hẳn vẻ bụi bặm thường ngày với bụi gỗ và áo thun. Sự xuất hiện đột ngột của anh khiến cả căn phòng xôn xao. Hứa Ngôn không chỉ là một thợ mộc đơn thuần, anh còn là nghệ nhân chính của dự án, người mà phía nhà đầu tư đã phải bỏ ra một khoản tiền không nhỏ để mời về.
+
+"Chi phí bảo trì gỗ có thể cao," Hứa Ngôn điềm tĩnh bước đến bên cạnh Lâm Diệp, đặt tay lên vai cô như một lời khẳng định thầm lặng. "Nhưng giá trị thương hiệu mà sự 'độc bản' này mang lại là vô giá. Tôi sẽ trực tiếp bảo trợ toàn bộ khâu chế tác và bảo quản. Các ông muốn một triển lãm công nghiệp khô khan, hay một không gian khiến khách hàng phải dừng lại và chạm vào?"
+
+Sự tự tin và uy tín của Hứa Ngôn đã xoay chuyển cục diện. Khi ban quản trị gật đầu đồng ý, Lâm Diệp cảm thấy như một tảng đá lớn vừa được nhấc ra khỏi ngực mình.
+
+Sau khi kết thúc buổi họp, cả hai đi dạo trên sân thượng của tòa nhà văn phòng. Gió tối thổi lồng lộng, mang theo hơi lạnh của những ngày cuối thu.
+
+"Sao anh lại đến đây? Anh nói hôm nay phải hoàn thành chiếc tủ cho khách mà?" Lâm Diệp nhìn anh, ánh mắt lấp lánh sự cảm kích.
+
+Hứa Ngôn tháo cà vạt, nới lỏng cổ áo sơ mi, lấy lại vẻ phóng khoáng thường ngày. Anh nhìn xuống dòng xe cộ tấp nập bên dưới rồi quay sang cô: "Vì tôi biết có một người con gái ngốc nghếch sẽ không chịu lùi bước dù bị mắng. Tôi không muốn em phải chiến đấu một mình."
+
+Lâm Diệp bật cười, cô bước lại gần, tinh nghịch túm lấy vạt áo vest của anh: "Hứa thợ mộc hôm nay mặc vest trông... rất ra dáng quý ông đấy."
+
+Hứa Ngôn bật cười, vòng tay qua eo cô, kéo cô sát lại vào lòng mình. Giữa không gian rộng lớn của thành phố, hơi ấm từ anh bao bọc lấy cô. Anh cúi xuống, giọng nói trầm thấp phả vào tai cô:
+
+"Xong việc rồi, tôi có thể nhận 'thù lao' tư vấn chưa?"
+
+Lâm Diệp hơi đỏ mặt, lắp bắp: "Thù... thù lao gì cơ?"
+
+Chưa kịp để cô phản ứng, Hứa Ngôn đã cúi xuống, đặt một nụ hôn nhẹ nhàng nhưng sâu đậm lên môi cô. Nụ hôn mang theo mùi bạc hà thanh mát và sự ngọt ngào của chiến thắng. Lâm Diệp sững người trong giây lát rồi từ từ nhắm mắt lại, vòng tay qua cổ anh, đáp lại bằng tất cả sự chân thành của mình.
+
+Giữa những tòa nhà chọc trời bằng bê tông và kính cường lực, có hai trái tim vừa tìm thấy nhau, giống như hai mảnh gỗ được đẽo gọt tỉ mỉ để ghép vào nhau bằng những đường mộng gỗ khít khao nhất, không cần đến một chiếc đinh nào để gắn kết.
+
+"Tối nay, đến nhà tôi nhé?" Hứa Ngôn thì thầm khi nụ hôn kết thúc. "Tôi muốn khoe với em một thứ tôi vừa làm xong... chỉ dành riêng cho em."
+
+Lâm Diệp tựa đầu vào ngực anh, khẽ gật đầu. Cô biết rằng, hành trình này không chỉ là một dự án triển lãm, mà là hành trình xây dựng một mái ấm thực sự giữa lòng thành phố xa lạ này.
+
+Căn hộ của Hứa Ngôn nằm ngay phía trên xưởng mộc, một không gian gác mái mang đậm hơi thở của gỗ và những giấc mơ. Khi Lâm Diệp bước vào, cô không thấy những món đồ nội thất xa hoa, mà là một không gian ấm cúng với những giá sách cao chạm trần và ánh đèn vàng dịu mắt.
+
+"Nhắm mắt lại đi," Hứa Ngôn khẽ nói, bàn tay anh ấm áp che lên mắt cô.
+
+Lâm Diệp nghe tiếng bước chân anh sột soạt trên sàn gỗ, rồi tiếng một cánh cửa được mở ra. Khi anh buông tay, cô ngỡ ngàng đến mức không thốt nên lời.
+
+Đó là một căn phòng nhỏ tràn ngập ánh sáng, nơi đặt một chiếc bàn vẽ chuyên dụng bằng gỗ sồi trắng tuyệt đẹp. Trên mặt bàn là những khay đựng bút chì, bảng màu được sắp xếp tỉ mỉ. Nhưng điều làm cô xúc động nhất chính là chiếc ghế dựa có phần tựa được chạm khắc hình những chiếc lá diệp (lá của cây thân gỗ) lồng vào nhau.
+
+"Đây là... dành cho em?" cô thì thầm, đầu ngón tay run rẩy chạm vào mặt gỗ mịn như nhung.
+
+"Hứa Ngôn gật đầu, anh bước đến phía sau, vòng tay ôm lấy cô từ phía sau. "Đây là trạm dừng của em. Khi nào thành phố ngoài kia làm em mệt mỏi, khi nào những bản thiết kế bị từ chối, em luôn có một nơi để trở về và vẽ tiếp giấc mơ của mình."
+
+Nước mắt Lâm Diệp khẽ rơi, nhưng đó là những giọt nước mắt của sự hạnh phúc vẹn tròn. Cô xoay người lại, vùi mặt vào ngực anh, cảm nhận nhịp tim đều đặn và vững chãi.
+
+Ba tháng sau.
+
+Buổi triển lãm "Hồn Gỗ" chính thức khai mạc tại bảo tàng nghệ thuật thành phố. Đây không chỉ là một sự kiện thương mại, mà là một bữa tiệc của thị giác và xúc giác. Khách tham quan không chỉ ngắm nhìn, họ chạm tay vào những đường vân gỗ, hít hà mùi hương của rừng già giữa lòng đô thị.
+
+Bản thiết kế của Lâm Diệp đại diện cho sự giao thoa hoàn hảo: hiện đại nhưng không vô cảm, mộc mạc nhưng đầy kiêu hãnh.
+
+Khi ánh đèn sân khấu dồn về phía hai nhân vật chính, Lâm Diệp mặc một chiếc váy lụa màu xanh rêu thanh lịch, sánh bước bên Hứa Ngôn lịch lãm. Sau bài phát biểu ngắn gọn, Hứa Ngôn không rời sân khấu ngay. Anh cầm lấy mic, ánh mắt chỉ hướng về phía cô gái đang đứng cạnh mình.
+
+"Nhiều người hỏi tôi, tại sao gỗ lại có thể truyền cảm hứng đến vậy? Câu trả lời rất đơn giản." Anh nắm lấy tay Lâm Diệp, trước sự chứng kiến của hàng trăm khách mời. "Vì gỗ cần thời gian để trưởng thành, cần sự kiên nhẫn để gọt giũa, và cần một linh hồn thấu hiểu để trở nên sống động. Lâm Diệp, em chính là linh hồn mà những thớ gỗ của tôi chờ đợi cả đời."
+
+Anh quỳ một gối xuống, lấy từ trong túi áo ra một chiếc nhẫn. Không phải nhẫn kim cương lấp lánh thông thường, mà là một chiếc nhẫn được chế tác từ gỗ mun đen bóng, khảm một dải vàng trắng mỏng manh ở giữa.
+
+"Lâm Diệp, em có đồng ý cùng anh xây dựng một mái ấm... bằng gỗ và bằng cả trái tim mình không?"
+
+Tiếng vỗ tay vang dội như sấm dậy, nhưng trong tai Lâm Diệp lúc đó chỉ còn lại tiếng đập của trái tim mình và ánh nhìn ấm áp của người đàn ông trước mặt. Cô mỉm cười, đôi mắt nhòe đi vì lệ, khẽ gật đầu:
+
+"Em đồng ý."
+
+Nhiều năm về sau, người ta vẫn kể cho nhau nghe về một xưởng mộc nhỏ ở phía Đông thành phố. Nơi đó lúc nào cũng thoang thoảng mùi trà gừng và hương gỗ tuyết tùng.
+
+Ở đó, có một người thợ mộc lặng lẽ làm việc bên những thớ gỗ, và một nhà thiết kế tài hoa đang vẽ nên những giấc mơ trên chiếc bàn gỗ sồi trắng. Họ không còn chạy đua với thời gian nữa, bởi vì họ biết rằng, những gì được xây dựng từ sự chân thành và tình yêu sẽ luôn bền bỉ theo năm tháng, giống như những thớ gỗ già, càng qua sương gió lại càng trở nên quý giá và đẹp đẽ hơn.
+
+Trạm dừng chân ngày mưa ấy, hóa ra lại là điểm khởi đầu cho một hành trình mãi mãi.
