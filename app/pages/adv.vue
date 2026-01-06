@@ -9,70 +9,91 @@
         'bg-default': fullscreen,
       }"
     >
-      <div class="flex justify-between items-center gap-4 mb-4">
-        <USelectMenu
-          v-model="activeTitle"
-          :items="advTitles"
+      <UCollapsible
+        v-model:open="headerOpen"
+        :ui="{
+          root: `relative mb-4 ${fullscreen ? 'pb-6' : ''}`,
+        }"
+      >
+        <UButton
+          variant="ghost"
+          size="sm"
+          trailing-icon="i-lucide-chevron-down"
+          class="group absolute bottom-0 left-1/2 -translate-x-1/2"
+          :class="{
+            hidden: !fullscreen,
+          }"
+          :ui="{
+            trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
+          }"
         />
-        <div class="flex items-center gap-1">
-          <UPopover>
-            <UButton
-              icon="i-lucide-settings"
-              variant="subtle"
-              color="neutral"
+        <template #content>
+          <div class="flex justify-between items-center gap-4">
+            <USelectMenu
+              v-model="activeTitle"
+              :items="advTitles"
             />
-            <template #content>
-              <div class="p-4 flex flex-col gap-4">
-                <UFormField label="Text Speed">
-                  <UInputNumber
-                    v-model="textSpeed"
-                    :min="1"
-                    :max="10"
-                  />
-                </UFormField>
-                <UFormField label="Text Size">
-                  <UTabs
-                    v-model="textSize"
-                    :content="false"
-                    :items="[{
-                      label: '小',
-                      value: 'text-sm',
-                    }, {
-                      label: '中',
-                      value: 'text-base',
-                    }, {
-                      label: '大',
-                      value: 'text-lg',
-                    }]"
-                  />
-                </UFormField>
+            <div class="flex items-center gap-1">
+              <UPopover>
                 <UButton
-                  :loading="synchronizationState.synchronizing"
-                  loading-icon="i-lucide-loader"
-                  :color="(() => {
-                    if (synchronizationState.synchronizing) {
-                      return 'neutral'
-                    }
-                    if (synchronizationState.executed) {
-                      return synchronizationState.success ? 'success' : 'error'
-                    }
-                    return 'neutral'
-                  })()"
-                  @click="synchronize"
-                >
-                  Synchronize
-                </UButton>
-              </div>
-            </template>
-          </UPopover>
-          <UButton
-            :icon="fullscreen ? 'i-lucide-shrink' : 'i-lucide-fullscreen'"
-            variant="soft"
-            class="opacity-30 hover:opacity-100"
-            @click="fullscreen = !fullscreen"
-          />
-        </div>
-      </div>
+                  icon="i-lucide-settings"
+                  variant="subtle"
+                  color="neutral"
+                />
+                <template #content>
+                  <div class="p-4 flex flex-col gap-4">
+                    <UFormField label="Text Speed">
+                      <UInputNumber
+                        v-model="textSpeed"
+                        :min="1"
+                        :max="10"
+                      />
+                    </UFormField>
+                    <UFormField label="Text Size">
+                      <UTabs
+                        v-model="textSize"
+                        :content="false"
+                        :items="[{
+                          label: '小',
+                          value: 'text-sm',
+                        }, {
+                          label: '中',
+                          value: 'text-base',
+                        }, {
+                          label: '大',
+                          value: 'text-lg',
+                        }]"
+                      />
+                    </UFormField>
+                    <UButton
+                      :loading="synchronizationState.synchronizing"
+                      loading-icon="i-lucide-loader"
+                      :color="(() => {
+                        if (synchronizationState.synchronizing) {
+                          return 'neutral'
+                        }
+                        if (synchronizationState.executed) {
+                          return synchronizationState.success ? 'success' : 'error'
+                        }
+                        return 'neutral'
+                      })()"
+                      @click="synchronize"
+                    >
+                      Synchronize
+                    </UButton>
+                  </div>
+                </template>
+              </UPopover>
+              <UButton
+                :icon="fullscreen ? 'i-lucide-shrink' : 'i-lucide-fullscreen'"
+                variant="soft"
+                class="opacity-30 hover:opacity-100"
+                @click="fullscreen = !fullscreen; headerOpen = !fullscreen"
+              />
+            </div>
+          </div>
+        </template>
+      </UCollapsible>
       <UScrollArea
         class="p-4 bg-muted rounded-md"
         :class="{
@@ -146,6 +167,7 @@ const advState = useState('adv', () => {
 const textSpeed = ref(5)
 const textSize = ref('text-base')
 const fullscreen = ref(false)
+const headerOpen = ref(true)
 const { data: advTitleData } = await useAsyncData('advTitles', () => {
   return queryCollection('adv').select('title', 'stem').all()
 })
