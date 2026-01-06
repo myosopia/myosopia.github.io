@@ -1,0 +1,3 @@
+# Ignore artifacts:
+package-lock.json
+app/types/database.types.ts

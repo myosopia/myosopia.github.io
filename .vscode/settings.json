@@ -1,25 +1,9 @@
 {
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.tabSize": 2
-    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
     "[markdown]": {
         "editor.wordWrap": "on",
-        "editor.defaultFormatter": "vscode.markdown-language-features"
     },
-    "[json]": {
-        "editor.tabSize": 2
-    },
-    "eslint.format.enable": true,
     "eslint.useFlatConfig": true
 }
