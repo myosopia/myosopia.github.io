@@ -34,6 +34,9 @@ export default defineNuxtConfig({
     clientBundle: {
       icons: [
         'lucide:x',
+        'lucide:check',
+        'lucide:plus',
+        'lucide:minus',
       ],
       scan: true,
     },
