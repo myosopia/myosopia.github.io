@@ -102,18 +102,21 @@
         :class="{
           grow: fullscreen,
         }"
-        @click="nextLine"
+        @click="handleClickText"
       >
         <p :class="textSize">
           <span
             v-for="(char, idx) in currentLine"
             :key="`${progress}-${idx}`"
             class="inline-block"
-            style="mask-image: linear-gradient(90deg, #000 0%, #000 33.33%, transparent 66.67%, transparent 100%); mask-size: 300% 100%; mask-position: 100%;"
+            style="mask-size: 300% 100%; mask-position: 100%;"
             :style="{
-              animation: `reveal ${500 / textSpeed * 3}ms ease-in forwards`,
+              maskImage: cancelAnimation ? '' : 'linear-gradient(90deg, #000 0%, #000 33.33%, transparent 66.67%, transparent 100%)',
+              animation: cancelAnimation ? '' : `reveal ${500 / textSpeed * 3}ms ease-in forwards`,
               animationDelay: `${idx * 500 / textSpeed}ms`,
             }"
+            @animationstart="playing = true"
+            @animationend="() => { if (idx === currentLine.length - 1) { playing = false } }"
           >{{ char }}</span>
         </p>
       </UScrollArea>
@@ -217,6 +220,8 @@ const advState = useState('adv', () => {
 })
 const textSpeed = ref(5)
 const textSize = ref('text-base')
+const playing = ref(false)
+const cancelAnimation = ref(false)
 const fullscreen = ref(false)
 const headerOpen = ref(true)
 const synchronizationState = reactive({
@@ -257,6 +262,7 @@ const progress = computed({
   },
   set(newValue) {
     if (advData.value) {
+      cancelAnimation.value = false
       advState.value.progress[advData.value.stem] = newValue % advData.value.content.length
       advState.value.updatedAt = Date.now()
       synchronizationState.executed = false
@@ -282,6 +288,15 @@ const nextLine = () => {
 }
 const prevLine = () => {
   progress.value -= 1
+}
+const handleClickText = () => {
+  if (playing.value) {
+    cancelAnimation.value = true
+    playing.value = false
+  }
+  else {
+    nextLine()
+  }
 }
 onMounted(() => {
   const advLocalState = localStorage.getItem('adv')
