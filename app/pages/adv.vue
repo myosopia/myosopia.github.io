@@ -66,8 +66,10 @@
                       />
                     </UFormField>
                     <UButton
+                      v-if="supabaseUser"
                       :loading="synchronizationState.synchronizing"
                       loading-icon="i-lucide-loader"
+                      trailing-icon="i-lucide-cloud-sync"
                       :color="(() => {
                         if (synchronizationState.synchronizing) {
                           return 'neutral'
@@ -77,9 +79,10 @@
                         }
                         return 'neutral'
                       })()"
+                      class="justify-center"
                       @click="synchronize"
                     >
-                      Synchronize
+                      同步数据
                     </UButton>
                   </div>
                 </template>
@@ -222,6 +225,7 @@ const synchronizationState = reactive({
   executed: false,
 })
 const synchronizeModalOpen = ref(false)
+const supabaseUser = useSupabaseUser()
 const { data: advTitleData } = await useAsyncData('advTitles', () => {
   return queryCollection('adv').select('title', 'stem').all()
 })
@@ -284,8 +288,7 @@ onMounted(() => {
   if (advLocalState) {
     advState.value = JSON.parse(advLocalState)
   }
-  const user = useSupabaseUser()
-  if (user.value) {
+  if (supabaseUser.value) {
     synchronizeModalOpen.value = true
   }
 })
