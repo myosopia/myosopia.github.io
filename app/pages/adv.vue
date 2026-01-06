@@ -3,6 +3,7 @@
     <div
       class="flex flex-col p-4"
       :class="{
+        'fullscreen-overlay': fullscreen,
         'fixed': fullscreen,
         'inset-0': fullscreen,
         'z-5000': fullscreen,
@@ -196,6 +197,7 @@
         <UButton
           variant="soft"
           class="grow justify-center"
+          @click="synchronizeModalOpen = false"
         >
           取消
         </UButton>
@@ -375,6 +377,9 @@ const confirmSynchronization = async () => {
 </script>
 
 <style>
+:root:has(.fullscreen-overlay) {
+  overflow: hidden;
+}
 @keyframes reveal {
   from { mask-position: 100%; }
   to { mask-position: 0%; }
