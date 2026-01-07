@@ -1,6 +1,7 @@
 <template>
 	<UPage>
 		<UPageBody>
+			<OtmfcGallery />
 			<UPageSection
 				title="留言版"
 				description="欢迎留言。通过审核的留言将会展示在这里"

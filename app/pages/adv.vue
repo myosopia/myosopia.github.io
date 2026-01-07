@@ -95,8 +95,10 @@
 								variant="soft"
 								class="opacity-30 hover:opacity-100"
 								@click="
-									fullscreen = !fullscreen
-									headerOpen = !fullscreen
+									() => {
+										fullscreen = !fullscreen
+										headerOpen = !fullscreen
+									}
 								"
 							/>
 						</div>
