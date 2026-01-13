@@ -98,7 +98,7 @@
 import { z } from 'zod/v4'
 import { h, resolveComponent } from 'vue'
 import {
-	type CalendarDate,
+	CalendarDate,
 	today,
 	parseDate,
 	getLocalTimeZone,
@@ -120,7 +120,7 @@ const onCreateShopItem = (item: string) => {
 
 const entrySchema = z.object({
 	id: z.number().optional(),
-	date: z.custom<Omit<CalendarDate, '#private' | 'hour' | 'minute'>>(),
+	date: z.instanceof(CalendarDate),
 	category: z.number().optional(),
 	amount: z.number().min(0, '金額は0以上で入力してください'),
 	currency: z.string(),
@@ -158,11 +158,12 @@ const categoryLabel = computed(() => {
 	return category ? category.label! : 'カテゴリーを選択'
 })
 const categories = computed(() => {
-	const categoryMap = new Map()
+	const orderMaxValue = Number.MAX_SAFE_INTEGER
+	const categoryMap = new Map<number, DropdownMenuItem>()
 	const rootItems: DropdownMenuItem[] = [
 		{
-			id: undefined,
 			label: '未分類',
+			order: orderMaxValue,
 			children: [],
 			onSelect() {
 				entryState.category = undefined
@@ -172,8 +173,8 @@ const categories = computed(() => {
 	// First pass: create all items
 	;(categoryData.value?.data || []).forEach(cat => {
 		const item: DropdownMenuItem = {
-			id: cat.id,
 			label: cat.label,
+			order: cat.order ?? orderMaxValue,
 			children: [],
 			onSelect() {
 				entryState.category = cat.id
@@ -183,13 +184,27 @@ const categories = computed(() => {
 	})
 	// Second pass: organize hierarchy
 	;(categoryData.value?.data || []).forEach(cat => {
-		const item = categoryMap.get(cat.id)
+		const item = categoryMap.get(cat.id)!
 		if (cat.parent && categoryMap.has(cat.parent)) {
-			categoryMap.get(cat.parent).children!.push(item)
+			;(categoryMap.get(cat.parent)!.children as DropdownMenuItem[]).push(item)
 		} else {
 			rootItems.push(item)
 		}
 	})
+	categoryMap.forEach(item => {
+		if (item.children) {
+			if (item.children.length === 0) {
+				delete item.childrens
+			} else {
+				item.children.sort(
+					(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
+				)
+			}
+		}
+	})
+	rootItems.sort(
+		(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
+	)
 	return rootItems
 })
 const categorySelectMenuItems = computed(() =>
