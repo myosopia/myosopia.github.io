@@ -175,7 +175,15 @@ const categories = computed(() => {
 		const item: DropdownMenuItem = {
 			label: cat.label,
 			order: cat.order ?? orderMaxValue,
-			children: [],
+			children: [
+				{
+					label: cat.label,
+					order: 0,
+					onSelect() {
+						entryState.category = cat.id
+					},
+				},
+			],
 			onSelect() {
 				entryState.category = cat.id
 			},
@@ -193,8 +201,8 @@ const categories = computed(() => {
 	})
 	categoryMap.forEach(item => {
 		if (item.children) {
-			if (item.children.length === 0) {
-				delete item.childrens
+			if (item.children.length <= 1) {
+				delete item.children
 			} else {
 				item.children.sort(
 					(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
@@ -249,6 +257,7 @@ function getRowItems(row: Row<Entry>): DropdownMenuItem[] {
 				entryState.category = row.original.category ?? undefined
 				entryState.note = row.original.note ?? undefined
 				entryState.shop = row.original.shop ?? undefined
+				formModalOpen.value = true
 			},
 		},
 		{
