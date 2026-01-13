@@ -25,7 +25,12 @@
 					<UInputNumber v-model="entryState.amount" :min="0" />
 				</UFormField>
 				<UFormField name="shop" label="店舗">
-					<UInput v-model="entryState.shop" />
+					<UInputMenu
+						v-model="entryState.shop"
+						:items="shopItems"
+						create-item
+						@create="onCreateShopItem"
+					/>
 				</UFormField>
 				<UFormField name="note" label="メモ">
 					<UTextarea v-model="entryState.note" />
@@ -47,11 +52,23 @@ import {
 	parseDate,
 	getLocalTimeZone,
 } from '@internationalized/date'
-import type { DropdownMenuItem, FormSubmitEvent, TableColumn } from '@nuxt/ui'
+import type {
+	DropdownMenuItem,
+	FormSubmitEvent,
+	InputMenuItem,
+	TableColumn,
+} from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
+import shops from '~/assets/json/kakeiboShops.json'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+
+const shopItems = ref(shops)
+const onCreateShopItem = (item: string) => {
+	shopItems.value.push(item)
+	entryState.shop = item
+}
 
 const entrySchema = z.object({
 	id: z.number().optional(),
@@ -227,6 +244,7 @@ const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 			category: entryData.category,
 			amount: entryData.amount,
 			currency: entryData.currency,
+			shop: entryData.shop,
 			note: entryData.note,
 		})
 		.select()
