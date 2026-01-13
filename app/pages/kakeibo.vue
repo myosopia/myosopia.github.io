@@ -16,7 +16,7 @@
 				<UButton
 					icon="i-lucide-plus"
 					size="lg"
-					class="rounded-full fixed bottom-4 right-4"
+					class="rounded-full fixed bottom-4 right-4 z-2000"
 				/>
 				<template #content>
 					<UForm
