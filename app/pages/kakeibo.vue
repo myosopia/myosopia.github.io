@@ -151,16 +151,32 @@ const categoryLabel = computed(() => {
 	)
 	return category ? category.label! : 'カテゴリーを選択'
 })
-const categories = computed(() =>
-	(categoryData.value?.data || []).map(cat => {
-		return {
+const categories = computed(() => {
+	const categoryMap = new Map()
+	const rootItems: DropdownMenuItem[] = []
+	// First pass: create all items
+	;(categoryData.value?.data || []).forEach(cat => {
+		const item: DropdownMenuItem = {
+			id: cat.id,
 			label: cat.label,
+			children: [],
 			onSelect() {
 				entryState.category = cat.id
 			},
-		} as DropdownMenuItem
-	}),
-)
+		}
+		categoryMap.set(cat.id, item)
+	})
+	// Second pass: organize hierarchy
+	;(categoryData.value?.data || []).forEach(cat => {
+		const item = categoryMap.get(cat.id)
+		if (cat.parent && categoryMap.has(cat.parent)) {
+			categoryMap.get(cat.parent).children!.push(item)
+		} else {
+			rootItems.push(item)
+		}
+	})
+	return rootItems
+})
 const categorySelectMenuItems = computed(() =>
 	(categoryData.value?.data || []).map(cat => {
 		return {
