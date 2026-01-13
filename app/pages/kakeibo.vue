@@ -5,41 +5,62 @@
 			<UTable
 				:data="kakeiboData?.data ?? []"
 				:columns="columns"
-				class="flex-1 h-40"
+				class="flex-1 h-80"
 			/>
-			<UForm
-				:schema="entrySchema"
-				:state="entryState"
-				class="space-y-4"
-				@submit="submitEntry"
+			<UModal
+				v-model:open="formModalOpen"
+				:ui="{
+					content: 'p-4',
+				}"
 			>
-				<UFormField name="date" label="日付">
-					<UInputDate v-model="entryState.date" />
-				</UFormField>
-				<UFormField name="category" label="カテゴリー">
-					<UDropdownMenu :items="categories">
-						<UButton variant="outline" :label="categoryLabel" />
-					</UDropdownMenu>
-				</UFormField>
-				<UFormField name="amount" label="金額">
-					<UInputNumber v-model="entryState.amount" :min="0" />
-				</UFormField>
-				<UFormField name="shop" label="店舗">
-					<UInputMenu
-						v-model="entryState.shop"
-						:items="shopItems"
-						create-item
-						@create="onCreateShopItem"
-					/>
-				</UFormField>
-				<UFormField name="note" label="メモ">
-					<UTextarea v-model="entryState.note" />
-				</UFormField>
 				<UButton
-					type="submit"
-					:label="entryState.id === undefined ? '追加' : '修正'"
+					icon="i-lucide-plus"
+					size="lg"
+					class="rounded-full fixed bottom-4 right-4"
 				/>
-			</UForm>
+				<template #content>
+					<UForm
+						:schema="entrySchema"
+						:state="entryState"
+						class="space-y-4"
+						@submit="submitEntry"
+					>
+						<UFormField name="date" label="日付">
+							<UInputDate class="w-full" v-model="entryState.date" />
+						</UFormField>
+						<UFormField name="category" label="カテゴリー">
+							<UDropdownMenu class="w-full" :items="categories">
+								<UButton variant="outline" :label="categoryLabel" />
+							</UDropdownMenu>
+						</UFormField>
+						<UFormField name="amount" label="金額">
+							<UInputNumber
+								class="w-full"
+								v-model="entryState.amount"
+								:min="0"
+							/>
+						</UFormField>
+						<UFormField name="shop" label="店舗">
+							<UInputMenu
+								v-model="entryState.shop"
+								:items="shopItems"
+								create-item
+								class="w-full"
+								@create="onCreateShopItem"
+							/>
+						</UFormField>
+						<UFormField name="note" label="メモ">
+							<UTextarea v-model="entryState.note" class="w-full" />
+						</UFormField>
+						<div class="flex justify-end">
+							<UButton
+								type="submit"
+								:label="entryState.id === undefined ? '追加' : '修正'"
+							/>
+						</div>
+					</UForm>
+				</template>
+			</UModal>
 		</UPageBody>
 	</div>
 </template>
@@ -60,9 +81,12 @@ import type {
 } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
 import shops from '~/assets/json/kakeiboShops.json'
+import { form } from '#build/ui'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+
+const formModalOpen = ref(false)
 
 const shopItems = ref(shops)
 const onCreateShopItem = (item: string) => {
@@ -258,6 +282,7 @@ const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 			description: 'エントリが追加されました。',
 			color: 'success',
 		})
+		formModalOpen.value = false
 		// フォームをリセット
 		entryState.date = today(getLocalTimeZone())
 		entryState.amount = 0
