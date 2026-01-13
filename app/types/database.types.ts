@@ -40,6 +40,7 @@ export type Database = {
       }
       kakeibo: {
         Row: {
+          amount: number
           category: number | null
           currency: string
           date: string
@@ -47,19 +48,19 @@ export type Database = {
           note: string | null
           shop: string | null
           user_id: string
-          value: number
         }
         Insert: {
+          amount: number
           category?: number | null
           currency?: string
           date: string
           id?: number
           note?: string | null
           shop?: string | null
-          user_id: string
-          value: number
+          user_id?: string
         }
         Update: {
+          amount?: number
           category?: number | null
           currency?: string
           date?: string
@@ -67,7 +68,6 @@ export type Database = {
           note?: string | null
           shop?: string | null
           user_id?: string
-          value?: number
         }
         Relationships: [
           {
