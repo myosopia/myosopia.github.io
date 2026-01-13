@@ -10,6 +10,11 @@
 			<UFormField name="date" label="日付">
 				<UInputDate v-model="entryState.date" />
 			</UFormField>
+			<UFormField name="category" label="カテゴリー">
+				<UDropdownMenu :items="categories">
+					<UButton :label="categoryLabel"></UButton>
+				</UDropdownMenu>
+			</UFormField>
 			<UFormField name="amount" label="金額">
 				<UInputNumber v-model="entryState.amount" :min="0" />
 			</UFormField>
@@ -22,12 +27,12 @@
 </template>
 <script setup lang="ts">
 import { z } from 'zod/v4'
-import type { FormSubmitEvent } from '@nuxt/ui'
 import {
 	type CalendarDate,
 	today,
 	getLocalTimeZone,
 } from '@internationalized/date'
+import type { DropdownMenuItem, FormSubmitEvent } from '@nuxt/ui'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
@@ -48,6 +53,29 @@ const entryState = reactive<Partial<EntrySchema>>({
 	amount: 0,
 	currency: 'JPY',
 })
+
+const { data: categoryData, refresh: refreshCategoryData } = useAsyncData(
+	async () => await supabase.from('kakeibo_categories').select('*').order('id'),
+	{
+		server: false,
+	},
+)
+const categoryLabel = computed(() => {
+	const category = (categoryData.value?.data || []).find(
+		cat => cat.id === entryState.category,
+	)
+	return category ? category.label! : 'カテゴリーを選択'
+})
+const categories = computed(() =>
+	(categoryData.value?.data || []).map(cat => {
+		return {
+			label: cat.label,
+			onSelect() {
+				entryState.category = cat.id
+			},
+		} as DropdownMenuItem
+	}),
+)
 
 const toast = useToast()
 
