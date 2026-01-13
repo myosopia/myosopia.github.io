@@ -29,7 +29,13 @@
 							<UInputDate v-model="entryState.date" class="w-full" />
 						</UFormField>
 						<UFormField name="category" label="カテゴリー">
-							<UDropdownMenu class="w-full" :items="categories">
+							<UDropdownMenu
+								class="w-full"
+								:items="categories"
+								:content="{
+									align: 'start',
+								}"
+							>
 								<UButton variant="outline" :label="categoryLabel" />
 							</UDropdownMenu>
 						</UFormField>
@@ -153,7 +159,16 @@ const categoryLabel = computed(() => {
 })
 const categories = computed(() => {
 	const categoryMap = new Map()
-	const rootItems: DropdownMenuItem[] = []
+	const rootItems: DropdownMenuItem[] = [
+		{
+			id: undefined,
+			label: '未分類',
+			children: [],
+			onSelect() {
+				entryState.category = undefined
+			},
+		},
+	]
 	// First pass: create all items
 	;(categoryData.value?.data || []).forEach(cat => {
 		const item: DropdownMenuItem = {
