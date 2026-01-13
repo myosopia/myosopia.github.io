@@ -103,6 +103,11 @@ const items = computed<NavigationMenuItem[]>(() => [
 		icon: 'i-lucide-book-open-text',
 	},
 	{
+		label: '家計簿',
+		to: '/kakeibo',
+		icon: 'i-lucide-wallet',
+	},
+	{
 		label: t('login'),
 		to: '/login',
 		icon: 'i-lucide-log-in',

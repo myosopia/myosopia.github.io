@@ -1,11 +1,11 @@
 <template>
-	<div>
-		<h1>家計簿</h1>
+	<UPage>
+		<UPageHeader title="家計簿" class="p-4" />
 		<UPageBody class="p-4">
 			<UTable
 				:data="kakeiboData?.data ?? []"
 				:columns="columns"
-				class="flex-1 h-80"
+				class="flex-1 h-120"
 			/>
 			<UModal
 				v-model:open="formModalOpen"
@@ -62,7 +62,7 @@
 				</template>
 			</UModal>
 		</UPageBody>
-	</div>
+	</UPage>
 </template>
 <script setup lang="ts">
 import { z } from 'zod/v4'
