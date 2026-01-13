@@ -82,19 +82,19 @@ export type Database = {
       kakeibo_categories: {
         Row: {
           id: number
-          label: string | null
+          label: string
           order: number | null
           parent: number | null
         }
         Insert: {
           id?: number
-          label?: string | null
+          label: string
           order?: number | null
           parent?: number | null
         }
         Update: {
           id?: number
-          label?: string | null
+          label?: string
           order?: number | null
           parent?: number | null
         }

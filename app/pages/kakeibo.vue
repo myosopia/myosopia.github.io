@@ -26,7 +26,7 @@
 						@submit="submitEntry"
 					>
 						<UFormField name="date" label="日付">
-							<UInputDate class="w-full" v-model="entryState.date" />
+							<UInputDate v-model="entryState.date" class="w-full" />
 						</UFormField>
 						<UFormField name="category" label="カテゴリー">
 							<UDropdownMenu class="w-full" :items="categories">
@@ -35,8 +35,8 @@
 						</UFormField>
 						<UFormField name="amount" label="金額">
 							<UInputNumber
-								class="w-full"
 								v-model="entryState.amount"
+								class="w-full"
 								:min="0"
 							/>
 						</UFormField>
@@ -61,6 +61,30 @@
 					</UForm>
 				</template>
 			</UModal>
+			<UForm
+				:schema="categorySchema"
+				:state="categoryState"
+				class="space-y-4"
+				@submit="submitCategory"
+			>
+				<UFormField name="label" label="カテゴリー名">
+					<UInput v-model="categoryState.label" class="w-full" />
+				</UFormField>
+				<UFormField name="parent" label="親カテゴリー">
+					<USelectMenu
+						v-model="categoryState.parent"
+						value-key="id"
+						:items="categorySelectMenuItems"
+						class="w-full"
+					/>
+				</UFormField>
+				<UFormField name="order" label="表示順">
+					<UInputNumber v-model="categoryState.order" :min="0" class="w-full" />
+				</UFormField>
+				<div class="flex justify-end">
+					<UButton type="submit" label="カテゴリー追加" />
+				</div>
+			</UForm>
 		</UPageBody>
 	</UPage>
 </template>
@@ -73,15 +97,9 @@ import {
 	parseDate,
 	getLocalTimeZone,
 } from '@internationalized/date'
-import type {
-	DropdownMenuItem,
-	FormSubmitEvent,
-	InputMenuItem,
-	TableColumn,
-} from '@nuxt/ui'
+import type { DropdownMenuItem, FormSubmitEvent, TableColumn } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
 import shops from '~/assets/json/kakeiboShops.json'
-import { form } from '#build/ui'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
@@ -112,6 +130,15 @@ const entryState = reactive<Partial<EntrySchema>>({
 	currency: 'JPY',
 })
 
+const categorySchema = z.object({
+	id: z.number().optional(),
+	label: z.string(),
+	parent: z.number().optional(),
+	order: z.number().optional(),
+})
+type CategorySchema = z.output<typeof categorySchema>
+const categoryState = reactive<Partial<CategorySchema>>({})
+
 const { data: categoryData, refresh: refreshCategoryData } = useAsyncData(
 	async () => await supabase.from('kakeibo_categories').select('*').order('id'),
 	{
@@ -134,7 +161,14 @@ const categories = computed(() =>
 		} as DropdownMenuItem
 	}),
 )
-
+const categorySelectMenuItems = computed(() =>
+	(categoryData.value?.data || []).map(cat => {
+		return {
+			label: cat.label,
+			id: cat.id,
+		}
+	}),
+)
 const { data: kakeiboData, refresh: refreshKakeiboData } = useAsyncData(
 	async () =>
 		await supabase
@@ -260,7 +294,7 @@ const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 		alert('ログインが必要です。')
 		return
 	}
-	const { data, error } = await supabase
+	const { error } = await supabase
 		.from('kakeibo')
 		.upsert({
 			id: entryData.id,
@@ -293,6 +327,40 @@ const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 		entryState.id = undefined
 		// データを再取得
 		refreshKakeiboData()
+	}
+}
+
+const submitCategory = async (event: FormSubmitEvent<CategorySchema>) => {
+	event.preventDefault()
+	const categoryData = event.data
+	if (!user.value) {
+		alert('ログインが必要です。')
+		return
+	}
+	const { error } = await supabase
+		.from('kakeibo_categories')
+		.upsert({
+			id: categoryData.id,
+			label: categoryData.label,
+			parent: categoryData.parent,
+			order: categoryData.order,
+		})
+		.select()
+	if (error) {
+		console.error('カテゴリーの追加に失敗しました:', error)
+		alert('カテゴリーの追加に失敗しました。')
+	} else {
+		toast.add({
+			title: '成功',
+			description: 'カテゴリーが追加されました。',
+			color: 'success',
+		})
+		// フォームをリセット
+		categoryState.label = undefined
+		categoryState.parent = undefined
+		categoryState.order = undefined
+		// データを再取得
+		refreshCategoryData()
 	}
 }
 </script>
