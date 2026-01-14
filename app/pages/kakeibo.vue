@@ -377,6 +377,12 @@ const columns: TableColumn<Entry>[] = [
 	{
 		accessorKey: 'amount',
 		header: '金額',
+		footer({ column }) {
+			const total = column
+				.getFacetedRowModel()
+				.rows.reduce((sum, row) => sum + (row.original.amount || 0), 0)
+			return total
+		},
 	},
 	{
 		accessorKey: 'currency',
