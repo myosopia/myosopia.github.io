@@ -23,6 +23,15 @@
 					"
 				/>
 			</UScrollArea>
+			<UInputDate
+				v-model="dateRange"
+				range
+				@change="
+					() => {
+						refreshKakeiboData()
+					}
+				"
+			/>
 			<UTable
 				ref="table"
 				sticky
@@ -262,6 +271,8 @@ const { data: kakeiboData, refresh: refreshKakeiboData } = useAsyncData(
 		await supabase
 			.from('kakeibo')
 			.select('*')
+			.gte('date', dateRange.value.start.toString())
+			.lte('date', dateRange.value.end.toString())
 			.order('date', { ascending: false }),
 	{
 		server: false,
@@ -456,4 +467,10 @@ const submitCategory = async (event: FormSubmitEvent<CategorySchema>) => {
 
 // Table
 const table = useTemplateRef('table')
+// Filter
+// Date range
+const dateRange = shallowRef({
+	start: today(getLocalTimeZone()).set({ day: 1 }),
+	end: today(getLocalTimeZone()),
+})
 </script>
