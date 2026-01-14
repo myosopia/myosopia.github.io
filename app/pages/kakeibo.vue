@@ -60,6 +60,20 @@
 					"
 				/>
 			</UFieldGroup>
+			<UCheckboxGroup
+				v-model="groupingColumns"
+				orientation="horizontal"
+				:items="[
+					{
+						label: '日付',
+						value: 'date',
+					},
+					{
+						label: 'カテゴリー',
+						value: 'category',
+					},
+				]"
+			/>
 			<UTable
 				ref="table"
 				sticky
@@ -76,6 +90,8 @@
 						actions: true,
 					},
 				}"
+				:grouping-options="groupingOptions"
+				:grouping="groupingColumns"
 				class="flex-1 h-120"
 			/>
 			<UModal
@@ -175,8 +191,9 @@ import {
 	getLocalTimeZone,
 } from '@internationalized/date'
 import type { DropdownMenuItem, FormSubmitEvent, TableColumn } from '@nuxt/ui'
-import type { Row } from '@tanstack/vue-table'
+import type { Row, GroupingOptions } from '@tanstack/vue-table'
 import shops from '~/assets/json/kakeiboShops.json'
+import { getGroupedRowModel } from '@tanstack/vue-table'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
@@ -377,6 +394,7 @@ const columns: TableColumn<Entry>[] = [
 	{
 		accessorKey: 'amount',
 		header: '金額',
+		aggregationFn: 'sum',
 		footer({ column }) {
 			const total = column
 				.getFacetedRowModel()
@@ -507,6 +525,12 @@ const dateRange = shallowRef({
 	start: today(getLocalTimeZone()).set({ day: 1 }),
 	end: today(getLocalTimeZone()),
 })
+// Grouping
+const groupingOptions = ref<GroupingOptions>({
+	groupedColumnMode: 'reorder',
+	getGroupedRowModel: getGroupedRowModel(),
+})
+const groupingColumns = shallowRef<string[]>([])
 
 onMounted(() => {
 	refreshKakeiboData()
