@@ -23,15 +23,43 @@
 					"
 				/>
 			</UScrollArea>
-			<UInputDate
-				v-model="dateRange"
-				range
-				@change="
-					() => {
-						refreshKakeiboData()
-					}
-				"
-			/>
+			<UFieldGroup>
+				<UButton
+					icon="i-lucide-chevrons-left"
+					variant="ghost"
+					color="neutral"
+					@click="
+						() => {
+							dateRange = {
+								start: dateRange.start.subtract({ months: 1 }).set({ day: 1 }),
+								end: dateRange.start.subtract({ months: 1 }).set({ day: 31 }),
+							}
+						}
+					"
+				/>
+				<UInputDate
+					v-model="dateRange"
+					range
+					@change="
+						() => {
+							refreshKakeiboData()
+						}
+					"
+				/>
+				<UButton
+					icon="i-lucide-chevrons-right"
+					variant="ghost"
+					color="neutral"
+					@click="
+						() => {
+							dateRange = {
+								start: dateRange.end.add({ months: 1 }).set({ day: 1 }),
+								end: dateRange.end.add({ months: 1 }).set({ day: 31 }),
+							}
+						}
+					"
+				/>
+			</UFieldGroup>
 			<UTable
 				ref="table"
 				sticky
@@ -472,5 +500,9 @@ const table = useTemplateRef('table')
 const dateRange = shallowRef({
 	start: today(getLocalTimeZone()).set({ day: 1 }),
 	end: today(getLocalTimeZone()),
+})
+
+onMounted(() => {
+	refreshKakeiboData()
 })
 </script>
