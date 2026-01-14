@@ -93,7 +93,32 @@
 				:grouping-options="groupingOptions"
 				:grouping="groupingColumns"
 				class="flex-1 h-120"
-			/>
+				:ui="{
+					root: 'min-w-full',
+					td: 'empty:p-0', // helps with the colspaned row added for expand slot
+				}"
+			>
+				<template #category-cell="{ row }">
+					<div v-if="row.getIsGrouped()" class="flex items-center">
+						<span
+							class="inline-block"
+							:style="{ width: `calc(${row.depth} * 1rem)` }"
+						/>
+						<UButton
+							variant="outline"
+							color="neutral"
+							class="mr-2"
+							size="xs"
+							:icon="row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus'"
+							@click="row.toggleExpanded()"
+						/>
+						<strong v-if="row.groupingColumnId === 'category'">{{
+							categoryData?.data?.find(cat => cat.id === row.original.category)
+								?.label ?? '未分類'
+						}}</strong>
+					</div>
+				</template>
+			</UTable>
 			<UModal
 				v-model:open="formModalOpen"
 				:ui="{
