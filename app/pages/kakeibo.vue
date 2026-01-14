@@ -2,9 +2,43 @@
 	<UPage>
 		<UPageHeader title="家計簿" class="p-4" />
 		<UPageBody class="p-4">
+			<UScrollArea orientation="horizontal">
+				<UCheckbox
+					v-for="column in table?.tableApi
+						?.getAllColumns()
+						.filter(column => column.getCanHide())"
+					:key="column.id"
+					:label="column.columnDef.header?.toString()"
+					variant="card"
+					indicator="hidden"
+					color="neutral"
+					:ui="{
+						root: 'shrink-0 bg-muted opacity-50 has-data-[state=checked]:opacity-100 rounded-none border-none',
+					}"
+					:default-value="column.getIsVisible()"
+					@update:model-value="
+						value => {
+							column.toggleVisibility(!!value)
+						}
+					"
+				/>
+			</UScrollArea>
 			<UTable
+				ref="table"
+				sticky
 				:data="kakeiboData?.data ?? []"
 				:columns="columns"
+				:initial-state="{
+					columnVisibility: {
+						date: true,
+						category: true,
+						amount: true,
+						currency: false,
+						shop: true,
+						note: false,
+						actions: true,
+					},
+				}"
 				class="flex-1 h-120"
 			/>
 			<UModal
@@ -319,6 +353,7 @@ const columns: TableColumn<Entry>[] = [
 	},
 	{
 		id: 'actions',
+		enableHiding: false,
 		cell: ({ row }) => {
 			return h(
 				UDropdownMenu,
@@ -418,4 +453,7 @@ const submitCategory = async (event: FormSubmitEvent<CategorySchema>) => {
 		refreshCategoryData()
 	}
 }
+
+// Table
+const table = useTemplateRef('table')
 </script>
