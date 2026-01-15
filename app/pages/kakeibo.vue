@@ -69,20 +69,28 @@
 					"
 				/>
 			</UFieldGroup>
-			<UCheckboxGroup
-				v-model="groupingColumns"
+			<UFormField
 				orientation="horizontal"
-				:items="[
-					{
-						label: '日付',
-						value: 'date',
-					},
-					{
-						label: 'カテゴリー',
-						value: 'category',
-					},
-				]"
-			/>
+				label="グループ化"
+				:ui="{
+					root: 'justify-start items-center gap-4',
+				}"
+			>
+				<UCheckboxGroup
+					v-model="groupingColumns"
+					orientation="horizontal"
+					:items="[
+						{
+							label: '日付',
+							value: 'date',
+						},
+						{
+							label: 'カテゴリー',
+							value: 'category',
+						},
+					]"
+				/>
+			</UFormField>
 			<UTable
 				ref="table"
 				sticky
