@@ -312,14 +312,23 @@ const categories = computed(() => {
 		label: cat.label,
 		order: cat.order ?? orderMaxValue,
 		onSelect() {
-			entryState.category = cat.id
+			if (!cat.children) {
+				entryState.category = cat.id
+			}
 		},
 		...(cat.children.length > 0 && {
-			children: cat.children
-				.map(buildCategoryItem)
-				.toSorted(
-					(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
-				),
+			children: [
+				{
+					label: cat.label,
+					order: orderMaxValue,
+					onSelect() {
+						entryState.category = cat.id
+					},
+				},
+				...cat.children.map(buildCategoryItem),
+			].toSorted(
+				(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
+			),
 		}),
 	})
 	categoryMap.value.forEach(cat => {
