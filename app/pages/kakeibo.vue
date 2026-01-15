@@ -37,15 +37,24 @@
 						}
 					"
 				/>
-				<UInputDate
-					v-model="dateRange"
-					range
-					@change="
-						() => {
-							refreshKakeiboData()
-						}
-					"
-				/>
+				<UPopover
+					:ui="{
+						content: 'p-4',
+					}"
+				>
+					<UInputDate
+						v-model="dateRange"
+						range
+						@change="
+							() => {
+								refreshKakeiboData()
+							}
+						"
+					/>
+					<template #content>
+						<UCalendar v-model="dateRange" range variant="soft" />
+					</template>
+				</UPopover>
 				<UButton
 					icon="i-lucide-chevrons-right"
 					variant="ghost"
@@ -120,7 +129,12 @@
 						@submit="submitEntry"
 					>
 						<UFormField name="date" label="日付">
-							<UInputDate v-model="entryState.date" class="w-full" />
+							<UPopover :content="{ align: 'start' }" :ui="{ content: 'p-4' }">
+								<UInputDate v-model="entryState.date" class="w-full" />
+								<template #content>
+									<UCalendar v-model="entryState.date" variant="soft" />
+								</template>
+							</UPopover>
 						</UFormField>
 						<UFormField name="category" label="カテゴリー">
 							<UDropdownMenu
