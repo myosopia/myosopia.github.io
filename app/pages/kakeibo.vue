@@ -89,6 +89,9 @@
 						note: false,
 						actions: true,
 					},
+					columnPinning: {
+						left: ['expand'],
+					},
 				}"
 				:grouping-options="groupingOptions"
 				:grouping="groupingColumns"
@@ -97,36 +100,7 @@
 					root: 'min-w-full',
 					td: 'empty:p-0', // helps with the colspaned row added for expand slot
 				}"
-			>
-				<template #category-cell="{ row }">
-					<div v-if="row.getIsGrouped()" class="flex items-center">
-						<span
-							class="inline-block"
-							:style="{ width: `calc(${row.depth} * 1rem)` }"
-						/>
-						<UButton
-							variant="outline"
-							color="neutral"
-							class="mr-2"
-							size="xs"
-							:icon="row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus'"
-							@click="row.toggleExpanded()"
-						/>
-						<strong v-if="row.groupingColumnId === 'category'">{{
-							(() => {
-								if (row.original.category) {
-									let item = categoryMap.get(row.original.category)
-									while (item?.parent) {
-										item = categoryMap.get(item.parent)
-									}
-									return item?.label
-								}
-								return '未分類'
-							})()
-						}}</strong>
-					</div>
-				</template>
-			</UTable>
+			/>
 			<UModal
 				v-model:open="formModalOpen"
 				:ui="{
@@ -411,6 +385,35 @@ function getRowItems(row: Row<Entry>): DropdownMenuItem[] {
 }
 const columns: TableColumn<Entry>[] = [
 	{
+		id: 'expand',
+		enableHiding: false,
+		cell({ row }) {
+			if (row.getIsGrouped()) {
+				return h(
+					'div',
+					{
+						class: 'flex items-center',
+					},
+					[
+						h('span', {
+							class: 'inline-block',
+							style: `width: calc(${row.depth} * 1rem);`,
+						}),
+						h(UButton, {
+							icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
+							variant: 'outline',
+							color: 'neutral',
+							size: 'xs',
+							onClick: () => {
+								row.toggleExpanded()
+							},
+						}),
+					],
+				)
+			}
+		},
+	},
+	{
 		accessorKey: 'date',
 		header: '日付',
 	},
@@ -418,10 +421,17 @@ const columns: TableColumn<Entry>[] = [
 		accessorKey: 'category',
 		header: 'カテゴリー',
 		cell({ row }) {
-			return (
-				categoryData.value?.data?.find(cat => cat.id === row.original.category)
-					?.label ?? '未分類'
-			)
+			if (row.original.category === null) {
+				return '未分類'
+			}
+			if (row.getIsGrouped()) {
+				let item = categoryMap.value.get(row.original.category)
+				while (item?.parent) {
+					item = categoryMap.value.get(item.parent)
+				}
+				return item?.label
+			}
+			return categoryMap.value.get(row.original.category)?.label ?? '未分類'
 		},
 		getGroupingValue(row) {
 			if (row.category) {
