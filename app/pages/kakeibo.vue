@@ -227,6 +227,8 @@ import { getGroupedRowModel } from '@tanstack/vue-table'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
+const exchange = useExchange()
+
 const formModalOpen = ref(false)
 
 const shopItems = ref(shops)
