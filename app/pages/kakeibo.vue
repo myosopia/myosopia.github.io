@@ -113,8 +113,16 @@
 							@click="row.toggleExpanded()"
 						/>
 						<strong v-if="row.groupingColumnId === 'category'">{{
-							categoryData?.data?.find(cat => cat.id === row.original.category)
-								?.label ?? '未分類'
+							(() => {
+								if (row.original.category) {
+									let item = categoryMap.get(row.original.category)
+									while (item?.parent) {
+										item = categoryMap.get(item.parent)
+									}
+									return item?.label
+								}
+								return '未分類'
+							})()
 						}}</strong>
 					</div>
 				</template>
@@ -270,9 +278,30 @@ const categoryLabel = computed(() => {
 	)
 	return category ? category.label! : 'カテゴリーを選択'
 })
+type CategoryMapItem = {
+	id: number
+	label: string
+	order: number | null
+	parent: number | null
+	children: CategoryMapItem[]
+}
+const categoryMap = computed(() => {
+	const m = new Map<number, CategoryMapItem>()
+	categoryData.value?.data?.forEach(cat => {
+		m.set(cat.id, {
+			...cat,
+			children: [],
+		})
+	})
+	m.forEach(item => {
+		if (item.parent && m.has(item.parent)) {
+			m.get(item.parent)?.children.push(item)
+		}
+	})
+	return m
+})
 const categories = computed(() => {
 	const orderMaxValue = Number.MAX_SAFE_INTEGER
-	const categoryMap = new Map<number, DropdownMenuItem>()
 	const rootItems: DropdownMenuItem[] = [
 		{
 			label: '未分類',
@@ -283,44 +312,23 @@ const categories = computed(() => {
 			},
 		},
 	]
-	// First pass: create all items
-	;(categoryData.value?.data || []).forEach(cat => {
-		const item: DropdownMenuItem = {
-			label: cat.label,
-			order: cat.order ?? orderMaxValue,
-			children: [
-				{
-					label: cat.label,
-					order: 0,
-					onSelect() {
-						entryState.category = cat.id
-					},
-				},
-			],
-			onSelect() {
-				entryState.category = cat.id
-			},
-		}
-		categoryMap.set(cat.id, item)
-	})
-	// Second pass: organize hierarchy
-	;(categoryData.value?.data || []).forEach(cat => {
-		const item = categoryMap.get(cat.id)!
-		if (cat.parent && categoryMap.has(cat.parent)) {
-			;(categoryMap.get(cat.parent)!.children as DropdownMenuItem[]).push(item)
-		} else {
-			rootItems.push(item)
-		}
-	})
-	categoryMap.forEach(item => {
-		if (item.children) {
-			if (item.children.length <= 1) {
-				delete item.children
-			} else {
-				item.children.sort(
+	const buildCategoryItem = (cat: CategoryMapItem): DropdownMenuItem => ({
+		label: cat.label,
+		order: cat.order ?? orderMaxValue,
+		onSelect() {
+			entryState.category = cat.id
+		},
+		...(cat.children.length > 0 && {
+			children: cat.children
+				.map(buildCategoryItem)
+				.toSorted(
 					(a: DropdownMenuItem, b: DropdownMenuItem) => a.order - b.order,
-				)
-			}
+				),
+		}),
+	})
+	categoryMap.value.forEach(cat => {
+		if (!cat.parent) {
+			rootItems.push(buildCategoryItem(cat))
 		}
 	})
 	rootItems.sort(
@@ -414,6 +422,16 @@ const columns: TableColumn<Entry>[] = [
 				categoryData.value?.data?.find(cat => cat.id === row.original.category)
 					?.label ?? '未分類'
 			)
+		},
+		getGroupingValue(row) {
+			if (row.category) {
+				let item = categoryMap.value.get(row.category)
+				while (item?.parent) {
+					item = categoryMap.value.get(item.parent)
+				}
+				return item?.id
+			}
+			return row.category
 		},
 	},
 	{
