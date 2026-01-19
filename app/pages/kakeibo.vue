@@ -45,7 +45,7 @@
 					<UInputDate
 						v-model="dateRange"
 						range
-						@change="
+						@update:model-value="
 							() => {
 								refreshKakeiboData()
 							}
@@ -118,6 +118,26 @@
 					td: 'empty:p-0', // helps with the colspaned row added for expand slot
 				}"
 			/>
+			<UFormField label="通貨">
+				<USelect
+					v-model="currency"
+					:items="[
+						{
+							label: 'JPY',
+							value: 'jpy',
+						},
+						{
+							label: 'CNY',
+							value: 'cny',
+						},
+						{
+							label: 'USD',
+							value: 'usd',
+						},
+					]"
+					@update:model-value="handleCurrencyChange"
+				/>
+			</UFormField>
 			<UModal
 				v-model:open="formModalOpen"
 				:ui="{
@@ -227,7 +247,10 @@ import { getGroupedRowModel } from '@tanstack/vue-table'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const exchange = useExchange()
+const currency = ref<string>('')
+const exchangeRates = ref<
+	Record<string, Record<string, Record<string, number>>>
+>({})
 
 const formModalOpen = ref(false)
 
@@ -352,6 +375,7 @@ const categorySelectMenuItems = computed(() =>
 	}),
 )
 const { data: kakeiboData, refresh: refreshKakeiboData } = useAsyncData(
+	'kakeibo',
 	async () =>
 		await supabase
 			.from('kakeibo')
@@ -481,6 +505,18 @@ const columns: TableColumn<Entry>[] = [
 		accessorKey: 'amount',
 		header: '金額',
 		aggregationFn: 'sum',
+		cell({ row }) {
+			const rate =
+				(exchangeRates.value &&
+				exchangeRates.value[row.original.date] &&
+				exchangeRates.value[row.original.date]![row.original.currency]
+					? exchangeRates.value[row.original.date]![row.original.currency]![
+							currency.value
+						]
+					: 1) ?? 1
+			const amount = row.original.amount * rate
+			return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
+		},
 		footer({ column }) {
 			const total = column
 				.getFacetedRowModel()
@@ -617,6 +653,34 @@ const groupingOptions = ref<GroupingOptions>({
 	getGroupedRowModel: getGroupedRowModel(),
 })
 const groupingColumns = shallowRef<string[]>([])
+
+// Currency
+const handleCurrencyChange = async () => {
+	const dates = kakeiboData.value?.data?.map(row => row.date)
+	const currencies = kakeiboData.value?.data?.map(row =>
+		row.currency.toLowerCase(),
+	)
+	if (!exchangeRates.value) {
+		exchangeRates.value = {}
+	}
+	dates?.forEach(async date => {
+		for (const cur of currencies ?? []) {
+			if (!exchangeRates.value[date] || !exchangeRates.value[date][cur]) {
+				const endpoint = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${date}/v1/currencies/${cur}.json`
+				const data = (await $fetch(endpoint)) as Record<
+					string,
+					string | Record<string, string>
+				>
+				if (!exchangeRates.value[date]) {
+					exchangeRates.value[date] = {}
+				}
+				exchangeRates.value[date][cur.toUpperCase()] = data[
+					cur
+				] as unknown as Record<string, number>
+			}
+		}
+	})
+}
 
 onMounted(() => {
 	refreshKakeiboData()
