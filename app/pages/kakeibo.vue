@@ -504,8 +504,23 @@ const columns: TableColumn<Entry>[] = [
 	{
 		accessorKey: 'amount',
 		header: '金額',
-		aggregationFn: 'sum',
 		cell({ row }) {
+			if (row.getIsGrouped()) {
+				const amount = row.getLeafRows().reduce((acc, currentValue) => {
+					const rate =
+						(exchangeRates.value &&
+						exchangeRates.value[currentValue.original.date] &&
+						exchangeRates.value[currentValue.original.date]![
+							currentValue.original.currency
+						]
+							? exchangeRates.value[currentValue.original.date]![
+									currentValue.original.currency
+								]![currency.value]
+							: 1) ?? 1
+					return acc + currentValue.original.amount * rate
+				}, 0)
+				return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
+			}
 			const rate =
 				(exchangeRates.value &&
 				exchangeRates.value[row.original.date] &&
@@ -518,10 +533,22 @@ const columns: TableColumn<Entry>[] = [
 			return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
 		},
 		footer({ column }) {
-			const total = column
+			const amount = column
 				.getFacetedRowModel()
-				.rows.reduce((sum, row) => sum + (row.original.amount || 0), 0)
-			return total
+				.rows.reduce((acc, currentValue) => {
+					const rate =
+						(exchangeRates.value &&
+						exchangeRates.value[currentValue.original.date] &&
+						exchangeRates.value[currentValue.original.date]![
+							currentValue.original.currency
+						]
+							? exchangeRates.value[currentValue.original.date]![
+									currentValue.original.currency
+								]![currency.value]
+							: 1) ?? 1
+					return acc + currentValue.original.amount * rate
+				}, 0)
+			return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
 		},
 	},
 	{
