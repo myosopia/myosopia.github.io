@@ -240,7 +240,7 @@ import {
 	getLocalTimeZone,
 } from '@internationalized/date'
 import type { DropdownMenuItem, FormSubmitEvent, TableColumn } from '@nuxt/ui'
-import type { Row, GroupingOptions } from '@tanstack/vue-table'
+import type { Row, GroupingOptions, Column } from '@tanstack/vue-table'
 import shops from '~/assets/json/kakeiboShops.json'
 import { getGroupedRowModel } from '@tanstack/vue-table'
 
@@ -440,6 +440,32 @@ function getRowItems(row: Row<Entry>): DropdownMenuItem[] {
 		},
 	]
 }
+const totalAmount = (column: Column<Entry>) => {
+	return column.getFacetedRowModel().rows.reduce((acc, currentValue) => {
+		const rate =
+			(exchangeRates.value &&
+			exchangeRates.value[currentValue.original.date] &&
+			exchangeRates.value[currentValue.original.date]![
+				currentValue.original.currency
+			]
+				? exchangeRates.value[currentValue.original.date]![
+						currentValue.original.currency
+					]![currency.value]
+				: 1) ?? 1
+		return acc + currentValue.original.amount * rate
+	}, 0)
+}
+const amountInCurrency = (row: Row<Entry>) => {
+	const rate =
+		(exchangeRates.value &&
+		exchangeRates.value[row.original.date] &&
+		exchangeRates.value[row.original.date]![row.original.currency]
+			? exchangeRates.value[row.original.date]![row.original.currency]![
+					currency.value
+				]
+			: 1) ?? 1
+	return row.original.amount * rate
+}
 const columns: TableColumn<Entry>[] = [
 	{
 		id: 'expand',
@@ -504,51 +530,20 @@ const columns: TableColumn<Entry>[] = [
 	{
 		accessorKey: 'amount',
 		header: '金額',
-		cell({ row }) {
+		cell({ row, column }) {
 			if (row.getIsGrouped()) {
 				const amount = row.getLeafRows().reduce((acc, currentValue) => {
-					const rate =
-						(exchangeRates.value &&
-						exchangeRates.value[currentValue.original.date] &&
-						exchangeRates.value[currentValue.original.date]![
-							currentValue.original.currency
-						]
-							? exchangeRates.value[currentValue.original.date]![
-									currentValue.original.currency
-								]![currency.value]
-							: 1) ?? 1
-					return acc + currentValue.original.amount * rate
+					return acc + amountInCurrency(currentValue)
 				}, 0)
-				return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
+				const total = totalAmount(column)
+				return `${parseFloat(amount.toFixed(2))} (${parseFloat(((amount / total) * 100).toFixed(2))}%)`
 			}
-			const rate =
-				(exchangeRates.value &&
-				exchangeRates.value[row.original.date] &&
-				exchangeRates.value[row.original.date]![row.original.currency]
-					? exchangeRates.value[row.original.date]![row.original.currency]![
-							currency.value
-						]
-					: 1) ?? 1
-			const amount = row.original.amount * rate
-			return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
+			const amount = amountInCurrency(row)
+			return parseFloat(amount.toFixed(2))
 		},
 		footer({ column }) {
-			const amount = column
-				.getFacetedRowModel()
-				.rows.reduce((acc, currentValue) => {
-					const rate =
-						(exchangeRates.value &&
-						exchangeRates.value[currentValue.original.date] &&
-						exchangeRates.value[currentValue.original.date]![
-							currentValue.original.currency
-						]
-							? exchangeRates.value[currentValue.original.date]![
-									currentValue.original.currency
-								]![currency.value]
-							: 1) ?? 1
-					return acc + currentValue.original.amount * rate
-				}, 0)
-			return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
+			const amount = totalAmount(column)
+			return parseFloat(amount.toFixed(2))
 		},
 	},
 	{
