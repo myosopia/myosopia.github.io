@@ -154,6 +154,13 @@
 				:ui="{
 					content: 'p-4',
 				}"
+				@update:open="
+					open => {
+						if (!open && entryState.id !== undefined) {
+							initializeEntryState()
+						}
+					}
+				"
 			>
 				<UButton
 					icon="i-lucide-plus"
@@ -303,6 +310,15 @@ const entryState = reactive<Partial<EntrySchema>>({
 	amount: 0,
 	currency: 'JPY',
 })
+const initializeEntryState = () => {
+	entryState.id = undefined
+	entryState.date = today(getLocalTimeZone())
+	entryState.amount = 0
+	entryState.currency = 'JPY'
+	entryState.category = undefined
+	entryState.note = undefined
+	entryState.shop = undefined
+}
 
 const categorySchema = z.object({
 	id: z.number().optional(),
@@ -673,13 +689,7 @@ const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 		})
 		formModalOpen.value = false
 		// フォームをリセット
-		entryState.date = today(getLocalTimeZone())
-		entryState.amount = 0
-		entryState.currency = 'JPY'
-		entryState.category = undefined
-		entryState.note = undefined
-		entryState.shop = undefined
-		entryState.id = undefined
+		initializeEntryState()
 		// データを再取得
 		refreshKakeiboData()
 	}
