@@ -158,6 +158,7 @@
 					open => {
 						if (!open && entryState.id !== undefined) {
 							initializeEntryState()
+							entryState.date = today(getLocalTimeZone())
 						}
 					}
 				"
