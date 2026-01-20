@@ -6,9 +6,9 @@
 				<UCheckbox
 					v-for="column in table?.tableApi
 						?.getAllColumns()
-						.filter(column => column.getCanHide())"
+						.filter(column => column.getCanHide() && columnLabels[column.id])"
 					:key="column.id"
-					:label="column.columnDef.header?.toString()"
+					:label="columnLabels[column.id]"
 					variant="card"
 					indicator="hidden"
 					color="neutral"
@@ -89,6 +89,15 @@
 							value: 'category',
 						},
 					]"
+					@change="
+						() => {
+							if (groupingColumns.length > 0) {
+								table?.tableApi.getColumn('expand')?.toggleVisibility(true)
+							} else {
+								table?.tableApi.getColumn('expand')?.toggleVisibility(false)
+							}
+						}
+					"
 				/>
 			</UFormField>
 			<UTable
@@ -98,6 +107,7 @@
 				:columns="columns"
 				:initial-state="{
 					columnVisibility: {
+						expand: false,
 						date: true,
 						category: true,
 						amount: true,
@@ -109,6 +119,7 @@
 					columnPinning: {
 						left: ['expand'],
 					},
+					sorting: [{ id: 'date', desc: true }],
 				}"
 				:grouping-options="groupingOptions"
 				:grouping="groupingColumns"
@@ -466,10 +477,17 @@ const amountInCurrency = (row: Row<Entry>) => {
 			: 1) ?? 1
 	return row.original.amount * rate
 }
+const columnLabels: Record<string, string> = {
+	date: '日付',
+	category: 'カテゴリー',
+	amount: '金額',
+	shop: '店舗',
+	note: 'メモ',
+	currency: '通貨',
+}
 const columns: TableColumn<Entry>[] = [
 	{
 		id: 'expand',
-		enableHiding: false,
 		cell({ row }) {
 			if (row.getIsGrouped()) {
 				return h(
@@ -497,12 +515,30 @@ const columns: TableColumn<Entry>[] = [
 		},
 	},
 	{
+		id: 'date',
 		accessorKey: 'date',
-		header: '日付',
+		header({ column }) {
+			const isSorted = column.getIsSorted()
+			return h(UButton, {
+				label: columnLabels[column.id],
+				icon: isSorted
+					? isSorted === 'asc'
+						? 'i-lucide-arrow-up-narrow-wide'
+						: 'i-lucide-arrow-down-wide-narrow'
+					: 'i-lucide-arrow-up-down',
+				variant: 'ghost',
+				color: 'neutral',
+				ui: {
+					label: 'font-bold',
+				},
+				onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+			})
+		},
 	},
 	{
+		id: 'category',
 		accessorKey: 'category',
-		header: 'カテゴリー',
+		header: columnLabels['category'],
 		cell({ row }) {
 			if (row.original.category === null) {
 				return '未分類'
@@ -528,8 +564,9 @@ const columns: TableColumn<Entry>[] = [
 		},
 	},
 	{
+		id: 'amount',
 		accessorKey: 'amount',
-		header: '金額',
+		header: columnLabels['amount'],
 		cell({ row, column }) {
 			if (row.getIsGrouped()) {
 				const amount = row.getLeafRows().reduce((acc, currentValue) => {
@@ -547,21 +584,27 @@ const columns: TableColumn<Entry>[] = [
 		},
 	},
 	{
+		id: 'currency',
 		accessorKey: 'currency',
-		header: '通貨',
+		header: columnLabels['currency'],
 	},
 	{
+		id: 'shop',
 		accessorKey: 'shop',
-		header: '店舗',
+		header: columnLabels['shop'],
 	},
 	{
+		id: 'note',
 		accessorKey: 'note',
-		header: 'メモ',
+		header: columnLabels['note'],
 	},
 	{
 		id: 'actions',
 		enableHiding: false,
 		cell: ({ row }) => {
+			if (row.getIsGrouped()) {
+				return
+			}
 			return h(
 				UDropdownMenu,
 				{
