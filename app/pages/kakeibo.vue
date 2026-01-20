@@ -363,7 +363,7 @@ const categories = computed(() => {
 		label: cat.label,
 		order: cat.order ?? orderMaxValue,
 		onSelect() {
-			if (!cat.children) {
+			if (cat.children.length < 1) {
 				entryState.category = cat.id
 			}
 		},
