@@ -187,11 +187,25 @@
 							</UDropdownMenu>
 						</UFormField>
 						<UFormField name="amount" label="金額">
-							<UInputNumber
-								v-model="entryState.amount"
-								class="w-full"
-								:min="0"
-							/>
+							<UFieldGroup class="flex">
+								<UInputNumber
+									v-model="entryState.amount"
+									:min="0"
+									class="flex-1"
+									:step="entryState.currency === 'JPY' ? 1 : 0.01"
+									:format-options="{
+										style: 'currency',
+										currency: entryState.currency,
+										currencyDisplay: 'symbol',
+										currencySign: 'accounting',
+									}"
+								/>
+								<USelect
+									v-model="entryState.currency"
+									default-value="JPY"
+									:items="['JPY', 'CNY', 'USD']"
+								/>
+							</UFieldGroup>
 						</UFormField>
 						<UFormField name="shop" label="店舗">
 							<UInputMenu
@@ -209,6 +223,7 @@
 							<UButton
 								type="submit"
 								:label="entryState.id === undefined ? '追加' : '修正'"
+								class="w-48 justify-center"
 							/>
 						</div>
 					</UForm>
