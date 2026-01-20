@@ -226,11 +226,17 @@
 						<UFormField name="note" label="メモ">
 							<UTextarea v-model="entryState.note" class="w-full" />
 						</UFormField>
-						<div class="flex justify-end">
+						<div class="flex gap-4">
+							<UButton
+								label="リセット"
+								color="neutral"
+								variant="subtle"
+								@click="initializeEntryState"
+							/>
 							<UButton
 								type="submit"
 								:label="entryState.id === undefined ? '追加' : '修正'"
-								class="w-48 justify-center"
+								class="flex-1 justify-center"
 							/>
 						</div>
 					</UForm>
