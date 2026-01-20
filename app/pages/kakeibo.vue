@@ -343,7 +343,6 @@ const entryState = reactive<Partial<EntrySchema>>({
 })
 const initializeEntryState = () => {
 	entryState.id = undefined
-	entryState.date = today(getLocalTimeZone())
 	entryState.amount = 0
 	entryState.currency = 'JPY'
 	entryState.category = undefined
