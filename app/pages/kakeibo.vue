@@ -162,11 +162,22 @@
 					}
 				"
 			>
-				<UButton
-					icon="i-lucide-plus"
-					size="lg"
-					class="rounded-full fixed bottom-4 right-4 z-2000"
-				/>
+				<UContextMenu
+					:items="[
+						{
+							label: 'カテゴリーを追加',
+							onSelect() {
+								categoryFormModalOpen = true
+							},
+						},
+					]"
+				>
+					<UButton
+						icon="i-lucide-plus"
+						size="lg"
+						class="rounded-full fixed bottom-4 right-4 z-2000"
+					/>
+				</UContextMenu>
 				<template #content>
 					<UForm
 						:schema="entrySchema"
@@ -242,30 +253,43 @@
 					</UForm>
 				</template>
 			</UModal>
-			<UForm
-				:schema="categorySchema"
-				:state="categoryState"
-				class="space-y-4"
-				@submit="submitCategory"
+			<UModal
+				v-model:open="categoryFormModalOpen"
+				:ui="{
+					content: 'p-4',
+				}"
 			>
-				<UFormField name="label" label="カテゴリー名">
-					<UInput v-model="categoryState.label" class="w-full" />
-				</UFormField>
-				<UFormField name="parent" label="親カテゴリー">
-					<USelectMenu
-						v-model="categoryState.parent"
-						value-key="id"
-						:items="categorySelectMenuItems"
-						class="w-full"
-					/>
-				</UFormField>
-				<UFormField name="order" label="表示順">
-					<UInputNumber v-model="categoryState.order" :min="0" class="w-full" />
-				</UFormField>
-				<div class="flex justify-end">
-					<UButton type="submit" label="カテゴリー追加" />
-				</div>
-			</UForm>
+				<template #content>
+					<UForm
+						:schema="categorySchema"
+						:state="categoryState"
+						class="space-y-4"
+						@submit="submitCategory"
+					>
+						<UFormField name="label" label="カテゴリー名">
+							<UInput v-model="categoryState.label" class="w-full" />
+						</UFormField>
+						<UFormField name="parent" label="親カテゴリー">
+							<USelectMenu
+								v-model="categoryState.parent"
+								value-key="id"
+								:items="categorySelectMenuItems"
+								class="w-full"
+							/>
+						</UFormField>
+						<UFormField name="order" label="表示順">
+							<UInputNumber
+								v-model="categoryState.order"
+								:min="0"
+								class="w-full"
+							/>
+						</UFormField>
+						<div class="flex justify-end">
+							<UButton type="submit" label="カテゴリー追加" />
+						</div>
+					</UForm>
+				</template>
+			</UModal>
 		</UPageBody>
 	</UPage>
 </template>
@@ -292,6 +316,7 @@ const exchangeRates = ref<
 >({})
 
 const formModalOpen = ref(false)
+const categoryFormModalOpen = ref(false)
 
 const shopItems = ref(shops)
 const onCreateShopItem = (item: string) => {
@@ -726,6 +751,7 @@ const submitCategory = async (event: FormSubmitEvent<CategorySchema>) => {
 			description: 'カテゴリーが追加されました。',
 			color: 'success',
 		})
+		categoryFormModalOpen.value = false
 		// フォームをリセット
 		categoryState.label = undefined
 		categoryState.parent = undefined
