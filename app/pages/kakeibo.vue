@@ -163,22 +163,24 @@
 					}
 				"
 			>
-				<UContextMenu
-					:items="[
-						{
-							label: 'カテゴリーを追加',
-							onSelect() {
-								categoryFormModalOpen = true
-							},
-						},
-					]"
+				<UButton
+					icon="i-lucide-plus"
+					size="lg"
+					class="rounded-full p-3 fixed bottom-4 right-4 z-2000"
 				>
-					<UButton
-						icon="i-lucide-plus"
-						size="lg"
-						class="rounded-full fixed bottom-4 right-4 z-2000"
-					/>
-				</UContextMenu>
+					<UContextMenu
+						:items="[
+							{
+								label: 'カテゴリーを追加',
+								onSelect() {
+									categoryFormModalOpen = true
+								},
+							},
+						]"
+					>
+						<div class="absolute inset-0" />
+					</UContextMenu>
+				</UButton>
 				<template #content>
 					<UForm
 						:schema="entrySchema"
@@ -187,10 +189,18 @@
 						@submit="submitEntry"
 					>
 						<UFormField name="date" label="日付">
-							<UPopover :content="{ align: 'start' }" :ui="{ content: 'p-4' }">
+							<UPopover
+								v-model:open="entryDateCalendarOpen"
+								:content="{ align: 'start' }"
+								:ui="{ content: 'p-4' }"
+							>
 								<UInputDate v-model="entryState.date" class="w-full" />
 								<template #content>
-									<UCalendar v-model="entryState.date" variant="soft" />
+									<UCalendar
+										v-model="entryState.date"
+										variant="soft"
+										@update:model-value="entryDateCalendarOpen = false"
+									/>
 								</template>
 							</UPopover>
 						</UFormField>
@@ -318,6 +328,7 @@ const exchangeRates = ref<
 
 const formModalOpen = ref(false)
 const categoryFormModalOpen = ref(false)
+const entryDateCalendarOpen = shallowRef(false)
 
 const shopItems = ref(shops)
 const onCreateShopItem = (item: string) => {
