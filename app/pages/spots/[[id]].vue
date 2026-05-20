@@ -113,7 +113,7 @@ const filterKey = computed(() => {
 })
 
 const { data: total } = await useAsyncData(
-	() => `spots-list-${filterKey.value}`,
+	() => `spots-count-${filterKey.value}`,
 	() => {
 		const query = queryCollection('spots')
 		filterQuery(query)
@@ -122,7 +122,7 @@ const { data: total } = await useAsyncData(
 )
 
 const { data: spots } = useAsyncData(
-	() => `spots-count-${filterKey.value}`,
+	() => `spots-list-${filterKey.value}`,
 	() => {
 		const query = queryCollection('spots')
 		filterQuery(query)
