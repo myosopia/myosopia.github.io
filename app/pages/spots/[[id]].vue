@@ -30,6 +30,7 @@ const compositioning = ref(false)
 const search = () => {
 	const q = searchQuery.value || undefined
 	navigateTo({
+		name: route.name,
 		params: { id: 1 },
 		query: { ...currentRoute.value.query, q },
 	})
@@ -49,6 +50,7 @@ const freeParking = computed({
 	get: () => currentRoute.value.query.freeParking === '1',
 	set: value => {
 		navigateTo({
+			name: route.name,
 			params: { id: 1 },
 			query: {
 				...currentRoute.value.query,
@@ -61,6 +63,7 @@ const freeEntrance = computed({
 	get: () => currentRoute.value.query.freeEntrance === '1',
 	set: value =>
 		navigateTo({
+			name: route.name,
 			params: { id: 1 },
 			query: {
 				...currentRoute.value.query,
@@ -121,8 +124,8 @@ const { data: total } = await useAsyncData(
 	},
 )
 
-const { data: spots } = useAsyncData(
-	() => `spots-list-${filterKey.value}`,
+const { data: spots } = await useAsyncData(
+	() => `spots-list-${filterKey.value}-${page.value}`,
 	() => {
 		const query = queryCollection('spots')
 		filterQuery(query)
