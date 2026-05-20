@@ -306,6 +306,8 @@
 								:items="categories"
 								:content="{
 									align: 'start',
+									class:
+										'max-h-(--reka-dropdown-menu-content-available-height) overflow-y-auto',
 								}"
 							>
 								<UButton
