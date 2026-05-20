@@ -105,7 +105,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 		children: [
 			{
 				label: '家計簿',
-				to: localePath('/kakeibo'),
+				to: localePath('/app/kakeibo'),
 				icon: 'i-lucide-wallet',
 			},
 			{
