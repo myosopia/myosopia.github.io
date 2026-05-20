@@ -77,8 +77,8 @@
 							</ul>
 						</template>
 					</UModal>
-					<div ref="list-bottom" class="absolute bottom-0" />
 				</UPageGrid>
+				<div ref="list-bottom" />
 			</UContainer>
 		</UPageBody>
 	</UPage>
@@ -220,10 +220,10 @@ const { data: libraryData, status: loadStatus } = useAsyncData(
 	},
 )
 
-watchEffect(() => {
+watch(bottomIsVisible, (visible) => {
 	if (
+		visible &&
 		loadStatus.value === 'success' &&
-		bottomIsVisible.value &&
 		libraryData.value &&
 		libraryData.value.length === limit.value
 	) {
