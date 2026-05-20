@@ -160,7 +160,8 @@ const statusSelectItems = ref([
 const selectedStatus = ref<string[]>([])
 
 // Max list items count
-const limit = ref(3)
+const pageSize = 3
+const displayCount = ref(pageSize)
 
 // Whether the bottom of the list is visible
 const bottomRef = useTemplateRef('list-bottom')
@@ -185,7 +186,7 @@ const navigationMenuItems: NavigationMenuItem[] = [
 	},
 ]
 
-const { data: libraryData, status: loadStatus } = useAsyncData(
+const { data: allData, status: loadStatus } = useAsyncData(
 	route.path,
 	() => {
 		const query = queryCollection('library')
@@ -199,10 +200,10 @@ const { data: libraryData, status: loadStatus } = useAsyncData(
 				}, q),
 			)
 		}
-		return query.limit(limit.value).all()
+		return query.all()
 	},
 	{
-		watch: [limit, selectedStatus],
+		watch: [selectedStatus],
 		transform: data => {
 			if (import.meta.dev) {
 				data.forEach(item => {
@@ -220,14 +221,21 @@ const { data: libraryData, status: loadStatus } = useAsyncData(
 	},
 )
 
+// Reset display count when filter changes
+watch(selectedStatus, () => {
+	displayCount.value = pageSize
+})
+
+const libraryData = computed(() => allData.value?.slice(0, displayCount.value))
+
 watch(bottomIsVisible, (visible) => {
 	if (
 		visible &&
 		loadStatus.value === 'success' &&
-		libraryData.value &&
-		libraryData.value.length === limit.value
+		allData.value &&
+		displayCount.value < allData.value.length
 	) {
-		limit.value += 3
+		displayCount.value += pageSize
 	}
 })
 </script>
