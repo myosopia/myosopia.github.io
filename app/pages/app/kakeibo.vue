@@ -73,7 +73,7 @@
 
 					<div class="flex items-center gap-2">
 						<!-- グループ化 -->
-						<UPopover>
+						<UPopover :ui="{ content: 'ring-0 rounded-lg' }">
 							<UButton
 								icon="i-lucide-group"
 								:variant="groupingColumns.length > 0 ? 'soft' : 'ghost'"
@@ -82,23 +82,25 @@
 								label="グループ化"
 							/>
 							<template #content>
-								<div class="p-3 flex flex-col gap-2">
-									<UCheckboxGroup
-										v-model="groupingColumns"
-										:items="[
-											{ label: '日付', value: 'date' },
-											{ label: 'カテゴリー', value: 'category' },
-										]"
-										@change="
-											() => {
-												const visible = groupingColumns.length > 0
-												table?.tableApi
-													.getColumn('expand')
-													?.toggleVisibility(visible)
-											}
-										"
-									/>
-								</div>
+								<UListbox
+									v-model="groupingColumns"
+									multiple
+									value-key="value"
+									:items="[
+										{ label: '日付', value: 'date' },
+										{ label: 'カテゴリー', value: 'category' },
+									]"
+									size="sm"
+									class="w-28"
+									@change="
+										() => {
+											const visible = groupingColumns.length > 0
+											table?.tableApi
+												.getColumn('expand')
+												?.toggleVisibility(visible)
+										}
+									"
+								/>
 							</template>
 						</UPopover>
 
