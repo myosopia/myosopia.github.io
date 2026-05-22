@@ -31,7 +31,7 @@
 				ref="formRef"
 				:schema="entrySchema"
 				:state="entryState"
-				class="space-y-4"
+				class="space-y-4 overflow-y-auto max-h-[calc(100dvh-8rem)]"
 				@submit="event => emit('submit', event)"
 			>
 				<div class="flex justify-between">
@@ -164,6 +164,7 @@
 						:items="shopItems"
 						create-item
 						class="w-full"
+						:content="{ side: 'top', sideOffset: 4 }"
 						@create="item => emit('create-shop', item)"
 					/>
 				</UFormField>
