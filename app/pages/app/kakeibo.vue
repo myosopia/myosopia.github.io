@@ -3,105 +3,152 @@
 		<UPageHeader title="家計簿" />
 		<UPageBody>
 			<UContainer>
-				<UScrollArea orientation="horizontal">
-					<UCheckbox
-						v-for="column in table?.tableApi
-							?.getAllColumns()
-							.filter(column => column.getCanHide() && columnLabels[column.id])"
-						:key="column.id"
-						:label="columnLabels[column.id]"
-						variant="card"
-						indicator="hidden"
-						color="neutral"
-						:ui="{
-							root: 'shrink-0 bg-muted opacity-50 has-data-[state=checked]:opacity-100 rounded-none border-none',
-						}"
-						:default-value="column.getIsVisible()"
-						@update:model-value="value => column.toggleVisibility(!!value)"
-					/>
-				</UScrollArea>
-			</UContainer>
-			<UContainer>
-				<UFieldGroup>
-					<UButton
-						icon="i-lucide-chevrons-left"
-						variant="ghost"
-						color="neutral"
-						@click="
-							() => {
-								dateRange = {
-									start: dateRange.start
-										.subtract({ months: 1 })
-										.set({ day: 1 }),
-									end: dateRange.start.subtract({ months: 1 }).set({ day: 31 }),
-								}
-							}
-						"
-					/>
-					<UInputDate
-						ref="inputDateRange"
-						v-model="dateRange"
-						:locale="locale"
-						range
-					>
-						<template #trailing>
-							<UPopover :reference="inputDateRange?.inputsRef[0]?.$el">
-								<UButton
-									color="neutral"
-									variant="link"
-									size="sm"
-									icon="i-lucide-calendar"
-									aria-label="Select a date range"
-									class="px-0"
-								/>
-								<template #content>
-									<UCalendar
-										v-model="dateRange"
-										range
-										:locale="locale"
-										variant="soft"
-										class="p-2"
-									/>
-								</template>
-							</UPopover>
-						</template>
-					</UInputDate>
-					<UButton
-						icon="i-lucide-chevrons-right"
-						variant="ghost"
-						color="neutral"
-						@click="
-							() => {
-								dateRange = {
-									start: dateRange.end.add({ months: 1 }).set({ day: 1 }),
-									end: dateRange.end.add({ months: 1 }).set({ day: 31 }),
-								}
-							}
-						"
-					/>
-				</UFieldGroup>
-			</UContainer>
-			<UContainer>
-				<UFormField
-					orientation="horizontal"
-					label="グループ化"
-					:ui="{ root: 'justify-start items-center gap-4' }"
+				<div
+					class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4"
 				>
-					<UCheckboxGroup
-						v-model="groupingColumns"
-						orientation="horizontal"
-						:items="[
-							{ label: '日付', value: 'date' },
-							{ label: 'カテゴリー', value: 'category' },
-						]"
-						@change="
-							() => {
-								const visible = groupingColumns.length > 0
-								table?.tableApi.getColumn('expand')?.toggleVisibility(visible)
-							}
-						"
-					/>
-				</UFormField>
+					<!-- 日付範囲 -->
+					<UFieldGroup class="overflow-x-auto">
+						<UButton
+							icon="i-lucide-chevrons-left"
+							variant="ghost"
+							color="neutral"
+							size="sm"
+							@click="
+								() => {
+									dateRange = {
+										start: dateRange.start
+											.subtract({ months: 1 })
+											.set({ day: 1 }),
+										end: dateRange.start
+											.subtract({ months: 1 })
+											.set({ day: 31 }),
+									}
+								}
+							"
+						/>
+						<UInputDate
+							ref="inputDateRange"
+							v-model="dateRange"
+							:locale="locale"
+							range
+							size="sm"
+						>
+							<template #trailing>
+								<UPopover :reference="inputDateRange?.inputsRef[0]?.$el">
+									<UButton
+										color="neutral"
+										variant="link"
+										size="sm"
+										icon="i-lucide-calendar"
+										aria-label="Select a date range"
+										class="px-0"
+									/>
+									<template #content>
+										<UCalendar
+											v-model="dateRange"
+											range
+											:locale="locale"
+											variant="soft"
+											class="p-2"
+										/>
+									</template>
+								</UPopover>
+							</template>
+						</UInputDate>
+						<UButton
+							icon="i-lucide-chevrons-right"
+							variant="ghost"
+							color="neutral"
+							size="sm"
+							@click="
+								() => {
+									dateRange = {
+										start: dateRange.end.add({ months: 1 }).set({ day: 1 }),
+										end: dateRange.end.add({ months: 1 }).set({ day: 31 }),
+									}
+								}
+							"
+						/>
+					</UFieldGroup>
+
+					<div class="flex items-center gap-2">
+						<!-- グループ化 -->
+						<UPopover>
+							<UButton
+								icon="i-lucide-group"
+								:variant="groupingColumns.length > 0 ? 'soft' : 'ghost'"
+								color="neutral"
+								size="sm"
+								label="グループ化"
+							/>
+							<template #content>
+								<div class="p-3 flex flex-col gap-2">
+									<UCheckboxGroup
+										v-model="groupingColumns"
+										:items="[
+											{ label: '日付', value: 'date' },
+											{ label: 'カテゴリー', value: 'category' },
+										]"
+										@change="
+											() => {
+												const visible = groupingColumns.length > 0
+												table?.tableApi
+													.getColumn('expand')
+													?.toggleVisibility(visible)
+											}
+										"
+									/>
+								</div>
+							</template>
+						</UPopover>
+
+						<!-- 列の表示 -->
+						<UPopover>
+							<UButton
+								icon="i-lucide-columns-3"
+								variant="ghost"
+								color="neutral"
+								size="sm"
+								label="列の表示"
+							/>
+							<template #content>
+								<div class="p-3 flex flex-col gap-2 min-w-32">
+									<span class="text-xs text-muted">表示する列</span>
+									<UCheckbox
+										v-for="column in table?.tableApi
+											?.getAllColumns()
+											.filter(
+												column =>
+													column.getCanHide() && columnLabels[column.id],
+											)"
+										:key="column.id"
+										:label="columnLabels[column.id]"
+										color="neutral"
+										:default-value="column.getIsVisible()"
+										@update:model-value="
+											value => column.toggleVisibility(!!value)
+										"
+									/>
+								</div>
+							</template>
+						</UPopover>
+
+						<!-- 通貨 -->
+						<USelect
+							v-model="currency"
+							class="w-28"
+							size="sm"
+							placeholder="通貨"
+							icon="i-lucide-coins"
+							:items="[
+								{ label: 'JPY', value: 'jpy' },
+								{ label: 'CNY', value: 'cny' },
+								{ label: 'USD', value: 'usd' },
+							]"
+							@update:model-value="handleCurrencyChange"
+						/>
+					</div>
+				</div>
 			</UContainer>
 			<UContainer>
 				<UTable
@@ -131,19 +178,6 @@
 						td: 'empty:p-0',
 					}"
 				/>
-			</UContainer>
-			<UContainer>
-				<UFormField label="通貨">
-					<USelect
-						v-model="currency"
-						:items="[
-							{ label: 'JPY', value: 'jpy' },
-							{ label: 'CNY', value: 'cny' },
-							{ label: 'USD', value: 'usd' },
-						]"
-						@update:model-value="handleCurrencyChange"
-					/>
-				</UFormField>
 			</UContainer>
 			<KakeiboEntryModal
 				ref="entryModal"
