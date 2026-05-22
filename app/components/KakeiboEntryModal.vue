@@ -127,6 +127,7 @@
 							size="xl"
 							autofocus
 							:ui="{ base: 'text-3xl font-bold' }"
+							@focus="onFocusInput"
 						/>
 						<USelect
 							v-model="entryState.currency"
@@ -161,11 +162,12 @@
 				<UFormField name="shop" label="店舗">
 					<UInput
 						ref="shopInput"
-						v-model="entryState.shop"
+						v-model.trim="entryState.shop"
 						class="w-full"
 						:ui="{
 							trailing: 'pe-0',
 						}"
+						@focus="onFocusInput"
 					>
 						<template #trailing>
 							<UPopover
@@ -245,6 +247,11 @@ const onCalendarSelect = (
 ) => {
 	if (value instanceof CalendarDate) entryDate.value = value
 	entryDateCalendarOpen.value = false
+}
+
+const onFocusInput = (e: FocusEvent) => {
+	if (!e.target) return
+	;(e.target as HTMLInputElement).select()
 }
 
 defineExpose({
