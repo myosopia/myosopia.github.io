@@ -2,7 +2,11 @@
 	<UModal
 		v-model:open="open"
 		:ui="{ content: 'p-4' }"
-		@update:open="value => { if (!value && isEdit) emit('reset') }"
+		@update:open="
+			value => {
+				if (!value && isEdit) emit('reset')
+			}
+		"
 	>
 		<UButton
 			icon="i-lucide-plus"
@@ -58,7 +62,7 @@
 									/>
 									<template #content>
 										<UCalendar
-											:model-value="entryDate"
+											v-model="entryDate"
 											variant="soft"
 											:locale="locale"
 											class="p-2"
@@ -76,11 +80,7 @@
 						class="justify-center"
 					/>
 				</div>
-				<UFormField
-					name="amount"
-					label="金額"
-					:ui="{ labelWrapper: 'hidden' }"
-				>
+				<UFormField name="amount" label="金額" :ui="{ labelWrapper: 'hidden' }">
 					<UFieldGroup class="flex">
 						<UInputNumber
 							v-model="entryState.amount"
@@ -115,7 +115,13 @@
 					<UDropdownMenu
 						class="w-full"
 						:items="categories"
-						:content="categoryDropdownContent"
+						:content="{
+							align: 'start',
+						}"
+						:ui="{
+							content:
+								'max-h-(--reka-dropdown-menu-content-available-height) overflow-y-auto',
+						}"
 					>
 						<UButton
 							variant="outline"
@@ -155,13 +161,13 @@
 	</UModal>
 </template>
 <script setup lang="ts">
-import type { CalendarDate, CalendarDateTime, ZonedDateTime } from '@internationalized/date'
+import { CalendarDate, type DateValue } from '@internationalized/date'
 import type { DropdownMenuItem, FormSubmitEvent } from '@nuxt/ui'
+import type { DateRange } from 'reka-ui'
 import type { EntrySchema } from '~/composables/useKakeiboEntryForm'
 import { entrySchema } from '~/composables/useKakeiboEntryForm'
 
 defineProps<{
-	entryDate: CalendarDate
 	categories: DropdownMenuItem[]
 	categoryLabel: string
 	shopItems: string[]
@@ -169,31 +175,29 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-	(e: 'updateEntryDate', value: CalendarDate | CalendarDateTime | ZonedDateTime): void
 	(e: 'submit', event: FormSubmitEvent<EntrySchema>): void
 	(e: 'reset' | 'open-category-modal'): void
 	(e: 'create-shop', item: string): void
 }>()
 
 const open = defineModel<boolean>('open', { required: true })
-const entryState = defineModel<Partial<EntrySchema>>('entryState', { required: true })
+const entryState = defineModel<Partial<EntrySchema>>('entryState', {
+	required: true,
+})
+const entryDate = defineModel<CalendarDate>('entryDate', { required: true })
 
 const { locale } = useI18n()
 const entryDateCalendarOpen = shallowRef(false)
 const inputDateRef = useTemplateRef('inputDateRef')
 const formRef = useTemplateRef('formRef')
 
-type DateValue = CalendarDate | CalendarDateTime | ZonedDateTime
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const categoryDropdownContent = { align: 'start', class: 'max-h-(--reka-dropdown-menu-content-available-height) overflow-y-auto' } as any
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onDateInput = (value: any) => {
-	if (value && !Array.isArray(value) && 'year' in value) emit('updateEntryDate', value as DateValue)
+const onDateInput = (value?: DateValue | DateRange | DateValue[] | null) => {
+	if (value instanceof CalendarDate) entryDate.value = value
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onCalendarSelect = (value: any) => {
-	if (value && !Array.isArray(value) && 'year' in value) emit('updateEntryDate', value as DateValue)
+const onCalendarSelect = (
+	value?: DateValue | DateRange | DateValue[] | null,
+) => {
+	if (value instanceof CalendarDate) entryDate.value = value
 	entryDateCalendarOpen.value = false
 }
 

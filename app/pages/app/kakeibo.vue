@@ -183,7 +183,7 @@
 				ref="entryModal"
 				v-model:open="formModalOpen"
 				v-model:entry-state="entryState"
-				:entry-date="entryDate"
+				v-model:entry-date="entryDate"
 				:categories="categories"
 				:category-label="getCategoryLabel(entryState.category)"
 				:shop-items="shopItems"
@@ -196,7 +196,6 @@
 						}
 					}
 				"
-				@update-entry-date="value => (entryDate = value as CalendarDate)"
 				@submit="submitEntry"
 				@reset="initializeEntryState"
 				@create-shop="onCreateShopItem"
