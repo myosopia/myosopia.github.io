@@ -38,16 +38,43 @@
 					<UFormField
 						name="date"
 						label="日付"
-						:ui="{ root: 'justify-start', labelWrapper: 'hidden' }"
+						:ui="{
+							root: 'justify-start',
+							labelWrapper: 'hidden',
+							container: 'mt-0',
+						}"
 					>
 						<UInputDate
 							ref="inputDateRef"
 							:model-value="entryDate"
 							:locale="locale"
 							variant="outline"
+							class="ps-6.5 pe-10.5"
 							@update:model-value="onDateInput"
 						>
+							<template #leading>
+								<UButton
+									icon="i-lucide-chevron-left"
+									color="neutral"
+									variant="link"
+									size="sm"
+									aria-label="前の日"
+									class="px-0"
+									tabindex="-1"
+									@click="entryDate = entryDate.subtract({ days: 1 })"
+								/>
+							</template>
 							<template #trailing>
+								<UButton
+									icon="i-lucide-chevron-right"
+									color="neutral"
+									variant="link"
+									size="sm"
+									aria-label="次の日"
+									class="px-0"
+									tabindex="-1"
+									@click="entryDate = entryDate.add({ days: 1 })"
+								/>
 								<UPopover
 									v-model:open="entryDateCalendarOpen"
 									:reference="inputDateRef?.inputsRef[3]?.$el"
