@@ -208,6 +208,30 @@
 				:category-select-menu-items="categorySelectMenuItems"
 				@submit="submitCategory"
 			/>
+			<UModal
+				v-model:open="deleteConfirmOpen"
+				:ui="{ content: 'p-4 max-w-sm' }"
+			>
+				<template #content>
+					<div class="space-y-4">
+						<p class="font-medium">このエントリを削除しますか？</p>
+						<p class="text-sm text-muted">この操作は元に戻せません。</p>
+						<div class="flex justify-end gap-2">
+							<UButton
+								label="キャンセル"
+								color="neutral"
+								variant="ghost"
+								@click="deleteConfirmOpen = false"
+							/>
+							<UButton
+								label="削除"
+								color="error"
+								@click="onConfirmDelete"
+							/>
+						</div>
+					</div>
+				</template>
+			</UModal>
 		</UPageBody>
 	</UPage>
 </template>
@@ -235,6 +259,18 @@ const entryModal = useTemplateRef('entryModal')
 // Modal states
 const formModalOpen = ref(false)
 const categoryFormModalOpen = ref(false)
+const deleteConfirmOpen = ref(false)
+const pendingDeleteId = ref<number | null>(null)
+
+const confirmDelete = (id: number) => {
+	pendingDeleteId.value = id
+	deleteConfirmOpen.value = true
+}
+const onConfirmDelete = () => {
+	if (pendingDeleteId.value !== null) deleteEntry(pendingDeleteId.value)
+	deleteConfirmOpen.value = false
+	pendingDeleteId.value = null
+}
 
 // Data layer
 const {
@@ -294,7 +330,8 @@ function getRowItems(row: Row<Entry>): DropdownMenuItem[] {
 		},
 		{
 			label: '削除',
-			onSelect: () => deleteEntry(row.original.id),
+			color: 'error' as const,
+			onSelect: () => confirmDelete(row.original.id),
 		},
 	]
 }
