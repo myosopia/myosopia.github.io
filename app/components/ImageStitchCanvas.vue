@@ -42,7 +42,16 @@
 					userSelect: 'none',
 				}"
 				@mousedown.stop="startDrag($event, img.id)"
-				@click.stop="emit('select', { type: $event.shiftKey ? 'range' : ($event.ctrlKey || $event.metaKey) ? 'toggle' : 'single', id: img.id })"
+				@click.stop="
+					emit('select', {
+						type: $event.shiftKey
+							? 'range'
+							: $event.ctrlKey || $event.metaKey
+								? 'toggle'
+								: 'single',
+						id: img.id,
+					})
+				"
 			>
 				<img
 					:src="img.src"
@@ -138,9 +147,10 @@ function startDrag(e: MouseEvent, id: string) {
 	// Capture origins for all images that should move together:
 	// union of the current selection and the dragged image's group members
 	const groupIds = props.groupMemberIds(id)
-	const coMoveIds = props.selectedIds.includes(id) && props.selectedIds.length > 1
-		? [...new Set([...props.selectedIds, ...groupIds])]
-		: groupIds
+	const coMoveIds =
+		props.selectedIds.includes(id) && props.selectedIds.length > 1
+			? [...new Set([...props.selectedIds, ...groupIds])]
+			: groupIds
 	if (coMoveIds.length > 1) {
 		multiDragOrigins.value = {}
 		for (const selId of coMoveIds) {

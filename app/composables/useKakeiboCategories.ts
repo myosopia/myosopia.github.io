@@ -13,18 +13,20 @@ export function useKakeiboCategories(
 	categoryData: Ref<RawCategory[] | null | undefined>,
 	onSelectCategory: (id: number | undefined) => void,
 ) {
-	const categoryMap: ComputedRef<Map<number, CategoryMapItem>> = computed(() => {
-		const m = new Map<number, CategoryMapItem>()
-		categoryData.value?.forEach(cat => {
-			m.set(cat.id, { ...cat, label: cat.label ?? '', children: [] })
-		})
-		m.forEach(item => {
-			if (item.parent && m.has(item.parent)) {
-				m.get(item.parent)?.children.push(item)
-			}
-		})
-		return m
-	})
+	const categoryMap: ComputedRef<Map<number, CategoryMapItem>> = computed(
+		() => {
+			const m = new Map<number, CategoryMapItem>()
+			categoryData.value?.forEach(cat => {
+				m.set(cat.id, { ...cat, label: cat.label ?? '', children: [] })
+			})
+			m.forEach(item => {
+				if (item.parent && m.has(item.parent)) {
+					m.get(item.parent)?.children.push(item)
+				}
+			})
+			return m
+		},
+	)
 
 	const categories: ComputedRef<DropdownMenuItem[]> = computed(() => {
 		const orderMaxValue = Number.MAX_SAFE_INTEGER

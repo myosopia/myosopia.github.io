@@ -1,8 +1,5 @@
 <template>
-	<UModal
-		v-model:open="open"
-		:ui="{ content: 'p-4' }"
-	>
+	<UModal v-model:open="open" :ui="{ content: 'p-4' }">
 		<template #content>
 			<UForm
 				:schema="categorySchema"
@@ -22,11 +19,7 @@
 					/>
 				</UFormField>
 				<UFormField name="order" label="表示順">
-					<UInputNumber
-						v-model="categoryState.order"
-						:min="0"
-						class="w-full"
-					/>
+					<UInputNumber v-model="categoryState.order" :min="0" class="w-full" />
 				</UFormField>
 				<div class="flex justify-end">
 					<UButton type="submit" label="カテゴリー追加" />
@@ -48,5 +41,7 @@ const emit = defineEmits<{
 }>()
 
 const open = defineModel<boolean>('open', { required: true })
-const categoryState = defineModel<Partial<CategorySchema>>('categoryState', { required: true })
+const categoryState = defineModel<Partial<CategorySchema>>('categoryState', {
+	required: true,
+})
 </script>

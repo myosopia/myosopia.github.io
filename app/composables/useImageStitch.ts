@@ -13,9 +13,9 @@ export type AlignEdge =
 	| 'middle'
 
 export type SelectAction =
-	| { type: 'single'; id: string }   // plain click — replace selection
-	| { type: 'toggle'; id: string }   // Ctrl/Meta — add/remove one unit
-	| { type: 'range'; id: string }    // Shift — select from anchor to id
+	| { type: 'single'; id: string } // plain click — replace selection
+	| { type: 'toggle'; id: string } // Ctrl/Meta — add/remove one unit
+	| { type: 'range'; id: string } // Shift — select from anchor to id
 
 const MAX_HISTORY = 50
 
@@ -132,7 +132,11 @@ export function useImageStitch() {
 			if (blob) {
 				restored.push({ ...meta, src: URL.createObjectURL(blob) })
 			} else {
-				console.warn('[image-stitch] Missing blob for image', meta.id, '— skipping')
+				console.warn(
+					'[image-stitch] Missing blob for image',
+					meta.id,
+					'— skipping',
+				)
 			}
 		}
 		images.value = restored
@@ -184,12 +188,12 @@ export function useImageStitch() {
 	 * `src` is a blob URL of the composited render (revoke after use).
 	 */
 	interface LogicalUnit {
-		memberIds: string[]   // all image IDs in this unit
-		src: string           // composite blob URL
+		memberIds: string[] // all image IDs in this unit
+		src: string // composite blob URL
 		width: number
 		height: number
-		originX: number       // canvas x of the bounding box top-left
-		originY: number       // canvas y of the bounding box top-left
+		originX: number // canvas x of the bounding box top-left
+		originY: number // canvas y of the bounding box top-left
 	}
 
 	async function compositeUnit(members: StitchImage[]): Promise<LogicalUnit> {
@@ -210,7 +214,10 @@ export function useImageStitch() {
 			ctx.drawImage(el, img.x - minX, img.y - minY, img.width, img.height)
 		}
 		const blob = await new Promise<Blob>((resolve, reject) =>
-			canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png'),
+			canvas.toBlob(
+				b => (b ? resolve(b) : reject(new Error('toBlob failed'))),
+				'image/png',
+			),
 		)
 		return {
 			memberIds: members.map(i => i.id),
@@ -433,7 +440,11 @@ export function useImageStitch() {
 
 	// ---- Export ----
 	function exportExt(format: string): string {
-		return format === 'image/png' ? 'png' : format === 'image/jpeg' ? 'jpg' : 'webp'
+		return format === 'image/png'
+			? 'png'
+			: format === 'image/jpeg'
+				? 'jpg'
+				: 'webp'
 	}
 
 	async function renderImage(opts: {
@@ -463,7 +474,10 @@ export function useImageStitch() {
 				)
 		}
 		const quality = opts.format === 'image/png' ? undefined : opts.quality / 100
-		return { dataUrl: canvas.toDataURL(opts.format, quality), ext: exportExt(opts.format) }
+		return {
+			dataUrl: canvas.toDataURL(opts.format, quality),
+			ext: exportExt(opts.format),
+		}
 	}
 
 	async function exportImage(opts: {
@@ -565,15 +579,19 @@ export function useImageStitch() {
 				if (diffY > 10) hint = centerAy < centerBy ? 'a-top' : 'b-top'
 
 				const result = await autoAlignVertical(
-					compA.src, compA.height,
-					compB.src, compB.height,
-					w, hint,
+					compA.src,
+					compA.height,
+					compB.src,
+					compB.height,
+					w,
+					hint,
 				)
 				if (!result) return null
 
 				const topComp = result.topImage === 'a' ? compA : compB
 				const botComp = result.topImage === 'a' ? compB : compA
-				const botIds = result.topImage === 'a' ? units[1]!.memberIds : units[0]!.memberIds
+				const botIds =
+					result.topImage === 'a' ? units[1]!.memberIds : units[0]!.memberIds
 
 				// New origin for the bottom unit
 				const newBotOriginY = topComp.originY + topComp.height - result.overlap
@@ -581,7 +599,10 @@ export function useImageStitch() {
 				const dx = topComp.originX - botComp.originX
 				for (const id of botIds) {
 					const img = getImageById(id)
-					if (img) { img.x += dx; img.y += dy }
+					if (img) {
+						img.x += dx
+						img.y += dy
+					}
 				}
 
 				pushHistory()
@@ -592,23 +613,31 @@ export function useImageStitch() {
 				if (diffX > 10) hint = centerAx < centerBx ? 'a-left' : 'b-left'
 
 				const result = await autoAlignHorizontal(
-					compA.src, compA.width,
-					compB.src, compB.width,
-					h, hint,
+					compA.src,
+					compA.width,
+					compB.src,
+					compB.width,
+					h,
+					hint,
 				)
 				if (!result) return null
 
 				const leftComp = result.leftImage === 'a' ? compA : compB
 				const rightComp = result.leftImage === 'a' ? compB : compA
-				const rightIds = result.leftImage === 'a' ? units[1]!.memberIds : units[0]!.memberIds
+				const rightIds =
+					result.leftImage === 'a' ? units[1]!.memberIds : units[0]!.memberIds
 
 				// New origin for the right unit
-				const newRightOriginX = leftComp.originX + leftComp.width - result.overlap
+				const newRightOriginX =
+					leftComp.originX + leftComp.width - result.overlap
 				const dx = newRightOriginX - rightComp.originX
 				const dy = leftComp.originY - rightComp.originY
 				for (const id of rightIds) {
 					const img = getImageById(id)
-					if (img) { img.x += dx; img.y += dy }
+					if (img) {
+						img.x += dx
+						img.y += dy
+					}
 				}
 
 				pushHistory()
@@ -623,7 +652,15 @@ export function useImageStitch() {
 	// ---- Auto layer order ----
 	// Sort selected images by position in a given direction; higher score → higher z-index.
 	function autoLayerOrder(
-		direction: 'top-left' | 'top' | 'top-right' | 'right' | 'bottom-right' | 'bottom' | 'bottom-left' | 'left',
+		direction:
+			| 'top-left'
+			| 'top'
+			| 'top-right'
+			| 'right'
+			| 'bottom-right'
+			| 'bottom'
+			| 'bottom-left'
+			| 'left',
 	) {
 		const selected = images.value.filter(i => selectedIds.value.includes(i.id))
 		if (selected.length < 2) return
@@ -632,21 +669,31 @@ export function useImageStitch() {
 			const cx = img.x + img.width / 2
 			const cy = img.y + img.height / 2
 			switch (direction) {
-				case 'top-left':     return -(cx + cy)
-				case 'top':          return -cy
-				case 'top-right':    return cx - cy
-				case 'right':        return cx
-				case 'bottom-right': return cx + cy
-				case 'bottom':       return cy
-				case 'bottom-left':  return cy - cx
-				case 'left':         return -cx
+				case 'top-left':
+					return -(cx + cy)
+				case 'top':
+					return -cy
+				case 'top-right':
+					return cx - cy
+				case 'right':
+					return cx
+				case 'bottom-right':
+					return cx + cy
+				case 'bottom':
+					return cy
+				case 'bottom-left':
+					return cy - cx
+				case 'left':
+					return -cx
 			}
 		}
 
 		// Sort ascending by score; assign z-indices from the existing set so non-selected layers aren't affected
 		const sorted = [...selected].sort((a, b) => score(a) - score(b))
 		const zValues = selected.map(i => i.zIndex).sort((a, b) => a - b)
-		sorted.forEach((img, idx) => { img.zIndex = zValues[idx]! })
+		sorted.forEach((img, idx) => {
+			img.zIndex = zValues[idx]!
+		})
 		pushHistory()
 	}
 
@@ -701,7 +748,9 @@ export function useImageStitch() {
 	// One image is the thumbnail; the rest are patches to be positioned.
 	// Phase 1: thumbnail SSD → snaps each patch to its grid cell.
 	// Phase 2: auto-align adjacent pairs → pixel-perfect overlap seams.
-	async function alignByThumbnailSelected(thumbId: string): Promise<{ avgConfidence: number } | null> {
+	async function alignByThumbnailSelected(
+		thumbId: string,
+	): Promise<{ avgConfidence: number } | null> {
 		const patches = images.value.filter(i => i.id !== thumbId)
 		const thumb = getImageById(thumbId)
 		if (!thumb || patches.length === 0) return null
@@ -720,7 +769,10 @@ export function useImageStitch() {
 		// Apply initial grid placements
 		for (const placement of result.placements) {
 			const img = getImageById(placement.id)
-			if (img) { img.x = placement.x; img.y = placement.y }
+			if (img) {
+				img.x = placement.x
+				img.y = placement.y
+			}
 		}
 		store.canvasWidth = result.canvasWidth
 		store.canvasHeight = result.canvasHeight
@@ -731,8 +783,9 @@ export function useImageStitch() {
 			a.x !== b.x ? a.x - b.x : a.y - b.y,
 		)
 		// Map (col, row) → image
-		const grid: (StitchImage | undefined)[][] = Array.from({ length: cols }, () =>
-			Array(rows).fill(undefined),
+		const grid: (StitchImage | undefined)[][] = Array.from(
+			{ length: cols },
+			() => Array(rows).fill(undefined),
 		)
 		for (const p of sorted) {
 			const col = Math.round(p.x / thumb.width)
@@ -750,7 +803,14 @@ export function useImageStitch() {
 					const right = grid[col + 1]![row]
 					if (!left || !right) continue
 					const h = Math.min(left.height, right.height)
-					const res = await autoAlignHorizontal(left.src, left.width, right.src, right.width, h, 'a-left')
+					const res = await autoAlignHorizontal(
+						left.src,
+						left.width,
+						right.src,
+						right.width,
+						h,
+						'a-left',
+					)
 					if (res) {
 						right.x = left.x + left.width - res.overlap
 						right.y = left.y
@@ -768,7 +828,14 @@ export function useImageStitch() {
 					const bot = grid[col]![row + 1]
 					if (!top || !bot) continue
 					const w = Math.min(top.width, bot.width)
-					const res = await autoAlignVertical(top.src, top.height, bot.src, bot.height, w, 'a-top')
+					const res = await autoAlignVertical(
+						top.src,
+						top.height,
+						bot.src,
+						bot.height,
+						w,
+						'a-top',
+					)
 					if (res) {
 						bot.y = top.y + top.height - res.overlap
 						bot.x = top.x

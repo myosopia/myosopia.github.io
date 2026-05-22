@@ -228,7 +228,7 @@ watch(selectedStatus, () => {
 
 const libraryData = computed(() => allData.value?.slice(0, displayCount.value))
 
-watch(bottomIsVisible, (visible) => {
+watch(bottomIsVisible, visible => {
 	if (
 		visible &&
 		loadStatus.value === 'success' &&

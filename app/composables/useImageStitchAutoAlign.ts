@@ -15,7 +15,6 @@ interface AlignResult {
 	confidence: number
 }
 
-
 /**
  * Horizontal SSD: compare right edge of img1 with left edge of img2.
  * Samples a vertical band around the centre.
@@ -189,7 +188,6 @@ async function findOverlapV(
 }
 
 export function useImageStitchAutoAlign() {
-
 	/**
 	 * Horizontal alignment: img A and B share the same height, overlap left/right.
 	 * hint forces a specific ordering; without it both are tried.

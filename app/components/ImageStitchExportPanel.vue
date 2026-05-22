@@ -1,9 +1,5 @@
 <template>
-	<UModal
-		v-model:open="open"
-		title="导出图片"
-		:ui="{ content: 'max-w-4xl' }"
-	>
+	<UModal v-model:open="open" title="导出图片" :ui="{ content: 'max-w-4xl' }">
 		<template #body>
 			<div class="flex gap-6">
 				<!-- Options -->
@@ -19,7 +15,12 @@
 						<USelect v-model="format" :items="formatOptions" class="w-full" />
 					</UFormField>
 					<UFormField v-if="format !== 'image/png'" label="质量 (1–100)">
-						<UInputNumber v-model="quality" :min="1" :max="100" class="w-full" />
+						<UInputNumber
+							v-model="quality"
+							:min="1"
+							:max="100"
+							class="w-full"
+						/>
 					</UFormField>
 					<UFormField label="宽度 (px)">
 						<UInputNumber
@@ -70,7 +71,10 @@
 					>
 						<template v-if="previewing">
 							<div class="flex flex-col items-center gap-2 text-muted text-sm">
-								<UIcon name="i-lucide-loader-circle" class="size-6 animate-spin" />
+								<UIcon
+									name="i-lucide-loader-circle"
+									class="size-6 animate-spin"
+								/>
 								<span>生成预览中…</span>
 							</div>
 						</template>
@@ -88,7 +92,14 @@
 						</template>
 					</div>
 					<div v-if="previewUrl" class="text-xs text-muted text-right">
-						{{ width }} × {{ height }} px · {{ format === 'image/png' ? 'PNG' : format === 'image/jpeg' ? 'JPEG' : 'WebP' }}
+						{{ width }} × {{ height }} px ·
+						{{
+							format === 'image/png'
+								? 'PNG'
+								: format === 'image/jpeg'
+									? 'JPEG'
+									: 'WebP'
+						}}
 					</div>
 				</div>
 			</div>
@@ -118,8 +129,19 @@
 const props = defineProps<{
 	canvasWidth: number
 	canvasHeight: number
-	renderImage: (opts: { format: string; width: number; height: number; quality: number }) => Promise<{ dataUrl: string; ext: string }>
-	exportImage: (opts: { format: string; width: number; height: number; quality: number; filename?: string }) => Promise<void>
+	renderImage: (opts: {
+		format: string
+		width: number
+		height: number
+		quality: number
+	}) => Promise<{ dataUrl: string; ext: string }>
+	exportImage: (opts: {
+		format: string
+		width: number
+		height: number
+		quality: number
+		filename?: string
+	}) => Promise<void>
 }>()
 
 const open = defineModel<boolean>('open', { default: false })
@@ -136,10 +158,24 @@ const width = ref(props.canvasWidth)
 const height = ref(props.canvasHeight)
 const quality = ref(90)
 
-watch(() => props.canvasWidth, v => { width.value = v })
-watch(() => props.canvasHeight, v => { height.value = v })
+watch(
+	() => props.canvasWidth,
+	v => {
+		width.value = v
+	},
+)
+watch(
+	() => props.canvasHeight,
+	v => {
+		height.value = v
+	},
+)
 
-const { locked, onWidth: _onWidth, onHeight: _onHeight } = useAspectRatioLock(
+const {
+	locked,
+	onWidth: _onWidth,
+	onHeight: _onHeight,
+} = useAspectRatioLock(
 	() => width.value,
 	() => height.value,
 )
@@ -197,7 +233,11 @@ async function onExport() {
 			quality: quality.value,
 			filename: filename.value || 'stitched-image',
 		})
-		toast.add({ title: '导出成功', color: 'success', icon: 'i-lucide-check-circle' })
+		toast.add({
+			title: '导出成功',
+			color: 'success',
+			icon: 'i-lucide-check-circle',
+		})
 		open.value = false
 	} catch {
 		toast.add({ title: '导出失败', color: 'error', icon: 'i-lucide-circle-x' })

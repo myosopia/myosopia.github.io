@@ -45,7 +45,9 @@ export function useImageStitchDB() {
 
 	async function loadBlob(id: string): Promise<Blob | null> {
 		const db = await getDB()
-		const result = (await tx(db, 'readonly', store => store.get(id))) as Blob | undefined
+		const result = (await tx(db, 'readonly', store => store.get(id))) as
+			| Blob
+			| undefined
 		return result instanceof Blob ? result : null
 	}
 

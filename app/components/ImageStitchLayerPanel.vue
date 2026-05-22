@@ -1,13 +1,20 @@
 <template>
 	<div class="w-48 border border-muted rounded-lg bg-elevated flex flex-col">
-		<div class="px-3 py-2 text-sm font-bold border-b border-muted flex items-center justify-between">
-			<span>图层 ({{ selectedIds.length > 0 ? `${selectedIds.length}/` : '' }}{{ sortedImages.length }})</span>
+		<div
+			class="px-3 py-2 text-sm font-bold border-b border-muted flex items-center justify-between"
+		>
+			<span
+				>图层 ({{ selectedIds.length > 0 ? `${selectedIds.length}/` : ''
+				}}{{ sortedImages.length }})</span
+			>
 			<UTooltip :text="allSelected ? '取消全选' : '全选'">
 				<UCheckbox
 					:model-value="allSelected"
 					:indeterminate="someSelected"
 					size="sm"
-					@update:model-value="allSelected ? emit('deselectAll') : emit('selectAll')"
+					@update:model-value="
+						allSelected ? emit('deselectAll') : emit('selectAll')
+					"
 				/>
 			</UTooltip>
 		</div>
@@ -44,7 +51,11 @@
 				<img :src="img.src" class="w-7 h-7 object-cover rounded shrink-0" />
 				<input
 					v-if="renamingId === img.id"
-					:ref="el => { renameInput = el as HTMLInputElement | null }"
+					:ref="
+						el => {
+							renameInput = el as HTMLInputElement | null
+						}
+					"
 					v-model="renameValue"
 					class="flex-1 min-w-0 bg-transparent border-b border-primary outline-none text-xs"
 					@keydown.enter="onRenameEnter"
@@ -59,7 +70,8 @@
 					v-else
 					class="flex-1 truncate text-muted"
 					@dblclick.stop="startRename(img.id, img.name)"
-				>{{ img.name }}</span>
+					>{{ img.name }}</span
+				>
 				<UIcon
 					v-if="img.groupId"
 					name="i-lucide-group"

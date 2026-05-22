@@ -4,7 +4,9 @@ import type { Entry } from '~/types/kakeibo'
 
 type ExchangeRateMap = Record<string, Record<string, Record<string, number>>>
 
-export function useKakeiboExchangeRates(kakeiboData: Ref<Entry[] | null | undefined>) {
+export function useKakeiboExchangeRates(
+	kakeiboData: Ref<Entry[] | null | undefined>,
+) {
 	const currency = ref<string>('')
 	const exchangeRates = ref<ExchangeRateMap>({})
 
@@ -61,5 +63,11 @@ export function useKakeiboExchangeRates(kakeiboData: Ref<Entry[] | null | undefi
 		}, 0)
 	}
 
-	return { currency, exchangeRates, handleCurrencyChange, amountInCurrency, totalAmount }
+	return {
+		currency,
+		exchangeRates,
+		handleCurrencyChange,
+		amountInCurrency,
+		totalAmount,
+	}
 }

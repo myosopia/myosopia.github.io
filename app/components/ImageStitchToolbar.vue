@@ -244,15 +244,63 @@
 					<div class="p-2 flex flex-col gap-1 items-center">
 						<p class="text-xs text-muted mb-1">该方向的图层在上</p>
 						<div class="grid grid-cols-3 gap-0.5">
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-up-left"    @click="emit('autoLayerOrder', 'top-left')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-up"         @click="emit('autoLayerOrder', 'top')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-up-right"   @click="emit('autoLayerOrder', 'top-right')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-left"       @click="emit('autoLayerOrder', 'left')" />
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-up-left"
+								@click="emit('autoLayerOrder', 'top-left')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-up"
+								@click="emit('autoLayerOrder', 'top')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-up-right"
+								@click="emit('autoLayerOrder', 'top-right')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-left"
+								@click="emit('autoLayerOrder', 'left')"
+							/>
 							<div />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-right"      @click="emit('autoLayerOrder', 'right')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-down-left"  @click="emit('autoLayerOrder', 'bottom-left')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-down"       @click="emit('autoLayerOrder', 'bottom')" />
-							<UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-arrow-down-right" @click="emit('autoLayerOrder', 'bottom-right')" />
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-right"
+								@click="emit('autoLayerOrder', 'right')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-down-left"
+								@click="emit('autoLayerOrder', 'bottom-left')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-down"
+								@click="emit('autoLayerOrder', 'bottom')"
+							/>
+							<UButton
+								size="xs"
+								color="neutral"
+								variant="ghost"
+								icon="i-lucide-arrow-down-right"
+								@click="emit('autoLayerOrder', 'bottom-right')"
+							/>
 						</div>
 					</div>
 				</template>
@@ -352,11 +400,25 @@ const emit = defineEmits<{
 	toggleFullscreen: []
 	groupSelected: []
 	ungroupSelected: []
-	autoLayerOrder: [direction: 'top-left' | 'top' | 'top-right' | 'right' | 'bottom-right' | 'bottom' | 'bottom-left' | 'left']
+	autoLayerOrder: [
+		direction:
+			| 'top-left'
+			| 'top'
+			| 'top-right'
+			| 'right'
+			| 'bottom-right'
+			| 'bottom'
+			| 'bottom-left'
+			| 'left',
+	]
 }>()
 
 // ---- Canvas aspect-ratio lock ----
-const { locked: canvasLocked, onWidth: _onCanvasWidth, onHeight: _onCanvasHeight } = useAspectRatioLock(
+const {
+	locked: canvasLocked,
+	onWidth: _onCanvasWidth,
+	onHeight: _onCanvasHeight,
+} = useAspectRatioLock(
 	() => props.canvasWidth,
 	() => props.canvasHeight,
 	100,
@@ -365,13 +427,15 @@ const { locked: canvasLocked, onWidth: _onCanvasWidth, onHeight: _onCanvasHeight
 function onCanvasWidth(v: number) {
 	const result = _onCanvasWidth(v)
 	emit('update:canvasWidth', result.width)
-	if (result.height !== props.canvasHeight) emit('update:canvasHeight', result.height)
+	if (result.height !== props.canvasHeight)
+		emit('update:canvasHeight', result.height)
 }
 
 function onCanvasHeight(v: number) {
 	const result = _onCanvasHeight(v)
 	emit('update:canvasHeight', result.height)
-	if (result.width !== props.canvasWidth) emit('update:canvasWidth', result.width)
+	if (result.width !== props.canvasWidth)
+		emit('update:canvasWidth', result.width)
 }
 
 const imageFiles = ref<File[]>([])

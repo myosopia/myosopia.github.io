@@ -107,20 +107,26 @@ const emit = defineEmits<{
 	setSize: [dim: 'width' | 'height', value: number]
 }>()
 
-const { locked: sizeLocked, onWidth: _onWidth, onHeight: _onHeight } = useAspectRatioLock(
+const {
+	locked: sizeLocked,
+	onWidth: _onWidth,
+	onHeight: _onHeight,
+} = useAspectRatioLock(
 	() => props.singleSelected?.width ?? 0,
 	() => props.singleSelected?.height ?? 0,
 )
 
 function onWidth(v: number) {
 	const result = _onWidth(v)
-	if (result.height !== (props.singleSelected?.height ?? 0)) emit('setSize', 'height', result.height)
+	if (result.height !== (props.singleSelected?.height ?? 0))
+		emit('setSize', 'height', result.height)
 	emit('setSize', 'width', result.width)
 }
 
 function onHeight(v: number) {
 	const result = _onHeight(v)
-	if (result.width !== (props.singleSelected?.width ?? 0)) emit('setSize', 'width', result.width)
+	if (result.width !== (props.singleSelected?.width ?? 0))
+		emit('setSize', 'width', result.width)
 	emit('setSize', 'height', result.height)
 }
 </script>

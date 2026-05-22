@@ -13,49 +13,71 @@
  */
 
 function ssdPatch(
-	haystack: Uint8ClampedArray, hw: number,
-	needle: Uint8ClampedArray, nw: number, nh: number,
-	ox: number, oy: number,
+	haystack: Uint8ClampedArray,
+	hw: number,
+	needle: Uint8ClampedArray,
+	nw: number,
+	nh: number,
+	ox: number,
+	oy: number,
 	step: number,
 ): number {
-	let sum = 0; let count = 0
+	let sum = 0
+	let count = 0
 	for (let y = 0; y < nh; y += step) {
-		const hRow = (oy + y) * hw; const nRow = y * nw
+		const hRow = (oy + y) * hw
+		const nRow = y * nw
 		for (let x = 0; x < nw; x += step) {
-			const hi = (hRow + ox + x) * 4; const ni = (nRow + x) * 4
+			const hi = (hRow + ox + x) * 4
+			const ni = (nRow + x) * 4
 			const dr = haystack[hi]! - needle[ni]!
 			const dg = haystack[hi + 1]! - needle[ni + 1]!
 			const db = haystack[hi + 2]! - needle[ni + 2]!
-			sum += dr * dr + dg * dg + db * db; count++
+			sum += dr * dr + dg * dg + db * db
+			count++
 		}
 	}
 	return count > 0 ? sum / count : Infinity
 }
 
 function findBestPosition(
-	haystack: Uint8ClampedArray, hw: number, hh: number,
-	needle: Uint8ClampedArray, nw: number, nh: number,
+	haystack: Uint8ClampedArray,
+	hw: number,
+	hh: number,
+	needle: Uint8ClampedArray,
+	nw: number,
+	nh: number,
 ): { x: number; y: number; score: number } {
-	const maxX = hw - nw; const maxY = hh - nh
+	const maxX = hw - nw
+	const maxY = hh - nh
 	if (maxX < 0 || maxY < 0) return { x: 0, y: 0, score: Infinity }
 
-	let bx = 0; let by = 0; let bs = Infinity
+	let bx = 0
+	let by = 0
+	let bs = Infinity
 
 	// Pass 1: coarse — step 2 (was 4, finer for better initial estimate)
 	for (let y = 0; y <= maxY; y += 2)
 		for (let x = 0; x <= maxX; x += 2) {
 			const s = ssdPatch(haystack, hw, needle, nw, nh, x, y, 2)
-			if (s < bs) { bs = s; bx = x; by = y }
+			if (s < bs) {
+				bs = s
+				bx = x
+				by = y
+			}
 		}
 	// Pass 2: fine — ±4, step 1 (exhaustive around best)
 	for (let y = Math.max(0, by - 4); y <= Math.min(maxY, by + 4); y++)
 		for (let x = Math.max(0, bx - 4); x <= Math.min(maxX, bx + 4); x++) {
 			const s = ssdPatch(haystack, hw, needle, nw, nh, x, y, 1)
-			if (s < bs) { bs = s; bx = x; by = y }
+			if (s < bs) {
+				bs = s
+				bx = x
+				by = y
+			}
 		}
 	return { x: bx, y: by, score: bs }
 }
-
 
 export interface ThumbAlignInput {
 	id: string
@@ -77,7 +99,6 @@ export interface ThumbAlignResult {
 }
 
 export function useImageStitchThumbAlign() {
-
 	/**
 	 * @param thumbSrc  blob URL of the thumbnail
 	 * @param thumbW    thumbnail pixel width  (= each patch's pixel width)
@@ -101,12 +122,18 @@ export function useImageStitchThumbAlign() {
 		const nh = Math.round(thumbH / rows)
 
 		// Downscale all patches in parallel
-		const needles = await Promise.all(patches.map(p => loadPixels(p.src, nw, nh)))
+		const needles = await Promise.all(
+			patches.map(p => loadPixels(p.src, nw, nh)),
+		)
 
 		// Search all patches in parallel (each is independent)
 		const placements: ThumbAlignOutput[] = await Promise.all(
 			patches.map(async (patch, i) => {
-				const { x: tx, y: ty, score } = findBestPosition(thumbPixels, thumbW, thumbH, needles[i]!, nw, nh)
+				const {
+					x: tx,
+					y: ty,
+					score,
+				} = findBestPosition(thumbPixels, thumbW, thumbH, needles[i]!, nw, nh)
 				// Snap to the nearest grid cell to enforce integer grid alignment
 				const col = Math.min(Math.round(tx / nw), cols - 1)
 				const row = Math.min(Math.round(ty / nh), rows - 1)
@@ -123,7 +150,8 @@ export function useImageStitchThumbAlign() {
 			placements,
 			canvasWidth: thumbW * cols,
 			canvasHeight: thumbH * rows,
-			avgConfidence: placements.reduce((s, p) => s + p.confidence, 0) / placements.length,
+			avgConfidence:
+				placements.reduce((s, p) => s + p.confidence, 0) / placements.length,
 		}
 	}
 
