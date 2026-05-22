@@ -1,6 +1,6 @@
 import * as z from 'zod/v4'
 import { CalendarDate, today, getLocalTimeZone } from '@internationalized/date'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import type { FormSubmitEvent, ListboxItem } from '@nuxt/ui'
 import shops from '~/assets/json/kakeiboShops.json'
 
 export const entrySchema = z.object({
@@ -50,11 +50,12 @@ export function useKakeiboEntryForm(options: { onSuccess: () => void }) {
 		entryState.shop = undefined
 	}
 
-	const shopItems = ref([...shops])
-	const onCreateShopItem = (item: string) => {
-		shopItems.value.push(item)
-		entryState.shop = item
-	}
+	const shopItems: ListboxItem[] = shops.map(shop => ({
+		label: shop,
+		onSelect() {
+			entryState.shop = shop
+		},
+	}))
 
 	const submitEntry = async (event: FormSubmitEvent<EntrySchema>) => {
 		event.preventDefault()
@@ -101,7 +102,6 @@ export function useKakeiboEntryForm(options: { onSuccess: () => void }) {
 		entrySchema,
 		initializeEntryState,
 		shopItems,
-		onCreateShopItem,
 		submitEntry,
 	}
 }

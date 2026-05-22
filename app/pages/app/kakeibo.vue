@@ -198,7 +198,6 @@
 				"
 				@submit="submitEntry"
 				@reset="initializeEntryState"
-				@create-shop="onCreateShopItem"
 				@open-category-modal="categoryFormModalOpen = true"
 			/>
 			<KakeiboAddCategoryModal
@@ -222,11 +221,7 @@
 								variant="ghost"
 								@click="deleteConfirmOpen = false"
 							/>
-							<UButton
-								label="削除"
-								color="error"
-								@click="onConfirmDelete"
-							/>
+							<UButton label="削除" color="error" @click="onConfirmDelete" />
 						</div>
 					</div>
 				</template>
@@ -236,7 +231,6 @@
 </template>
 <script setup lang="ts">
 import { resolveComponent } from 'vue'
-import type { CalendarDate } from '@internationalized/date'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import type { GroupingOptions, Row } from '@tanstack/vue-table'
 import { getGroupedRowModel } from '@tanstack/vue-table'
@@ -287,19 +281,13 @@ const {
 })
 
 // Entry form
-const {
-	entryState,
-	entryDate,
-	initializeEntryState,
-	shopItems,
-	onCreateShopItem,
-	submitEntry,
-} = useKakeiboEntryForm({
-	onSuccess: () => {
-		formModalOpen.value = false
-		refreshKakeiboData()
-	},
-})
+const { entryState, entryDate, initializeEntryState, shopItems, submitEntry } =
+	useKakeiboEntryForm({
+		onSuccess: () => {
+			formModalOpen.value = false
+			refreshKakeiboData()
+		},
+	})
 
 // Category tree
 const { categoryMap, categories, categorySelectMenuItems, getCategoryLabel } =

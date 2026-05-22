@@ -159,14 +159,32 @@
 					</UDropdownMenu>
 				</UFormField>
 				<UFormField name="shop" label="店舗">
-					<UInputMenu
+					<UInput
+						ref="shopInput"
 						v-model="entryState.shop"
-						:items="shopItems"
-						create-item
 						class="w-full"
-						:content="{ side: 'top', sideOffset: 4 }"
-						@create="item => emit('create-shop', item)"
-					/>
+						:ui="{
+							trailing: 'pe-0',
+						}"
+					>
+						<template #trailing>
+							<UPopover
+								:reference="shopInputRef?.inputRef!"
+								:ui="{
+									content: 'w-(--reka-popper-anchor-width) ring-0 rounded-none',
+								}"
+							>
+								<UButton
+									icon="i-lucide-chevron-down"
+									variant="link"
+									color="neutral"
+								/>
+								<template #content="{ close }">
+									<UListbox :items="shopItems" @update:model-value="close" />
+								</template>
+							</UPopover>
+						</template>
+					</UInput>
 				</UFormField>
 				<UFormField name="note" label="メモ">
 					<UTextarea v-model="entryState.note" class="w-full" />
@@ -190,7 +208,7 @@
 </template>
 <script setup lang="ts">
 import { CalendarDate, type DateValue } from '@internationalized/date'
-import type { DropdownMenuItem, FormSubmitEvent } from '@nuxt/ui'
+import type { DropdownMenuItem, FormSubmitEvent, ListboxItem } from '@nuxt/ui'
 import type { DateRange } from 'reka-ui'
 import type { EntrySchema } from '~/composables/useKakeiboEntryForm'
 import { entrySchema } from '~/composables/useKakeiboEntryForm'
@@ -198,14 +216,13 @@ import { entrySchema } from '~/composables/useKakeiboEntryForm'
 defineProps<{
 	categories: DropdownMenuItem[]
 	categoryLabel: string
-	shopItems: string[]
+	shopItems: ListboxItem[]
 	isEdit: boolean
 }>()
 
 const emit = defineEmits<{
 	(e: 'submit', event: FormSubmitEvent<EntrySchema>): void
 	(e: 'reset' | 'open-category-modal'): void
-	(e: 'create-shop', item: string): void
 }>()
 
 const open = defineModel<boolean>('open', { required: true })
@@ -218,6 +235,7 @@ const { locale } = useI18n()
 const entryDateCalendarOpen = shallowRef(false)
 const inputDateRef = useTemplateRef('inputDateRef')
 const formRef = useTemplateRef('formRef')
+const shopInputRef = useTemplateRef('shopInput')
 
 const onDateInput = (value?: DateValue | DateRange | DateValue[] | null) => {
 	if (value instanceof CalendarDate) entryDate.value = value
