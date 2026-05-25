@@ -70,7 +70,7 @@ export function useKakeiboEntryForm(options: { onSuccess: () => void }) {
 		}
 		const row = {
 			id: data.id,
-			date: data.date.toISOString().slice(0, 10),
+			date: `${data.date.getFullYear()}-${String(data.date.getMonth() + 1).padStart(2, '0')}-${String(data.date.getDate()).padStart(2, '0')}`,
 			category: data.category,
 			amount: data.amount,
 			currency: data.currency,

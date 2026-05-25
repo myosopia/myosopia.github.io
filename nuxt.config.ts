@@ -76,6 +76,7 @@ export default defineNuxtConfig({
 				'lucide:arrow-right',
 				'lucide:loader-circle',
 				'lucide:eye',
+				'lucide:ellipsis-vertical',
 			],
 			scan: true,
 		},
