@@ -91,6 +91,7 @@
 								@rename="renameImage"
 								@select-all="selectAll"
 								@deselect-all="deselectAll"
+								@toggle-hidden="toggleHidden"
 							/>
 						</div>
 
@@ -231,6 +232,7 @@ const {
 	cropToContent,
 	alignByThumbnailSelected,
 	autoLayerOrder,
+	toggleHidden,
 	renameImage,
 	groupMemberIds,
 	groupSelected,

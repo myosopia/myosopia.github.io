@@ -367,6 +367,14 @@ export function useImageStitch() {
 		pushHistory()
 	}
 
+	function toggleHidden(id: string) {
+		const img = getImageById(id)
+		if (img) {
+			img.hidden = !img.hidden
+			pushHistory()
+		}
+	}
+
 	function renameImage(id: string, name: string) {
 		const img = getImageById(id)
 		if (img) {
@@ -463,6 +471,7 @@ export function useImageStitch() {
 		ctx.fillStyle = store.canvasBg
 		ctx.fillRect(0, 0, canvas.width, canvas.height)
 		for (const img of sortedImages.value) {
+			if (img.hidden) continue
 			const el = await loadImage(img.src).catch(() => null)
 			if (el)
 				ctx.drawImage(
@@ -898,6 +907,7 @@ export function useImageStitch() {
 		cropToContent,
 		alignByThumbnailSelected,
 		autoLayerOrder,
+		toggleHidden,
 		renameImage,
 		groupMemberIds,
 		groupSelected,

@@ -26,6 +26,7 @@
 		>
 			<div
 				v-for="img in sortedImages"
+				v-show="!img.hidden"
 				:key="img.id"
 				:style="{
 					position: 'absolute',

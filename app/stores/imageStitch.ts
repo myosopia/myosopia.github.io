@@ -10,6 +10,7 @@ export interface StitchImageMeta {
 	height: number
 	zIndex: number
 	groupId?: string
+	hidden?: boolean
 }
 
 export const useImageStitchStore = defineStore(

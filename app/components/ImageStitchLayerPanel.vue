@@ -36,6 +36,7 @@
 					'border-b-primary! border-b-2':
 						dragOver === img.id && dragPos === 'after',
 					'opacity-40': dragging === img.id,
+					'opacity-50': img.hidden,
 				}"
 				@mousedown.stop="onItemMousedown($event, img.id)"
 				@dragstart="onDragStart($event, img.id)"
@@ -77,6 +78,18 @@
 					name="i-lucide-group"
 					class="size-3 text-amber-500 shrink-0"
 				/>
+				<UTooltip :text="img.hidden ? '显示图层' : '隐藏图层'">
+					<button
+						class="shrink-0 text-muted hover:text-default transition-colors"
+						@click.stop="emit('toggleHidden', img.id)"
+						@mousedown.stop
+					>
+						<UIcon
+							:name="img.hidden ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+							class="size-3"
+						/>
+					</button>
+				</UTooltip>
 			</div>
 		</div>
 
@@ -161,6 +174,7 @@ const emit = defineEmits<{
 	rename: [id: string, name: string]
 	selectAll: []
 	deselectAll: []
+	toggleHidden: [id: string]
 }>()
 
 const allSelected = computed(
