@@ -62,9 +62,11 @@ export const useRoutineStore = defineStore(
 			return -1
 		}
 
-		return { getStatus, setStatus, reset, getResetAt, getNextIndex }
+		return { map, getStatus, setStatus, reset, getResetAt, getNextIndex }
 	},
 	{
-		persist: true,
+		persist: {
+			storage: piniaPluginPersistedstate.localStorage(),
+		},
 	},
 )

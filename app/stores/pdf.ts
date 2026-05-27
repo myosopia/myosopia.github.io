@@ -86,6 +86,8 @@ export const usePDFStore = defineStore(
 		}
 	},
 	{
-		persist: true,
+		persist: {
+			storage: piniaPluginPersistedstate.localStorage(),
+		},
 	},
 )

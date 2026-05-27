@@ -24,6 +24,8 @@ export const useImageStitchStore = defineStore(
 		return { imageMetas, canvasWidth, canvasHeight, canvasBg }
 	},
 	{
-		persist: true,
+		persist: {
+			storage: piniaPluginPersistedstate.localStorage(),
+		},
 	},
 )
