@@ -4,12 +4,12 @@ import type { RoutineStatus, RoutineData } from '~/types/routine'
 export const useRoutineStore = defineStore(
 	'routine',
 	() => {
-		const map = reactive(new Map<string, RoutineData>())
+		const map = reactive<Record<string, RoutineData>>({})
 
 		const getStatus = (routineId: string, index: number) => {
-			if (map.has(routineId)) {
-				const { status } = map.get(routineId)!
-				return status[index] ?? 'todo'
+			const routine = map[routineId]
+			if (routine) {
+				return routine.status[index] ?? 'todo'
 			} else {
 				return 'todo'
 			}
@@ -20,10 +20,10 @@ export const useRoutineStore = defineStore(
 			index: number,
 			value: RoutineStatus,
 		) => {
-			let routine = map.get(routineId)
+			let routine = map[routineId]
 			if (!routine) {
 				routine = { status: [], resetAt: Date.now() }
-				map.set(routineId, routine)
+				map[routineId] = routine
 			}
 			if (routine.status.length <= index) {
 				routine.status.push(
@@ -34,11 +34,11 @@ export const useRoutineStore = defineStore(
 		}
 
 		const reset = (id: string) => {
-			map.delete(id)
+			Reflect.deleteProperty(map, id)
 		}
 
 		const getResetAt = (id: string) => {
-			return map.get(id)?.resetAt ?? Date.now()
+			return map[id]?.resetAt ?? Date.now()
 		}
 
 		const getNextIndex = (
@@ -46,7 +46,7 @@ export const useRoutineStore = defineStore(
 			currentIndex: number,
 			max: number,
 		) => {
-			const routine = map.get(routineId)
+			const routine = map[routineId]
 			if (!routine) {
 				return -1
 			}
