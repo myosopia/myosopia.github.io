@@ -46,11 +46,10 @@
 					>
 						<UInputDate
 							ref="inputDateRef"
-							:model-value="entryDate"
+							v-model="entryDate"
 							:locale="locale"
 							variant="outline"
 							class="ps-6.5 pe-10.5"
-							@update:model-value="onDateInput"
 						>
 							<template #leading>
 								<UButton
@@ -87,13 +86,13 @@
 										aria-label="Select a date"
 										class="px-0"
 									/>
-									<template #content>
+									<template #content="{ close }">
 										<UCalendar
 											v-model="entryDate"
 											variant="soft"
 											:locale="locale"
 											class="p-2"
-											@update:model-value="onCalendarSelect"
+											@update:model-value="close"
 										/>
 									</template>
 								</UPopover>
@@ -238,16 +237,6 @@ const entryDateCalendarOpen = shallowRef(false)
 const inputDateRef = useTemplateRef('inputDateRef')
 const formRef = useTemplateRef('formRef')
 const shopInputRef = useTemplateRef('shopInput')
-
-const onDateInput = (value?: DateValue | DateRange | DateValue[] | null) => {
-	if (value instanceof CalendarDate) entryDate.value = value
-}
-const onCalendarSelect = (
-	value?: DateValue | DateRange | DateValue[] | null,
-) => {
-	if (value instanceof CalendarDate) entryDate.value = value
-	entryDateCalendarOpen.value = false
-}
 
 const onFocusInput = (e: FocusEvent) => {
 	if (!e.target) return
