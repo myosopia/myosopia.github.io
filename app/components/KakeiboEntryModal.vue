@@ -208,9 +208,8 @@
 	</UModal>
 </template>
 <script setup lang="ts">
-import { CalendarDate, type DateValue } from '@internationalized/date'
+import type { CalendarDate } from '@internationalized/date'
 import type { DropdownMenuItem, FormSubmitEvent, ListboxItem } from '@nuxt/ui'
-import type { DateRange } from 'reka-ui'
 import type { EntrySchema } from '~/composables/useKakeiboEntryForm'
 import { entrySchema } from '~/composables/useKakeiboEntryForm'
 
