@@ -43,6 +43,10 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
+useHead({
+	title: t('page.blog.privatePosts'),
+})
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const { data: privatePosts, refresh: refreshPrivatePosts } = useAsyncData(

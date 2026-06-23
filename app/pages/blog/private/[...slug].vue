@@ -13,9 +13,6 @@ watch(directions, ({ top, bottom }) => {
 	}
 })
 
-definePageMeta({
-	title: 'Blog',
-})
 const route = useRoute()
 const slug =
 	typeof route.params.slug === 'string'
@@ -34,6 +31,10 @@ const { data: post } = await useAsyncData(`post-${slug}`, async () => {
 if (!post.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Post not found' })
 }
+
+useHead({
+	title: post.value.title,
+})
 
 const modalOpen = ref(false)
 const state = reactive({
