@@ -30,6 +30,7 @@
 					</template>
 				</UDrawer>
 			</UContextMenu>
+			<ScrollToTop />
 		</UPageBody>
 	</UPage>
 </template>

@@ -85,6 +85,7 @@ const updatePost = async () => {
 				</div>
 				<MDC v-if="post" :value="post.content ?? ''" class="" />
 			</UContainer>
+			<ScrollToTop />
 		</UPageBody>
 	</UPage>
 </template>
