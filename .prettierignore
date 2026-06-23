@@ -3,3 +3,4 @@ package-lock.json
 app/types/database.types.ts
 .agents
 .claude
+supabase/.temp
