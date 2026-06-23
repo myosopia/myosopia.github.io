@@ -1,12 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useWindowScroll } from '@vueuse/core'
 
-const { y, isScrolling, directions } = useWindowScroll()
+const { y, directions } = useWindowScroll()
 
-const showButton = computed(
-	() => y.value > 300 && isScrolling.value && directions.top,
-)
+const showButton = ref(false)
+
+watchEffect(() => {
+	if (y.value < 300) {
+		showButton.value = false
+	} else if (directions.top) {
+		showButton.value = true
+	}
+})
+
+watchEffect(() => {
+	if (directions.bottom) {
+		showButton.value = false
+	}
+})
 
 const scrollToTop = () => {
 	window.scrollTo({
