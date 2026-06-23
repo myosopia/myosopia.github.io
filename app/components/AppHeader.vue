@@ -15,14 +15,19 @@
 		</div>
 	</DefineTemplate>
 	<ReuseTemplate classes="hidden lg:flex uppercase" />
+
 	<UHeader
 		:title="pageTitle"
 		mode="drawer"
 		:ui="{
-			root: 'border-0',
+			root: 'border-0 transition-[top,opacity] duration-400 ease-in-out',
 			container: 'flex py-4',
 			center: 'justify-center',
 			body: 'space-y-4',
+		}"
+		:class="{
+			'-top-(--ui-header-height)': !store.showHeader,
+			'opacity-0': !store.showHeader,
 		}"
 	>
 		<UNavigationMenu :items="items" />
@@ -63,6 +68,9 @@ import { createReusableTemplate } from '@vueuse/core'
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 	classes: string
 }>()
+
+// App store
+const store = useAppStore()
 
 // Page title
 const route = useRoute()

@@ -1,4 +1,18 @@
 <script setup lang="ts">
+import { useWindowScroll } from '@vueuse/core'
+
+const { y, directions } = useWindowScroll()
+const store = useAppStore()
+
+watch(directions, ({ top, bottom }) => {
+	if (top) {
+		store.showHeader = true
+	}
+	if (bottom && y.value > 300) {
+		store.showHeader = false
+	}
+})
+
 definePageMeta({
 	title: 'Blog',
 })

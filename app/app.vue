@@ -1,6 +1,6 @@
 <template>
 	<UApp :locale="currentLocale">
-		<AppHeader v-if="store.showHeader" />
+		<AppHeader />
 
 		<UMain>
 			<NuxtLayout>
@@ -19,9 +19,6 @@ const { locale } = useI18n()
 const currentLocale = computed(() => {
 	return locales[locale.value as keyof typeof locales]
 })
-
-// App store
-const store = useAppStore()
 
 useHead({
 	htmlAttrs: {
