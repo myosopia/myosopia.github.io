@@ -19,28 +19,34 @@ const slug =
 		? route.params.slug
 		: (route.params.slug ?? []).join('/')
 const supabase = useSupabaseClient()
-const { data: post } = await useAsyncData(`post-${slug}`, async () => {
-	const { data, error } = await supabase
-		.from('posts')
-		.select('*')
-		.eq('slug', slug)
-		.single()
-	if (error) return null
-	return data
-})
-if (!post.value) {
+const { data: post } = await useAsyncData(
+	`post-${slug}`,
+	async () => {
+		const { data, error } = await supabase
+			.from('posts')
+			.select('*')
+			.eq('slug', slug)
+			.single()
+		if (error) return null
+		return data
+	},
+	{
+		server: false,
+	},
+)
+if (import.meta.client && !post.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Post not found' })
 }
 
 useHead({
-	title: post.value.title,
+	title: post.value?.title ?? 'Loading',
 })
 
 const modalOpen = ref(false)
 const state = reactive({
 	slug: slug,
-	title: post.value.title ?? '',
-	content: post.value.content ?? '',
+	title: post.value?.title ?? '',
+	content: post.value?.content ?? '',
 })
 
 const toast = useToast()
@@ -76,7 +82,7 @@ const updatePost = async () => {
 <template>
 	<UPage>
 		<UPageBody>
-			<UContainer class="space-y-4 sm:space-y-6 lg:space-y-8">
+			<UContainer v-if="post" class="space-y-4 sm:space-y-6 lg:space-y-8">
 				<div class="flex items-end justify-between">
 					<div class="flex flex-col text-muted text-sm">
 						<span v-if="post?.created_at">
