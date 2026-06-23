@@ -2,9 +2,11 @@
 import { computed } from 'vue'
 import { useWindowScroll } from '@vueuse/core'
 
-const { y } = useWindowScroll()
+const { y, isScrolling, directions } = useWindowScroll()
 
-const showButton = computed(() => y.value > 300)
+const showButton = computed(
+	() => y.value > 300 && isScrolling.value && directions.top,
+)
 
 const scrollToTop = () => {
 	window.scrollTo({
