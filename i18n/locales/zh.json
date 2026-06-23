@@ -42,6 +42,9 @@
 					"completed": "看完了"
 				}
 			}
+		},
+		"blog": {
+			"privatePosts": "私人文章"
 		}
 	}
 }

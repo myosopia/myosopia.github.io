@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"build": "nuxt build",
-		"dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev",
+		"dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --port 3031",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
@@ -35,6 +35,7 @@
 		"nuxt": "^4.2.2",
 		"pdfjs-dist": "^5.7.284",
 		"pinia-plugin-persistedstate": "^4.7.1",
+		"temporal-polyfill": "^1.0.1",
 		"text-case": "^1.2.10",
 		"typescript": "^5.9.3",
 		"vue": "^3.5.26",

@@ -25,8 +25,18 @@ export default defineNuxtConfig({
 				'@vue/devtools-kit',
 				'@vueuse/core',
 				'text-case',
+				'temporal-polyfill',
 			],
 		},
+	},
+	imports: {
+		presets: [
+			{
+				from: 'temporal-polyfill',
+				imports: ['Temporal'],
+			},
+		],
+		polyfills: true,
 	},
 	nitro: {
 		publicAssets: [

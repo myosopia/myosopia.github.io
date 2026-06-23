@@ -4,15 +4,27 @@
 			title="BLOG"
 			:ui="{
 				container: 'border-0',
-				title: 'font-vintage flex items-center justify-center gap-2 mx-auto',
+				title: 'mx-auto',
+				links: 'justify-center',
 			}"
+			:links="[
+				{
+					to: localePath('/blog/private'),
+					label: t('page.blog.privatePosts'),
+					variant: 'link',
+					color: 'neutral',
+					icon: 'i-lucide-book-lock',
+				},
+			]"
 		>
 			<template #title>
-				<span class="font-sans text-xl font-light">. ⊹ ₊ ݁</span>
-				BLOG
-				<span class="font-sans text-xl font-light"> ₊ ⊹ . ݁</span>
+				<div class="font-vintage flex items-center justify-center gap-2">
+					<span class="font-sans text-xl font-light">. ⊹ ₊ ݁</span>
+					BLOG
+					<span class="font-sans text-xl font-light"> ₊ ⊹ . ݁</span>
+				</div>
+				<div class="text-center text-sm font-light">꧁──────ஓ๑♡๑ஓ──────꧂</div>
 			</template>
-			<div class="text-center text-sm font-light">꧁──────ஓ๑♡๑ஓ──────꧂</div>
 		</UPageHeader>
 		<UPageBody>
 			<UContainer class="lg:hidden space-x-2 space-y-2">
@@ -99,25 +111,6 @@
 					list: 'justify-center',
 				}"
 			/>
-			<ClientOnly>
-				<div v-if="user">
-					<UPageSection
-						:title="$t('privatePosts')"
-						description="Limited to logged in users"
-					/>
-					<UContainer>
-						<UBlogPosts>
-							<UBlogPost
-								v-for="(post, index) in privatePosts"
-								:key="index"
-								:title="post.title ?? 'No Title'"
-								:date="new Date(post.created_at)"
-								:to="`/blog/private/${post.slug}`"
-							/>
-						</UBlogPosts>
-					</UContainer>
-				</div>
-			</ClientOnly>
 		</UPageBody>
 		<template #right>
 			<UPageAside>
@@ -148,6 +141,7 @@
 import type { CalendarDate } from '@internationalized/date'
 // Locale used to format date
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 // Ref for date input to anchor popover
 const inputDate = useTemplateRef('inputDate')
@@ -300,26 +294,5 @@ const { data: posts, refresh: refreshPosts } = await useAsyncData(
 			.limit(5)
 			.all()
 	},
-)
-
-// Display private posts only to authorized users
-const user = useSupabaseUser()
-const supabase = useSupabaseClient()
-const { data: privatePosts } = useAsyncData(
-	'private-posts',
-	async () => {
-		if (user.value) {
-			const { data, error } = await supabase
-				.from('posts')
-				.select('title,slug,created_at')
-			if (error) {
-				console.error('Error fetching private posts:', error)
-				return []
-			}
-			return data
-		}
-		return []
-	},
-	{ server: false, watch: [user] },
 )
 </script>

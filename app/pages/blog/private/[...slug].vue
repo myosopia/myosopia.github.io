@@ -14,27 +14,31 @@ const { data: post } = await useAsyncData(`post-${slug}`, async () => {
 		.select('*')
 		.eq('slug', slug)
 		.single()
-	if (error) return undefined
+	if (error) return null
 	return data
 })
 if (!post.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Post not found' })
 }
 
-const editModalOpen = ref(false)
+const modalOpen = ref(false)
 const state = reactive({
-	content: '',
+	slug: slug,
+	title: post.value.title ?? '',
+	content: post.value.content ?? '',
 })
-const onModalOpen = (open: boolean) => {
-	if (open) {
-		state.content = post.value!.content ?? ''
-	}
-}
+
 const toast = useToast()
 const updatePost = async () => {
 	const { error } = await supabase
 		.from('posts')
-		.update({ content: state.content })
+		.update({
+			title: state.title,
+			content: state.content,
+			updated_at: Temporal.Now.zonedDateTimeISO().toString({
+				timeZoneName: 'never',
+			}),
+		})
 		.eq('slug', slug)
 	if (error) {
 		toast.add({
@@ -50,27 +54,37 @@ const updatePost = async () => {
 		})
 	}
 	refreshNuxtData(`post-${slug}`)
-	editModalOpen.value = false
+	modalOpen.value = false
 }
 </script>
 
 <template>
 	<UPage>
 		<UPageBody>
-			<MDC :value="post!.content!" class="px-4 max-w-3xl mx-auto" />
-			<div class="px-4 max-w-3xl mx-auto flex justify-end">
-				<UModal v-model:open="editModalOpen" @update:open="onModalOpen">
-					<UButton label="Edit" color="neutral" variant="subtle" />
-					<template #content>
-						<UForm class="p-4 space-y-4" :state="state" @submit="updatePost">
-							<UFormField label="Post Content" name="content">
-								<UTextarea v-model="state.content" class="w-full" />
-							</UFormField>
-							<UButton type="submit"> Update Post </UButton>
-						</UForm>
-					</template>
-				</UModal>
-			</div>
+			<UContainer class="space-y-4 sm:space-y-6 lg:space-y-8">
+				<div class="flex items-end justify-between">
+					<div class="flex flex-col text-muted text-sm">
+						<span v-if="post?.created_at">
+							创建于
+							<DateTime :value="post.created_at" />
+						</span>
+						<span v-if="post?.updated_at">
+							更新于
+							<DateTime :value="post.updated_at" />
+						</span>
+					</div>
+					<PrivatePostModal
+						v-model="state"
+						v-model:open="modalOpen"
+						:slug-disabled="true"
+						title="更新文章"
+						@submit="updatePost"
+					>
+						<UButton label="编辑" icon="i-lucide-square-pen" variant="ghost" />
+					</PrivatePostModal>
+				</div>
+				<MDC v-if="post" :value="post.content ?? ''" class="" />
+			</UContainer>
 		</UPageBody>
 	</UPage>
 </template>
