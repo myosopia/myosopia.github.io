@@ -1,11 +1,21 @@
 {
-	"version": 1,
-	"skills": {
-		"nuxt-ui": {
-			"source": "nuxt/ui",
-			"sourceType": "github",
-			"skillPath": "skills/nuxt-ui/SKILL.md",
-			"computedHash": "2d58c6092b7028db223a819d5a37badc860a4036ca134a3e457ce7b056562f72"
-		}
-	}
+  "version": 1,
+  "skills": {
+    "comark": {
+      "source": "comark.dev",
+      "sourceType": "well-known",
+      "computedHash": "c6b35ca32e1dd0f50b3bf1c1f780e23d984ba541ded9534176d3fbb337b9aec7"
+    },
+    "migrate-mdc-to-comark": {
+      "source": "comark.dev",
+      "sourceType": "well-known",
+      "computedHash": "9051cd30adf013b4afb4bcde240f42c5e87be76bc84250c01c9899e88aab9e8d"
+    },
+    "nuxt-ui": {
+      "source": "nuxt/ui",
+      "sourceType": "github",
+      "skillPath": "skills/nuxt-ui/SKILL.md",
+      "computedHash": "2d58c6092b7028db223a819d5a37badc860a4036ca134a3e457ce7b056562f72"
+    }
+  }
 }

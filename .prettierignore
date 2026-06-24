@@ -1,6 +1,11 @@
 # Ignore artifacts:
 package-lock.json
 app/types/database.types.ts
+
+# AI agents
 .agents
 .claude
+skills-lock.json
+
+# Supabase
 supabase/.temp
