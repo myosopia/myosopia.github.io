@@ -34,6 +34,7 @@ const getPrivatePostPrerenderRoutes = async () => {
 export default defineNuxtConfig({
 	modules: [
 		'@nuxt/content',
+		'@comark/nuxt',
 		'@nuxt/eslint',
 		'@nuxt/image',
 		'@nuxt/ui',

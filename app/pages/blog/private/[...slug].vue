@@ -104,7 +104,9 @@ const updatePost = async () => {
 						<UButton label="编辑" icon="i-lucide-square-pen" variant="ghost" />
 					</PrivatePostModal>
 				</div>
-				<MDC v-if="post" :value="post.content ?? ''" class="" />
+				<Suspense>
+					<Comark v-if="post" :markdown="post.content ?? ''" />
+				</Suspense>
 			</UContainer>
 			<ScrollToTop />
 		</UPageBody>

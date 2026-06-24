@@ -14,6 +14,7 @@
 		"format:check": "prettier --check ."
 	},
 	"dependencies": {
+		"@comark/nuxt": "^0.4.0",
 		"@nuxt/content": "^3.14.0",
 		"@nuxt/eslint": "^1.16.0",
 		"@nuxt/image": "^2.0.0",

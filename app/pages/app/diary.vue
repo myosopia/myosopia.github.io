@@ -8,7 +8,9 @@
 			<UContainer>
 				<UTabs v-model="activeTab" :items="tabItems">
 					<template #preview>
-						<MDC :value="diaryContent" class="px-2" />
+						<Suspense>
+							<Comark :markdown="diaryContent" class="px-2" />
+						</Suspense>
 					</template>
 					<template #edit>
 						<UForm
