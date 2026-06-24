@@ -20,7 +20,7 @@
 		:title="pageTitle"
 		mode="drawer"
 		:ui="{
-			root: 'border-0 transition-[top,opacity] duration-400 ease-in-out',
+			root: 'border-0 touch-none transition-[top,opacity] duration-400 ease-in-out',
 			container: 'flex py-4',
 			center: 'justify-center',
 			body: 'space-y-4',
@@ -31,6 +31,9 @@
 		}"
 	>
 		<UNavigationMenu :items="items" />
+		<template #bottom>
+			<div ref="headerBottom" class="absolute bottom-0" />
+		</template>
 		<template #left>
 			<NuxtImg
 				src="/img/logo.png"
@@ -63,7 +66,12 @@
 
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { createReusableTemplate } from '@vueuse/core'
+import {
+	createReusableTemplate,
+	useSwipe,
+	useWindowScroll,
+	useElementSize,
+} from '@vueuse/core'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 	classes: string
@@ -71,6 +79,21 @@ const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 
 // App store
 const store = useAppStore()
+const headerBottom = useTemplateRef('headerBottom')
+const headerElement = computed(() => headerBottom.value?.parentElement)
+const { direction } = useSwipe(headerElement)
+const { y } = useWindowScroll()
+const { height } = useElementSize(headerElement)
+watchEffect(() => {
+	if (direction.value === 'up') {
+		store.showHeader = false
+	}
+})
+watchEffect(() => {
+	if (y.value < height.value) {
+		store.showHeader = true
+	}
+})
 
 // Page title
 const route = useRoute()
