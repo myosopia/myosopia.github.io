@@ -79,6 +79,14 @@ const updatePost = async () => {
 	refreshNuxtData(`post-${slug}`)
 	modalOpen.value = false
 }
+
+watch(post, newPost => {
+	if (newPost) {
+		state.title = newPost.title
+		state.content = newPost.content ?? ''
+		state.slug = newPost.slug
+	}
+})
 </script>
 
 <template>
