@@ -1,3 +1,10 @@
+---
+date: 2026-07-08
+description: 与ChatGPT讨论亲密关系的聊天记录。
+tags:
+	- AI
+---
+
 # 与ChatGPT探讨亲密关系
 
 ## 无浪漫与“最重要”
