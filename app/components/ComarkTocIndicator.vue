@@ -102,7 +102,7 @@ const activeRange = computed<Range | null>(() => {
 })
 
 const width = computed(() => {
-	return Math.max(0, ...trackPoints.value.map(([x]) => x))
+	return Math.max(4, ...trackPoints.value.map(([x]) => x))
 })
 
 const displayedActiveRange = ref<Range | null>(
