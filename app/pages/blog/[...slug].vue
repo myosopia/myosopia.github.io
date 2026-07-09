@@ -68,4 +68,8 @@ const contextMenuItems = ref<ContextMenuItem[]>([
 	},
 ])
 const dictionaryQuery = ref('')
+
+useHead({
+	title: post.value?.title,
+})
 </script>
