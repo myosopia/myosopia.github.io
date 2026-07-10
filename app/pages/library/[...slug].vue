@@ -86,6 +86,11 @@
 import type { NavigationMenuItem, SelectItem } from '@nuxt/ui'
 import { createReusableTemplate, useElementVisibility } from '@vueuse/core'
 
+definePageMeta({
+	title: 'page.library.title',
+	headerTitle: 'header.title.library',
+})
+
 const route = useRoute()
 
 const i18nPrefix = computed(() => {
@@ -101,10 +106,6 @@ const i18nPrefix = computed(() => {
 
 // Locale to format date
 const { locale, t } = useI18n()
-
-useHead({
-	title: t('page.library.title'),
-})
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 	image: string | string[]

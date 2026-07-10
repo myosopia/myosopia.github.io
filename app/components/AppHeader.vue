@@ -19,6 +19,7 @@
 	<UHeader
 		:title="pageTitle"
 		mode="drawer"
+		toggle-side="left"
 		:ui="{
 			root: 'border-0 touch-none transition-[top,opacity] duration-400 ease-in-out',
 			container: 'flex py-4',
@@ -33,18 +34,6 @@
 		<UNavigationMenu :items="items" />
 		<template #bottom>
 			<div ref="headerBottom" class="absolute bottom-0" />
-		</template>
-		<template #left>
-			<NuxtImg
-				src="/img/logo.png"
-				width="32"
-				height="32"
-				class="rotate-y-180"
-			/>
-			<div class="font-bold text-lg text-nowrap text-ellipsis overflow-hidden">
-				{{ pageTitle }}
-			</div>
-			<NuxtImg src="/img/logo.png" width="32" height="32" />
 		</template>
 		<template #right>
 			<LocaleMenu />
@@ -95,14 +84,15 @@ watchEffect(() => {
 	}
 })
 
-// Page title
-const route = useRoute()
-const pageTitle = computed(() => (route.meta.title as string) || '')
-
 // I18n
 const { t } = useI18n()
 const localePath = useLocalePath()
 
+// Page title
+const route = useRoute()
+const pageTitle = computed(() =>
+	route.meta.headerTitle ? t(route.meta.headerTitle as string) : '',
+)
 // Navigation Menu
 const items = computed<NavigationMenuItem[]>(() => [
 	{

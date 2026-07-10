@@ -232,7 +232,7 @@ import {
 	useKakeiboColumns,
 } from '~/composables/useKakeiboColumns'
 
-definePageMeta({ title: '家計簿' })
+definePageMeta({ title: '家計簿', headerTitle: '家計簿' })
 
 const { locale } = useI18n()
 

@@ -3,6 +3,7 @@ import type { CollectionQueryBuilder } from '@nuxt/content'
 
 definePageMeta({
 	title: '観光・散策スポットまとめ',
+	headerTitle: 'スポット',
 	i18n: {
 		locales: ['ja'],
 	},

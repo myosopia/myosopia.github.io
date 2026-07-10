@@ -31,6 +31,7 @@ watchEffect(() => {
 	if (status.value === 'error' && !post.value) {
 		throw createError({ statusCode: 404, statusMessage: 'Post not found' })
 	}
+	route.meta.title = post.value?.title ?? 'page.blog.title'
 })
 
 const tree = computedAsync(async () => {
@@ -39,10 +40,6 @@ const tree = computedAsync(async () => {
 		plugins: [ensureHeadingIds(), toc({ depth: 3, title: '目录' })],
 	})
 }, null)
-
-useHead({
-	title: post.value?.title ?? 'Loading',
-})
 
 const modalOpen = ref(false)
 const state = reactive({

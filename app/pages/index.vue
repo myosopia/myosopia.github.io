@@ -31,12 +31,9 @@
 import { useElementVisibility } from '@vueuse/core'
 
 definePageMeta({
-	title: 'Home',
+	title: 'page.home.title',
+	headerTitle: 'header.title.home',
 	layout: 'full',
-})
-
-useHead({
-	title: '首页',
 })
 
 // Supabase user

@@ -1,7 +1,7 @@
 <template>
 	<UPage>
 		<UPageHeader
-			:title="$t('page.blog.privatePosts')"
+			:title="$t('page.blog.private.title')"
 			description="Limited to logged in users"
 		>
 			<template #links>
@@ -41,9 +41,9 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
-useHead({
-	title: t('page.blog.privatePosts'),
+definePageMeta({
+	title: 'page.blog.private.title',
+	headerTitle: 'header.title.blog',
 })
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Force ja locale
 definePageMeta({
+	headerTitle: 'スポット',
 	i18n: {
 		locales: ['ja'],
 	},
@@ -31,19 +32,9 @@ const { data: spot } = await useAsyncData(
 )
 
 // SEO meta
-useHead({
-	title: () => spot.value?.name ?? 'ページが見つかりません',
+watchEffect(() => {
+	route.meta.title = spot.value?.name ?? 'ページが見つかりません'
 })
-
-watch(
-	slug,
-	value => {
-		console.log(value)
-	},
-	{
-		immediate: true,
-	},
-)
 </script>
 
 <template>

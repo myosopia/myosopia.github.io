@@ -42,12 +42,15 @@
 <script setup lang="ts">
 import type { ContextMenuItem } from '@nuxt/ui'
 import { useBreakpoints, breakpointsTailwind } from '@vueuse/core'
-
+definePageMeta({
+	headerTitle: 'header.title.blog',
+})
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const route = useRoute()
 const { data: post } = await useAsyncData(route.path, () => {
 	return queryCollection('blog').path(route.path).first()
 })
+route.meta.title = post.value?.title
 const toc = computed(() => post.value?.body?.toc)
 const dictionaryDrawerRightOpen = ref(false)
 const dictionaryDrawerBottomOpen = ref(false)
@@ -66,8 +69,4 @@ const contextMenuItems = ref<ContextMenuItem[]>([
 	},
 ])
 const dictionaryQuery = ref('')
-
-useHead({
-	title: post.value?.title,
-})
 </script>

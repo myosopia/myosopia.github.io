@@ -10,7 +10,7 @@
 			:links="[
 				{
 					to: localePath('/blog/private'),
-					label: t('page.blog.privatePosts'),
+					label: t('page.blog.private.title'),
 					variant: 'link',
 					color: 'neutral',
 					icon: 'i-lucide-book-lock',
@@ -149,10 +149,8 @@ const inputDate = useTemplateRef('inputDate')
 
 // SEO
 definePageMeta({
-	title: 'Blog',
-})
-useHead({
-	title: t('page.blog.title'),
+	title: 'page.blog.title',
+	headerTitle: 'header.title.blog',
 })
 
 // Route used to get page and tags

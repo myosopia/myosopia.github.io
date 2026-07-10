@@ -11,9 +11,17 @@
 			"adv": "阅读",
 			"library": "资料库",
 			"diary": "日记"
+		},
+		"title": {
+			"home": "首页",
+			"blog": "博客",
+			"library": "资料库"
 		}
 	},
 	"page": {
+		"home": {
+			"title": "首页"
+		},
 		"library": {
 			"title": "资料库",
 			"common": {
@@ -51,8 +59,10 @@
 			}
 		},
 		"blog": {
-			"title": "Blog",
-			"privatePosts": "私人文章"
+			"title": "博客",
+			"private": {
+				"title": "私人文章"
+			}
 		}
 	}
 }
