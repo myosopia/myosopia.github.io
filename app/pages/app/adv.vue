@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div
-			class="flex flex-col p-4"
+			class="flex flex-col"
 			:class="{
 				'fullscreen-overlay': fullscreen,
 				fixed: fullscreen,

@@ -146,7 +146,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 			},
 			{
 				label: t('adv'),
-				to: localePath('/adv'),
+				to: localePath('/app/adv'),
 				icon: 'i-lucide-book-open-text',
 			},
 			{

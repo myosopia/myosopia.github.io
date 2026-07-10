@@ -1,7 +1,7 @@
 <template>
 	<UPage>
 		<UPageBody>
-			<!-- <OtmfcGallery /> -->
+			<OtmfcGallery />
 			<UPageSection
 				ref="updateSection"
 				title="动态"
@@ -32,6 +32,11 @@ import { useElementVisibility } from '@vueuse/core'
 
 definePageMeta({
 	title: 'Home',
+	layout: 'full',
+})
+
+useHead({
+	title: '首页',
 })
 
 // Supabase user
