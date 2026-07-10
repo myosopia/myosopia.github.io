@@ -93,48 +93,45 @@ const onSubmit = (payload: FormSubmitEvent<Schema>) => {
 <template>
 	<UPage>
 		<UPageBody>
-			<UContainer>
-				<UPageCard class="max-w-md mx-auto">
-					<UAuthForm
-						:schema="schema"
-						:fields="fields"
-						title="Welcome back!"
-						icon="i-lucide-lock"
-						:submit="{
-							color:
-								status === 'idle' || status === 'pending' ? 'primary' : status,
-							loading: status === 'pending',
-						}"
-						@submit="onSubmit"
-					>
-						<template #description>
-							Don't have an account?
-							<ULink to="/signup" class="text-primary font-medium"
-								>Sign up</ULink
-							>.
-						</template>
-						<template #password-hint>
-							<ULink to="#" class="text-primary font-medium" tabindex="-1"
-								>Forgot password?</ULink
-							>
-						</template>
-						<template #validation>
-							<UAlert
-								v-if="status === 'error'"
-								color="error"
-								icon="i-lucide-info"
-								title="Error signing in"
-							/>
-						</template>
-						<template #footer>
-							By signing in, you agree to our
-							<ULink to="#" class="text-primary font-medium"
-								>Terms of Service</ULink
-							>.
-						</template>
-					</UAuthForm>
-				</UPageCard>
-			</UContainer>
+			<UPageCard class="max-w-md mx-auto">
+				<UAuthForm
+					:schema="schema"
+					:fields="fields"
+					title="Welcome back!"
+					icon="i-lucide-lock"
+					:submit="{
+						color:
+							status === 'idle' || status === 'pending' ? 'primary' : status,
+						loading: status === 'pending',
+					}"
+					@submit="onSubmit"
+				>
+					<template #description>
+						Don't have an account?
+						<ULink to="/signup" class="text-primary font-medium">Sign up</ULink
+						>.
+					</template>
+					<template #password-hint>
+						<ULink to="#" class="text-primary font-medium" tabindex="-1"
+							>Forgot password?</ULink
+						>
+					</template>
+					<template #validation>
+						<UAlert
+							v-if="status === 'error'"
+							color="error"
+							icon="i-lucide-info"
+							title="Error signing in"
+						/>
+					</template>
+					<template #footer>
+						By signing in, you agree to our
+						<ULink to="#" class="text-primary font-medium"
+							>Terms of Service</ULink
+						>.
+					</template>
+				</UAuthForm>
+			</UPageCard>
 		</UPageBody>
 	</UPage>
 </template>

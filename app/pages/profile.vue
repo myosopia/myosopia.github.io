@@ -2,55 +2,53 @@
 	<UPage>
 		<UPageHeader title="Profile" />
 		<UPageBody>
-			<UContainer>
-				<UPageCard>
-					<UAuthForm
-						ref="authForm"
-						:fields="fields"
-						:schema="schema"
-						:submit="{
-							label: 'Update Profile',
-							color:
-								status === 'idle' || status === 'pending' ? 'primary' : status,
-							loading: status === 'pending',
-						}"
-						:ui="{
-							header: 'items-center',
-						}"
-						@submit="onSubmit"
-					>
-						<template #header>
-							<Icon
-								v-if="!form?.state.avatar"
-								name="i-lucide-user"
-								class="size-16"
+			<UPageCard>
+				<UAuthForm
+					ref="authForm"
+					:fields="fields"
+					:schema="schema"
+					:submit="{
+						label: 'Update Profile',
+						color:
+							status === 'idle' || status === 'pending' ? 'primary' : status,
+						loading: status === 'pending',
+					}"
+					:ui="{
+						header: 'items-center',
+					}"
+					@submit="onSubmit"
+				>
+					<template #header>
+						<Icon
+							v-if="!form?.state.avatar"
+							name="i-lucide-user"
+							class="size-16"
+						/>
+						<NuxtImg
+							v-else
+							:src="form?.state.avatar"
+							width="64"
+							height="64"
+							class="size-16 rounded-full"
+						/>
+					</template>
+					<template #avatar-field="{ state }">
+						<UFieldGroup class="w-full">
+							<UInput v-model="state.avatar" class="w-full" />
+							<UButton
+								variant="subtle"
+								color="neutral"
+								icon="i-lucide-x"
+								@click="
+									() => {
+										state.avatar = undefined
+									}
+								"
 							/>
-							<NuxtImg
-								v-else
-								:src="form?.state.avatar"
-								width="64"
-								height="64"
-								class="size-16 rounded-full"
-							/>
-						</template>
-						<template #avatar-field="{ state }">
-							<UFieldGroup class="w-full">
-								<UInput v-model="state.avatar" class="w-full" />
-								<UButton
-									variant="subtle"
-									color="neutral"
-									icon="i-lucide-x"
-									@click="
-										() => {
-											state.avatar = undefined
-										}
-									"
-								/>
-							</UFieldGroup>
-						</template>
-					</UAuthForm>
-				</UPageCard>
-			</UContainer>
+						</UFieldGroup>
+					</template>
+				</UAuthForm>
+			</UPageCard>
 		</UPageBody>
 	</UPage>
 </template>

@@ -122,40 +122,38 @@ const onSubmit = (payload: FormSubmitEvent<Schema>) => {
 <template>
 	<UPage>
 		<UPageBody>
-			<UContainer>
-				<UPageCard class="max-w-xl mx-auto">
-					<UAuthForm
-						ref="authForm"
-						:fields="fields"
-						:schema="schema"
-						:submit="{
-							label: 'Sign Up',
-							color:
-								status === 'idle' || status === 'pending' ? 'primary' : status,
-							loading: status === 'pending',
-						}"
-						:ui="{
-							header: 'items-center',
-						}"
-						@submit="onSubmit"
-					>
-						<template #header>
-							<Icon
-								v-if="!form?.state.avatar"
-								name="i-lucide-user"
-								class="size-16"
-							/>
-							<NuxtImg
-								v-else
-								:src="form?.state.avatar"
-								width="64"
-								height="64"
-								class="size-16 rounded-full"
-							/>
-						</template>
-					</UAuthForm>
-				</UPageCard>
-			</UContainer>
+			<UPageCard class="max-w-xl mx-auto">
+				<UAuthForm
+					ref="authForm"
+					:fields="fields"
+					:schema="schema"
+					:submit="{
+						label: 'Sign Up',
+						color:
+							status === 'idle' || status === 'pending' ? 'primary' : status,
+						loading: status === 'pending',
+					}"
+					:ui="{
+						header: 'items-center',
+					}"
+					@submit="onSubmit"
+				>
+					<template #header>
+						<Icon
+							v-if="!form?.state.avatar"
+							name="i-lucide-user"
+							class="size-16"
+						/>
+						<NuxtImg
+							v-else
+							:src="form?.state.avatar"
+							width="64"
+							height="64"
+							class="size-16 rounded-full"
+						/>
+					</template>
+				</UAuthForm>
+			</UPageCard>
 		</UPageBody>
 	</UPage>
 </template>
