@@ -51,6 +51,7 @@
 			}
 		},
 		"blog": {
+			"title": "Blog",
 			"privatePosts": "私人文章"
 		}
 	}

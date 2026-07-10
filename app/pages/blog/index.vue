@@ -101,10 +101,10 @@
 				</UBlogPost>
 			</UBlogPosts>
 			<UPagination
-				v-if="(postCount ?? 0) > 5"
+				v-if="(postCount ?? 0) > ITEMS_PER_PAGE"
 				v-model:page="currentPage"
 				:total="postCount"
-				:items-per-page="5"
+				:items-per-page="ITEMS_PER_PAGE"
 				:ui="{
 					list: 'justify-center',
 				}"
@@ -137,6 +137,9 @@
 
 <script setup lang="ts">
 import type { CalendarDate } from '@internationalized/date'
+// Const
+const ITEMS_PER_PAGE = 12
+
 // Locale used to format date
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
@@ -149,7 +152,7 @@ definePageMeta({
 	title: 'Blog',
 })
 useHead({
-	title: t('blog'),
+	title: t('page.blog.title'),
 })
 
 // Route used to get page and tags
@@ -288,8 +291,8 @@ const { data: posts, refresh: refreshPosts } = await useAsyncData(
 					.where('date', '<', endDate)
 			})
 			.order('date', 'DESC')
-			.skip((currentPage.value - 1) * 5)
-			.limit(5)
+			.skip((currentPage.value - 1) * ITEMS_PER_PAGE)
+			.limit(ITEMS_PER_PAGE)
 			.all()
 	},
 )
