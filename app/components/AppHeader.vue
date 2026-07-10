@@ -106,17 +106,17 @@ const localePath = useLocalePath()
 // Navigation Menu
 const items = computed<NavigationMenuItem[]>(() => [
 	{
-		label: t('home'),
+		label: t('header.navigation.home'),
 		to: localePath('/'),
 		icon: 'i-lucide-house',
 	},
 	{
-		label: t('blog'),
+		label: t('header.navigation.blog'),
 		to: localePath('/blog'),
 		icon: 'i-lucide-book-open',
 	},
 	{
-		label: 'Library',
+		label: t('header.navigation.library'),
 		to: localePath('/library'),
 		icon: 'i-lucide-library',
 	},
@@ -124,11 +124,6 @@ const items = computed<NavigationMenuItem[]>(() => [
 		label: '観光スポット',
 		to: localePath('/spots', 'ja'),
 		icon: 'i-lucide-trees',
-	},
-	{
-		label: t('about'),
-		to: localePath('/about'),
-		icon: 'i-lucide-user-circle',
 	},
 	{
 		label: 'APP',
@@ -145,7 +140,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 				icon: 'i-lucide-book',
 			},
 			{
-				label: t('adv'),
+				label: t('header.navigation.adv'),
 				to: localePath('/app/adv'),
 				icon: 'i-lucide-book-open-text',
 			},
@@ -156,7 +151,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 			},
 			{
 				icon: 'i-lucide-book-heart',
-				label: 'Diary',
+				label: t('header.navigation.diary'),
 				to: localePath('/app/diary'),
 			},
 			{

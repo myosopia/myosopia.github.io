@@ -140,7 +140,7 @@ const { data: spots } = await useAsyncData(
 	<UPage>
 		<UPageHeader title="観光・散策スポットまとめ" />
 		<UPageBody>
-			<UContainer class="flex flex-col gap-4 lg:flex-row">
+			<div class="flex flex-col gap-4 lg:flex-row">
 				<UInput
 					v-model.trim="searchQuery"
 					icon="i-lucide-search"
@@ -184,8 +184,8 @@ const { data: spots } = await useAsyncData(
 						size="sm"
 					/>
 				</div>
-			</UContainer>
-			<UContainer class="flex flex-col items-center gap-4">
+			</div>
+			<div class="flex flex-col items-center gap-4">
 				<UPageGrid>
 					<SpotCard
 						v-for="spot in spots"
@@ -206,7 +206,7 @@ const { data: spots } = await useAsyncData(
 					:to="paginationLinkTo"
 					class="mx-auto"
 				/>
-			</UContainer>
+			</div>
 		</UPageBody>
 	</UPage>
 </template>

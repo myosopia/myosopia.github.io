@@ -1,14 +1,21 @@
 {
 	"appTitle": "Huyễn Cảnh Lưu Ly",
-	"home": "首页",
-	"blog": "博客",
-	"dictionary": "词典",
-	"about": "关于",
-	"contact": "联系",
-	"login": "登陆",
-	"adv": "阅读",
+	"header": {
+		"navigation": {
+			"home": "首页",
+			"blog": "博客",
+			"dictionary": "词典",
+			"about": "关于",
+			"contact": "联系",
+			"login": "登陆",
+			"adv": "阅读",
+			"library": "资料库",
+			"diary": "日记"
+		}
+	},
 	"page": {
 		"library": {
+			"title": "资料库",
 			"common": {
 				"navigation": {
 					"all": "全部",

@@ -1,21 +1,19 @@
 <template>
 	<UPage>
-		<UPageHeader title="Library" />
+		<UPageHeader :title="t('page.library.title')" />
 		<UPageBody>
-			<UContainer class="space-y-8">
-				<UNavigationMenu :items="navigationMenuItems" highlight />
-				<div>
-					<USelect
-						v-model="selectedStatus"
-						:items="statusSelectItems"
-						:placeholder="$t('page.library.common.statusSelect.placeholder')"
-						value-key="value"
-						multiple
-						class="w-48"
-					/>
-				</div>
-			</UContainer>
-			<UContainer>
+			<UNavigationMenu :items="navigationMenuItems" highlight />
+			<div>
+				<USelect
+					v-model="selectedStatus"
+					:items="statusSelectItems"
+					:placeholder="$t('page.library.common.statusSelect.placeholder')"
+					value-key="value"
+					multiple
+					class="w-48"
+				/>
+			</div>
+			<div>
 				<UPageGrid>
 					<DefineTemplate v-slot="{ image }">
 						<LibraryImage v-if="typeof image === 'string'" :src="image" />
@@ -79,7 +77,7 @@
 					</UModal>
 				</UPageGrid>
 				<div ref="list-bottom" />
-			</UContainer>
+			</div>
 		</UPageBody>
 	</UPage>
 </template>
@@ -87,11 +85,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem, SelectItem } from '@nuxt/ui'
 import { createReusableTemplate, useElementVisibility } from '@vueuse/core'
-
-// Set page meta
-definePageMeta({
-	title: 'Library',
-})
 
 const route = useRoute()
 
@@ -107,7 +100,11 @@ const i18nPrefix = computed(() => {
 })
 
 // Locale to format date
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+
+useHead({
+	title: t('page.library.title'),
+})
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 	image: string | string[]
