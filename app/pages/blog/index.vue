@@ -27,7 +27,7 @@
 			</template>
 		</UPageHeader>
 		<UPageBody>
-			<UContainer class="lg:hidden space-x-2 space-y-2">
+			<div class="lg:hidden space-x-2 space-y-2 overflow-auto">
 				<USelect
 					v-model="tags"
 					:items="tagSelectItems"
@@ -57,51 +57,49 @@
 						</UPopover>
 					</template>
 				</UInputDate>
-			</UContainer>
-			<UContainer>
-				<UBlogPosts>
-					<UBlogPost
-						v-for="(post, index) in posts"
-						:key="index"
-						v-bind="post"
-						:to="post.path"
-					>
-						<template #header>
-							<NuxtImg
-								v-if="post.image"
-								:src="post.image"
-								:provider="post.image.startsWith('http') ? 'ipx' : 'google'"
-								width="640"
-								height="360"
-								loading="lazy"
-							/>
-							<div
-								v-else
-								class="absolute bg-primary/40 inset-0 content-center text-center font-bold text-lg"
-							>
-								{{ post.title }}
-							</div>
-						</template>
-						<template #description>
-							<div v-if="post.description">
-								{{ post.description }}
-							</div>
-							<div v-if="post.tags" class="text-sm mt-2">
-								{{ post.tags?.map(tag => `#${tag}`).join(' ') }}
-							</div>
-						</template>
-						<template v-if="post.date" #date>
-							<NuxtTime
-								:datetime="post.date"
-								year="numeric"
-								month="short"
-								day="numeric"
-								:locale="locale"
-							/>
-						</template>
-					</UBlogPost>
-				</UBlogPosts>
-			</UContainer>
+			</div>
+			<UBlogPosts>
+				<UBlogPost
+					v-for="(post, index) in posts"
+					:key="index"
+					v-bind="post"
+					:to="post.path"
+				>
+					<template #header>
+						<NuxtImg
+							v-if="post.image"
+							:src="post.image"
+							:provider="post.image.startsWith('http') ? 'ipx' : 'google'"
+							width="640"
+							height="360"
+							loading="lazy"
+						/>
+						<div
+							v-else
+							class="absolute bg-primary/40 inset-0 content-center text-center font-bold text-lg"
+						>
+							{{ post.title }}
+						</div>
+					</template>
+					<template #description>
+						<div v-if="post.description">
+							{{ post.description }}
+						</div>
+						<div v-if="post.tags" class="text-sm mt-2">
+							{{ post.tags?.map(tag => `#${tag}`).join(' ') }}
+						</div>
+					</template>
+					<template v-if="post.date" #date>
+						<NuxtTime
+							:datetime="post.date"
+							year="numeric"
+							month="short"
+							day="numeric"
+							:locale="locale"
+						/>
+					</template>
+				</UBlogPost>
+			</UBlogPosts>
 			<UPagination
 				v-if="(postCount ?? 0) > 5"
 				v-model:page="currentPage"

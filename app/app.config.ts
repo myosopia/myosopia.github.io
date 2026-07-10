@@ -37,7 +37,7 @@ export default defineAppConfig({
 		},
 		pageHeader: {
 			slots: {
-				root: 'py-0 px-4 sm:px-6 lg:px-8 border-0',
+				root: 'py-0 border-0',
 				container: 'border-b border-default py-8',
 			},
 		},

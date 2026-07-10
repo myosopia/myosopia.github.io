@@ -1,43 +1,41 @@
 <template>
 	<UPage>
+		<UPageHeader
+			:title="$t('page.blog.privatePosts')"
+			description="Limited to logged in users"
+		>
+			<template #links>
+				<PrivatePostModal
+					v-model="privatePostFormState"
+					v-model:open="privatePostModalOpen"
+					title="创建新文章"
+					@submit="createPost"
+				>
+					<UButton
+						label="创建"
+						variant="outline"
+						icon="i-lucide-file-plus-corner"
+					/>
+				</PrivatePostModal>
+			</template>
+		</UPageHeader>
 		<UPageBody>
-			<UPageHeader
-				:title="$t('page.blog.privatePosts')"
-				description="Limited to logged in users"
-			>
-				<template #links>
-					<PrivatePostModal
-						v-model="privatePostFormState"
-						v-model:open="privatePostModalOpen"
-						title="创建新文章"
-						@submit="createPost"
+			<ul class="space-y-2">
+				<li v-for="(post, index) in privatePosts" :key="index">
+					<ULink
+						:to="`/blog/private/${post.slug}`"
+						class="flex justify-between items-center"
 					>
-						<UButton
-							label="创建"
-							variant="outline"
-							icon="i-lucide-file-plus-corner"
+						<span>{{ post.title ?? 'No Title' }}</span>
+						<DateTime
+							:value="post.updated_at ?? post.created_at"
+							:format="{
+								dateStyle: 'long',
+							}"
 						/>
-					</PrivatePostModal>
-				</template>
-			</UPageHeader>
-			<UContainer>
-				<ul class="space-y-2">
-					<li v-for="(post, index) in privatePosts" :key="index">
-						<ULink
-							:to="`/blog/private/${post.slug}`"
-							class="flex justify-between items-center"
-						>
-							<span>{{ post.title ?? 'No Title' }}</span>
-							<DateTime
-								:value="post.updated_at ?? post.created_at"
-								:format="{
-									dateStyle: 'long',
-								}"
-							/>
-						</ULink>
-					</li>
-				</ul>
-			</UContainer>
+					</ULink>
+				</li>
+			</ul>
 		</UPageBody>
 	</UPage>
 </template>

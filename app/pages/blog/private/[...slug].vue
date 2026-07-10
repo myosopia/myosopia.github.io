@@ -93,7 +93,7 @@ watch(post, newPost => {
 	<UPage>
 		<UPageBody class="relative">
 			<ClientOnly>
-				<UContainer v-if="post" class="space-y-4 sm:space-y-6 lg:space-y-8">
+				<div v-if="post" class="space-y-4 sm:space-y-6 lg:space-y-8">
 					<div class="flex items-end justify-between">
 						<div class="flex flex-col text-muted text-sm">
 							<span v-if="post?.created_at">
@@ -120,12 +120,12 @@ watch(post, newPost => {
 						</PrivatePostModal>
 					</div>
 					<div v-if="tree" class="relative">
-						<div class="absolute h-full right-0 top-1">
+						<div class="absolute h-full right-0 top-0 pt-12">
 							<TocModal :toc="tree.meta.toc" />
 						</div>
 						<ComarkRenderer :tree="tree" />
 					</div>
-				</UContainer>
+				</div>
 			</ClientOnly>
 		</UPageBody>
 		<ScrollToTop />

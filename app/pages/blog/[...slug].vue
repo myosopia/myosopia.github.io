@@ -1,36 +1,34 @@
 <template>
 	<UPage>
 		<UPageBody class="relative">
-			<UContainer class="relative">
-				<UContextMenu :items="contextMenuItems" :disabled="!post?.dictionary">
-					<ContentRenderer v-if="post" :value="post" />
-					<UDrawer
-						v-model:open="dictionaryDrawerRightOpen"
-						direction="right"
-						class="w-96"
-					>
-						<template #content>
-							<div class="p-4 grow">
-								<DictionaryLookup v-model="dictionaryQuery" />
-							</div>
-						</template>
-					</UDrawer>
-					<UDrawer
-						v-model:open="dictionaryDrawerBottomOpen"
-						direction="bottom"
-						class="h-1/2 min-h-120"
-					>
-						<template #content>
-							<div class="p-4 grow">
-								<DictionaryLookup v-model="dictionaryQuery" />
-							</div>
-						</template>
-					</UDrawer>
-				</UContextMenu>
-				<div v-if="toc" class="absolute h-full right-4 top-1">
-					<TocModal :toc="toc" />
-				</div>
-			</UContainer>
+			<UContextMenu :items="contextMenuItems" :disabled="!post?.dictionary">
+				<ContentRenderer v-if="post" :value="post" />
+				<UDrawer
+					v-model:open="dictionaryDrawerRightOpen"
+					direction="right"
+					class="w-96"
+				>
+					<template #content>
+						<div class="p-4 grow">
+							<DictionaryLookup v-model="dictionaryQuery" />
+						</div>
+					</template>
+				</UDrawer>
+				<UDrawer
+					v-model:open="dictionaryDrawerBottomOpen"
+					direction="bottom"
+					class="h-1/2 min-h-120"
+				>
+					<template #content>
+						<div class="p-4 grow">
+							<DictionaryLookup v-model="dictionaryQuery" />
+						</div>
+					</template>
+				</UDrawer>
+			</UContextMenu>
+			<div v-if="toc" class="absolute h-full right-0 top-0 pt-12">
+				<TocModal :toc="toc" />
+			</div>
 		</UPageBody>
 		<ScrollToTop />
 		<template #right>
