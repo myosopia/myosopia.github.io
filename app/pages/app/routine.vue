@@ -1,9 +1,7 @@
 <template>
 	<UPage>
 		<UPageBody>
-			<UContainer>
-				<RoutineApp />
-			</UContainer>
+			<RoutineApp />
 		</UPageBody>
 	</UPage>
 </template>

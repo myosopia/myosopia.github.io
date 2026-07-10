@@ -5,7 +5,7 @@
 			description="Convert Google Photos share URL to direct URL"
 		/>
 		<UPageBody>
-			<UContainer class="space-y-4">
+			<div class="space-y-4">
 				<UFormField label="Share URL">
 					<UInput v-model="shareUrl" name="shareUrl" class="w-full">
 						<template #trailing>
@@ -58,7 +58,7 @@
 						}
 					"
 				/>
-			</UContainer>
+			</div>
 		</UPageBody>
 	</UPage>
 </template>

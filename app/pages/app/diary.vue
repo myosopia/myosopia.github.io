@@ -2,55 +2,51 @@
 	<UPage>
 		<UPageHeader title="Diary" />
 		<UPageBody>
-			<UContainer class="max-w-80">
-				<UCalendar v-model="date" :locale="locale" />
-			</UContainer>
-			<UContainer>
-				<UTabs v-model="activeTab" :items="tabItems">
-					<template #preview>
-						<Suspense>
-							<Comark :markdown="diaryContent" class="px-2" />
-						</Suspense>
-					</template>
-					<template #edit>
-						<UForm
-							:schema="schema"
-							:state="state"
-							class="space-y-4"
-							@submit="onSubmit"
+			<UCalendar v-model="date" :locale="locale" class="max-w-80 mx-auto" />
+			<UTabs v-model="activeTab" :items="tabItems">
+				<template #preview>
+					<Suspense>
+						<Comark :markdown="diaryContent" class="px-2" />
+					</Suspense>
+				</template>
+				<template #edit>
+					<UForm
+						:schema="schema"
+						:state="state"
+						class="space-y-4"
+						@submit="onSubmit"
+					>
+						<UFormField
+							name="content"
+							label="Content"
+							:ui="{
+								labelWrapper: 'hidden',
+							}"
 						>
-							<UFormField
-								name="content"
-								label="Content"
+							<UTextarea
+								ref="textarea"
+								v-model="state.content"
+								class="w-full"
 								:ui="{
-									labelWrapper: 'hidden',
+									base: 'max-h-80',
 								}"
-							>
-								<UTextarea
-									ref="textarea"
-									v-model="state.content"
-									class="w-full"
-									:ui="{
-										base: 'max-h-80',
-									}"
-									@update:model-value="updateTextareaSize"
-								/>
-							</UFormField>
-							<div class="flex justify-end gap-2">
-								<UButton
-									v-if="state.id"
-									type="button"
-									label="Delete"
-									variant="outline"
-									color="error"
-									@click="deleteDiary"
-								/>
-								<UButton type="submit" label="Submit" />
-							</div>
-						</UForm>
-					</template>
-				</UTabs>
-			</UContainer>
+								@update:model-value="updateTextareaSize"
+							/>
+						</UFormField>
+						<div class="flex justify-end gap-2">
+							<UButton
+								v-if="state.id"
+								type="button"
+								label="Delete"
+								variant="outline"
+								color="error"
+								@click="deleteDiary"
+							/>
+							<UButton type="submit" label="Submit" />
+						</div>
+					</UForm>
+				</template>
+			</UTabs>
 		</UPageBody>
 	</UPage>
 </template>

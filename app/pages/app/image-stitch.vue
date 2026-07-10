@@ -5,106 +5,101 @@
 			description="将多张图片拼接成一张大图，支持自由移动、层次控制、对齐和导出"
 		/>
 		<UPageBody>
-			<UContainer>
-				<div
-					ref="editorRef"
-					:class="
-						isFullscreen
-							? 'flex flex-col p-3 gap-3 h-screen bg-default'
-							: 'flex flex-col gap-4'
-					"
-				>
-					<!-- 7. USkeleton loading state -->
-					<template v-if="loading">
-						<USkeleton class="h-10 w-full rounded-lg" />
-						<USkeleton class="flex-1 min-h-100 w-full rounded-lg" />
-					</template>
+			<div
+				ref="editorRef"
+				:class="
+					isFullscreen
+						? 'flex flex-col p-3 gap-3 h-screen bg-default'
+						: 'flex flex-col gap-4'
+				"
+			>
+				<!-- 7. USkeleton loading state -->
+				<template v-if="loading">
+					<USkeleton class="h-10 w-full rounded-lg" />
+					<USkeleton class="flex-1 min-h-100 w-full rounded-lg" />
+				</template>
 
-					<template v-else>
-						<ImageStitchToolbar
-							v-model:canvas-width="canvasWidth"
-							v-model:canvas-height="canvasHeight"
-							v-model:canvas-bg="canvasBg"
-							v-model:zoom="zoom"
-							:can-undo="canUndo"
-							:can-redo="canRedo"
-							:selected-count="selectedIds.length"
-							:image-count="images.length"
-							:auto-aligning="autoAligning"
-							:thumb-aligning="thumbAligning"
-							:is-fullscreen="isFullscreen"
-							:selected-have-group="selectedHaveGroup"
-							:can-auto-align="selectedLogicalUnits.length === 2"
-							@undo="undo"
-							@redo="redo"
-							@align="alignImages"
-							@open-export="showExportModal = true"
-							@add-files="addFiles"
-							@crop-to-content="onCropToContent"
-							@clear-all="confirmClearAll"
-							@save-project="onSaveProject"
-							@open-project-file="onOpenProjectFile"
-							@auto-align="onAutoAlign"
-							@thumb-align="showThumbAlignModal = true"
-							@group-selected="groupSelected"
-							@ungroup-selected="ungroupSelected"
-							@auto-layer-order="autoLayerOrder"
-							@reset-pan="canvasRef?.resetPan()"
-							@toggle-fullscreen="toggle"
+				<template v-else>
+					<ImageStitchToolbar
+						v-model:canvas-width="canvasWidth"
+						v-model:canvas-height="canvasHeight"
+						v-model:canvas-bg="canvasBg"
+						v-model:zoom="zoom"
+						:can-undo="canUndo"
+						:can-redo="canRedo"
+						:selected-count="selectedIds.length"
+						:image-count="images.length"
+						:auto-aligning="autoAligning"
+						:thumb-aligning="thumbAligning"
+						:is-fullscreen="isFullscreen"
+						:selected-have-group="selectedHaveGroup"
+						:can-auto-align="selectedLogicalUnits.length === 2"
+						@undo="undo"
+						@redo="redo"
+						@align="alignImages"
+						@open-export="showExportModal = true"
+						@add-files="addFiles"
+						@crop-to-content="onCropToContent"
+						@clear-all="confirmClearAll"
+						@save-project="onSaveProject"
+						@open-project-file="onOpenProjectFile"
+						@auto-align="onAutoAlign"
+						@thumb-align="showThumbAlignModal = true"
+						@group-selected="groupSelected"
+						@ungroup-selected="ungroupSelected"
+						@auto-layer-order="autoLayerOrder"
+						@reset-pan="canvasRef?.resetPan()"
+						@toggle-fullscreen="toggle"
+					/>
+
+					<div class="flex gap-4 min-h-0" :class="isFullscreen ? 'flex-1' : ''">
+						<ImageStitchCanvas
+							ref="canvasRef"
+							:sorted-images="sortedImages"
+							:selected-ids="selectedIds"
+							:canvas-width="canvasWidth"
+							:canvas-height="canvasHeight"
+							:canvas-bg="canvasBg"
+							:zoom="zoom"
+							:fullscreen="isFullscreen"
+							:group-member-ids="groupMemberIds"
+							@update:zoom="zoom = $event"
+							@select="selectImage"
+							@deselect="deselectAll"
+							@drag-end="onDragEnd"
+							@resize-end="onResizeEnd"
 						/>
 
-						<div
-							class="flex gap-4 min-h-0"
-							:class="isFullscreen ? 'flex-1' : ''"
-						>
-							<ImageStitchCanvas
-								ref="canvasRef"
-								:sorted-images="sortedImages"
-								:selected-ids="selectedIds"
-								:canvas-width="canvasWidth"
-								:canvas-height="canvasHeight"
-								:canvas-bg="canvasBg"
-								:zoom="zoom"
-								:fullscreen="isFullscreen"
-								:group-member-ids="groupMemberIds"
-								@update:zoom="zoom = $event"
-								@select="selectImage"
-								@deselect="deselectAll"
-								@drag-end="onDragEnd"
-								@resize-end="onResizeEnd"
-							/>
-
-							<ImageStitchLayerPanel
-								v-if="images.length > 0"
-								:sorted-images="sortedImages"
-								:selected-ids="selectedIds"
-								:single-selected="singleSelected"
-								@select="selectImage"
-								@move-layer="moveLayer"
-								@move-layer-to-edge="moveLayerToEdge"
-								@remove-selected="
-									() => {
-										for (const id of [...selectedIds]) removeImage(id)
-									}
-								"
-								@reorder="reorderLayers"
-								@rename="renameImage"
-								@select-all="selectAll"
-								@deselect-all="deselectAll"
-								@toggle-hidden="toggleHidden"
-							/>
-						</div>
-
-						<ImageStitchNudgeBar
-							v-if="selectedIds.length > 0"
+						<ImageStitchLayerPanel
+							v-if="images.length > 0"
+							:sorted-images="sortedImages"
+							:selected-ids="selectedIds"
 							:single-selected="singleSelected"
-							@nudge="nudge"
-							@set-pos="setPos"
-							@set-size="setSize"
+							@select="selectImage"
+							@move-layer="moveLayer"
+							@move-layer-to-edge="moveLayerToEdge"
+							@remove-selected="
+								() => {
+									for (const id of [...selectedIds]) removeImage(id)
+								}
+							"
+							@reorder="reorderLayers"
+							@rename="renameImage"
+							@select-all="selectAll"
+							@deselect-all="deselectAll"
+							@toggle-hidden="toggleHidden"
 						/>
-					</template>
-				</div>
-			</UContainer>
+					</div>
+
+					<ImageStitchNudgeBar
+						v-if="selectedIds.length > 0"
+						:single-selected="singleSelected"
+						@nudge="nudge"
+						@set-pos="setPos"
+						@set-size="setSize"
+					/>
+				</template>
+			</div>
 		</UPageBody>
 
 		<!-- Export modal -->
