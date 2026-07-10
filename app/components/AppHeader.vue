@@ -135,8 +135,8 @@ const items = computed<NavigationMenuItem[]>(() => [
 				icon: 'i-lucide-wallet',
 			},
 			{
-				label: t('dictionary'),
-				to: localePath('/dictionary'),
+				label: t('header.navigation.dictionary'),
+				to: localePath('/app/dictionary'),
 				icon: 'i-lucide-book',
 			},
 			{

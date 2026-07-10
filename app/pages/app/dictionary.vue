@@ -1,6 +1,6 @@
 <template>
 	<UPage>
-		<UPageBody class="max-w-3xl mx-auto px-4">
+		<UPageBody>
 			<DictionaryLookup />
 		</UPageBody>
 	</UPage>
