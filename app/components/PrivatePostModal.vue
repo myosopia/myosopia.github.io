@@ -63,7 +63,7 @@ const formRef = useTemplateRef('form')
 					/>
 				</UFormField>
 				<UFormField label="正文">
-					<UTextarea v-model="state.content" class="w-full" />
+					<UTextarea v-model="state.content" autoresize class="w-full" />
 				</UFormField>
 			</UForm>
 		</template>
