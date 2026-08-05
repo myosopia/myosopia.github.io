@@ -112,7 +112,10 @@ const onSubmit = (payload: FormSubmitEvent<Schema>) => {
 						>.
 					</template>
 					<template #password-hint>
-						<ULink to="#" class="text-primary font-medium" tabindex="-1"
+						<ULink
+							to="/reset-password"
+							class="text-primary font-medium"
+							tabindex="-1"
 							>Forgot password?</ULink
 						>
 					</template>
