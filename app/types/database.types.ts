@@ -10,7 +10,32 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.1"
+    PostgrestVersion: "14.17"
+  }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
   public: {
     Tables: {
@@ -187,6 +212,35 @@ export type Database = {
         }
         Relationships: []
       }
+      post_permissions: {
+        Row: {
+          id: number
+          post_id: number
+          user_id: string | null
+          user_role: Database["public"]["Enums"]["app_role"] | null
+        }
+        Insert: {
+          id?: number
+          post_id: number
+          user_id?: string | null
+          user_role?: Database["public"]["Enums"]["app_role"] | null
+        }
+        Update: {
+          id?: number
+          post_id?: number
+          user_id?: string | null
+          user_role?: Database["public"]["Enums"]["app_role"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_permissions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       posts: {
         Row: {
           content: string | null
@@ -303,6 +357,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      authorize_post: { Args: { target_post_id: number }; Returns: boolean }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
       verify_password: { Args: { password: string }; Returns: boolean }
     }
@@ -320,6 +375,14 @@ export type Database = {
         | "diary.insert"
         | "diary.update"
         | "diary.delete"
+        | "post_permissions.select"
+        | "post_permissions.insert"
+        | "post_permissions.update"
+        | "post_permissions.delete"
+        | "user_roles.select"
+        | "user_roles.insert"
+        | "user_roles.update"
+        | "user_roles.delete"
       app_role: "admin" | "guest"
     }
     CompositeTypes: {
@@ -446,6 +509,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       app_permission: [
@@ -461,6 +527,14 @@ export const Constants = {
         "diary.insert",
         "diary.update",
         "diary.delete",
+        "post_permissions.select",
+        "post_permissions.insert",
+        "post_permissions.update",
+        "post_permissions.delete",
+        "user_roles.select",
+        "user_roles.insert",
+        "user_roles.update",
+        "user_roles.delete",
       ],
       app_role: ["admin", "guest"],
     },
