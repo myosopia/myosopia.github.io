@@ -4,6 +4,8 @@ import { parse } from 'comark'
 import toc from 'comark/plugins/toc'
 import ensureHeadingIds from '~/utils/comarkHeadingIds'
 
+const user = useSupabaseUser()
+
 const route = useRoute()
 const slug =
 	typeof route.params.slug === 'string'
@@ -103,8 +105,10 @@ watch(post, newPost => {
 							</span>
 						</div>
 						<PrivatePostModal
+							v-if="user && user.user_role === 'admin'"
 							v-model="state"
 							v-model:open="modalOpen"
+							:post-id="post.id"
 							:slug-disabled="true"
 							title="更新文章"
 							@submit="updatePost"
